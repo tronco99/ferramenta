@@ -1,0 +1,25 @@
+{
+  "name": "ferramenta",
+  "version": "1.0.0",
+  "description": "progetto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tronco99/ferramenta.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tronco99/ferramenta/issues"
+  },
+  "homepage": "https://github.com/tronco99/ferramenta#readme",
+  "dependencies": {
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.1"
+  }
+}
