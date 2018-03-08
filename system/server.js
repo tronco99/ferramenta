@@ -1,4 +1,4 @@
-var ip = '192.168.10.112';
+var ip = 'localhost';
 
 
 var nodemailer = require('nodemailer');
@@ -14,7 +14,7 @@ console.log(verify_path);
 app.use( express.static(verify_path));
 app.get( '/', function ( req, res, next )
 {
-    res.sendFile( __dirname + '/index.html' );
+    res.sendFile( __dirname + '/html/index.html' );
 
 } );
 
@@ -24,11 +24,11 @@ app.get( '/', function ( req, res, next )
 io.on( 'connection', function ( socket )
 {
 
-	    // socket.on( 'invioTipo', function ( data )
-    	// {
-    	// 	socket.emit('','')
-    	// }
-	
+			socket.on('prova',function(data)
+			{
+				console.log(data);
+			});
+		
 });
 
 
