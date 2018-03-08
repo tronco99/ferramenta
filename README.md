@@ -1,3 +1,3 @@
 # PROGETTO SITO WEB FERRAMENTA
 
-progetto per esami di mturità sulla realizzazzione di un sito web gestionale
+progetto esami di maturità sulla realizzazzione di un sito web gestionale di una ferramenta:
