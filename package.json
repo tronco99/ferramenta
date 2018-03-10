@@ -21,7 +21,9 @@
     "nodemailer": "^4.6.2",
     "semantic-ui": "^2.3.0",
     "socket.io": "^2.0.4",
-    "sqlite": "^2.9.1"
+    "sqlite": "^2.9.1",
+    "velocity": "^0.7.2",
+    "velocity-animate": "^2.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.17.1"
