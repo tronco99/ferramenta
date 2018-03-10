@@ -24,10 +24,10 @@ app.get( '/', function ( req, res, next )
 io.on( 'connection', function ( socket )
 {
 
-			socket.on('prova',function(data)
-			{
-				console.log(data);
-			});
+	socket.on('prova',function(data)
+	{
+		console.log(data);
+	});
 		
 });
 
