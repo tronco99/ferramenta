@@ -11,54 +11,88 @@
 </head>
 <body>
 
-	<button id="test"></button>
-
 	<div class="ui fixed inverted main menu">
 		<div class="ui container">
 			<a class="launch icon item" id="openMenu">
 				<i class="content icon"></i>
 			</a>
-
-			<div>
-				<label class="white basic label">
-					ESSSKERE
-				</label>
+			<div id="log">
+				<button  id="test">accedi/registrati</button>
 			</div>
 		</div>
 	</div>
 
-	<div class="ui tiny modal">
-		<div class="header">
-
-		</div>
-
+	<div class="ui tiny modal" id="tabLog">
 		<div class="content">
-			<div class="ui tabular menu">
-				<a class="item active">
+			<div class="ui tabular menu" id="tabular">
+				<a class="item active" id="accedi">
 					Accedi
 				</a>
-				<a class="item">
+				<a class="item" id="registrati">
 					Registrati
 				</a>
 			</div>
-			<div class="ui form">
+			<div class="content" id="first">
+			<div class="ui form" id="login">
 				<div class="field" id="emailfield">
 					<label>e-mail:</label>
 					<input type="text" placeholder="inserisci e-mail">
 				</div>
 				<div class="field" id="passwordfield">
 					<label>passwod:</label>
-					<input type="password" placeholder="8 caratteri">
-				</div>
-				<div class="field">
-					<label>conferma password:</label>
-					<input type="password" placeholder="conferma">
+					<input type="password" placeholder="inserisci password">
 				</div>
 			</div>
 			
+		</div> 
 		</div>
+
+		<div class="content" id="second">
+			<div class="ui form">
+				<div class="fields">
+					<div class="field">
+						<label>Nome:</label>
+						<input type="text" placeholder="inserisci il tuo nome">
+					</div>
+					<div class="field">
+						<label>Indirizzo:</label>
+						<input type="text" placeholder="dove abiti">
+					</div>
+				</div>
+				<div class="fields">
+					<div class="field">
+						<label>Città:</label>
+						<input type="text" placeholder="città di provenienza">
+					</div>
+					<div class="field">
+						<label>CAP:</label>
+						<input type="text" placeholder="codice postale">
+					</div>
+				</div>
+				<div class="fields">
+					<div class="field">
+						<label>Nickname:</label>
+						<input type="text" placeholder="inserisci un nickname">
+					</div>
+					<div class="field">
+						<label>e-mail:</label>
+						<input type="text" placeholder="inserisci e-mail">
+					</div>
+				</div>
+				<div class="fields">
+					<div class="field">
+						<label>Password:</label>
+						<input type="password" placeholder="••••••••">
+					</div>
+					<div class="field">
+						<label>Conferma password:</label>
+						<input type="password" placeholder="conferma password">
+					</div>
+				</div>
+			</div>
+		</div>		
 		<div class="actions">
-			<div class="ui approve button">Conferma</div>
+			<div class="ui approve button" id="confirm"></div>
 		</div>
 	</div>
 
