@@ -11,16 +11,64 @@
 </head>
 <body>
 
-	<div class="ui fixed inverted main menu">
+	<div class="ui fixed inverted menu">
 		<div class="ui container">
-			<a class="launch icon item" id="openMenu">
+			<a class="fixed item" id="openMenu">
 				<i class="content icon"></i>
+				<label id="label_menu">MENU</label>
 			</a>
-			<div id="log">
+
+			<a class="right menu" >
+				<a class="launch icon item">
+					<i class="user circle icon" id="test"></i>
+				</a>
+				<a class="launch icon item">
+					<i class="shopping cart icon" id="carrello"></i>
+				</a>
+			</a>
+			<!-- <div id="log" class="right menu">
 				<button  id="test">accedi/registrati</button>
-			</div>
+			</div> -->
 		</div>
 	</div>
+
+	<div class="ui left demo vertical inverted sidebar labeled icon menu">
+		<a class="item">
+			<div class="ui search">
+				<div class="ui icon input">
+					<input class="prompt" type="text" placeholder="Inserisci prodotto:">
+					<i class="search icon"></i>
+				</div>
+				<div class="results"></div>
+			</div>
+		</a>
+		<a class="item">
+			Home
+		</a>
+		
+		<div class="item">
+			<div class="active header">Categorie:</div>
+			<div class="menu">
+				<a class="active item">Interni</a>
+			</div>
+			<div class="menu">
+				<a class="active item">Esterni</a>
+			</div>
+			<div class="menu">
+				<a class="active item">Aziendali</a>
+			</div>
+		</div>
+
+		<a class="item" href="https://github.com/divino-marchese">
+			Chi siamo?
+		</a>
+
+		<a class="item" href="https://www.google.it/maps/place/30010+Calcroci+VE/data=!4m2!3m1!1s0x477ec7bcd436d1fd:0xe81581287e7b1358?sa=X&ved=0ahUKEwih-ertyObZAhVMlCwKHd-8AfYQ8gEIlQEwCg">
+			Dove siamo? 
+		</a>
+	</div>
+
+
 
 	<div class="ui tiny modal" id="tabLog">
 		<div class="content">
@@ -33,18 +81,18 @@
 				</a>
 			</div>
 			<div class="content" id="first">
-			<div class="ui form" id="login">
-				<div class="field" id="emailfield">
-					<label>e-mail:</label>
-					<input type="text" placeholder="inserisci e-mail">
+				<div class="ui form" id="login">
+					<div class="field" id="emailfield">
+						<label>e-mail:</label>
+						<input type="text" placeholder="inserisci e-mail">
+					</div>
+					<div class="field" id="passwordfield">
+						<label>passwod:</label>
+						<input type="password" placeholder="inserisci password">
+					</div>
 				</div>
-				<div class="field" id="passwordfield">
-					<label>passwod:</label>
-					<input type="password" placeholder="inserisci password">
-				</div>
-			</div>
-			
-		</div> 
+
+			</div> 
 		</div>
 
 		<div class="content" id="second">
@@ -97,38 +145,7 @@
 	</div>
 
 
-	<div class="ui left demo vertical inverted sidebar labeled icon menu">
-		<a class="item">
-			<div class="ui search">
-				<div class="ui icon input">
-					<input class="prompt" type="text" placeholder="Inserisci prodotto:">
-					<i class="search icon"></i>
-				</div>
-				<div class="results"></div>
-			</div>
-		</a>
-		<a class="item">
-			Home
-		</a>
-		<a class="item">
-			tedua
-		</a>
-		<a class="item">
-			g o c o
-		</a>
-		<a class="item">
-			ueue
-		</a>
-		<a class="item">
-			izeh
-		</a>
-		<a class="item">
-			wild bandana
-		</a>
-		<a class="item">
-			stoh
-		</a>
-	</div>
+	
 
 </body>
 </html>

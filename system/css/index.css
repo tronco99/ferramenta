@@ -1,21 +1,15 @@
  /*pc:*/
  @media only screen and (min-width: 992px)
- { #log
+ { 
+ 	#label_menu
  	{
- 		margin-left: 92%;
- 		margin-top: 10px;
+ 		margin-left: 5px;
  	}
 
- 	#test
- 	{
- 		height: 20px;
- 		width: 112px;
- 		align-items: right;
- 	}
 
  	#tabLog
  	{
-		width: 30%;
+ 		width: 30%;
  	}
 
  	#tabular
@@ -28,27 +22,19 @@
  /*smartphone verticali*/
  @media only screen and (max-width: 600px) 
  {
- 	#log
+ 	#tabLog
  	{
- 		margin-left: 247px;
- 		margin-top: 10px;
+ 		width: 70%;
+ 		height: 10%;
  	}
-
- 	#test
- 	{
- 		height: 20px;
- 		width: 115px;
- 		align-items: right;
- 		text-align: center;
- 	}
- 	 	#tabLog
- 	{
-		width: 70%;
- 	}
- 	 	#tabular
+ 	#tabular
  	{
  		margin-left: -13px;
  		margin-top: -10px;
+ 	}
+ 	 	#label_menu
+ 	{
+ 		margin-left: 3px;
  	}
  } 
 

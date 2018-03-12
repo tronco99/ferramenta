@@ -1,4 +1,4 @@
-var ip='192.168.1.9';
+var ip='192.168.43.89';
 
 
 var nodemailer = require('nodemailer');
@@ -24,16 +24,16 @@ app.get( '/', function ( req, res, next )
 io.on( 'connection', function ( socket )
 {
 
-			socket.on('prova',function(data)
-			{
-				console.log(data);
-			});
+	socket.on('prova',function(data)
+	{
+		console.log(data);
+	});
 		
 });
 
 
 
-server.listen( 4300, function ()
+server.listen( 4200, function ()
 {
     console.log( 'server online,porta 4200' );
 } );

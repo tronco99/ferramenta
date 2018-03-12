@@ -1,8 +1,9 @@
-var ip='192.168.1.9';
+var ip='192.168.43.89';
 var socket = io.connect(ip+":4200");
 
 
 $(document).ready(function() {
+
 
 	$('.ui .item').on('click', function() {
 		$('.ui .item').removeClass('active');
@@ -12,23 +13,26 @@ $(document).ready(function() {
 	$('#openMenu').on('click',function()
 	{
 		$('.ui.labeled.icon.sidebar').sidebar('toggle');
-
-
 	});
-	$('#test').on('click',function()
+
+	$('#test').on('click',function(e)
 	{
+		// if($(e.target).prop('id') == 'menu' || $(e.target).hasClass('sidebar')) return false;
+		// $('.sidebar').sidebar('toggle');
+
 		$( '#second' ).hide();
 		$('#first').show();
 		$('.tiny.modal').modal('show');
 	});
+
 	$('#accedi').on('click',function()
 	{
-
 		$( '#second' ).hide();
 		$('#first').show();
 		$('#confirm').html('accedi');
 
 	});
+
 	$('#registrati').on('click',function()
 	{
 		$( '#first' ).hide();
