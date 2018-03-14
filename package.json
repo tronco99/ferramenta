@@ -18,6 +18,7 @@
   "homepage": "https://github.com/tronco99/ferramenta#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "mongodb": "^3.0.4",
     "nodemailer": "^4.6.2",
     "semantic-ui": "^2.3.0",
     "socket.io": "^2.0.4",

@@ -1,4 +1,12 @@
-var ip='192.168.10.114';
+var ip='192.168.10.103';
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://+"ip+":4200/mydb";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
 
 
 var nodemailer = require('nodemailer');

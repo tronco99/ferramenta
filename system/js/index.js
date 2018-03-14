@@ -1,4 +1,4 @@
-var ip='192.168.10.114';
+var ip='192.168.10.103';
 var socket = io.connect(ip+":4200");
 
 
@@ -17,12 +17,11 @@ $(document).ready(function() {
 
 	$('#test').on('click',function(e)
 	{
-		// if($(e.target).prop('id') == 'menu' || $(e.target).hasClass('sidebar')) return false;
-		// $('.sidebar').sidebar('toggle');
-
 		$( '#second' ).hide();
 		$('#first').show();
 		$('.tiny.modal').modal('show');
+		$("#accedi").addClass('active');
+		$('#confirm').html('accedi');
 	});
 
 	$('#accedi').on('click',function()
@@ -38,6 +37,8 @@ $(document).ready(function() {
 		$( '#first' ).hide();
 		$('#second').show();
 		$('#confirm').html('registrati');
+
+		
 		
 	});
 
