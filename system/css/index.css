@@ -1,46 +1,82 @@
- /*pc:*/
- @media only screen and (min-width: 992px)
- { 
- 	#label_menu
- 	{
- 		margin-left: 5px;
- 	}
+ 	#logo
+	{		
+		align-items: center;
+	}
+	#container
+	{
+		
+		margin-top: 2%;
+	}
 
 
- 	#tabLog
- 	{
- 		width: 30%;
- 	}
+/*pc:*/
+@media only screen and (min-width: 992px)
+{ 
+	#container
+	{
+		background-color: white;
+		width: 80.5%;
+		margin:0 auto;
+		align-items: center;
+		margin-top: 2%;
+	}
+	#label_menu
+	{
+		margin-left: 5px;
+	}
 
- 	#tabular
- 	{
- 		margin-left: -17px;
- 		margin-top: -15px;
- 	}
- 	#content
- 	{
+
+	#tabLog
+	{
+		width: 30%;
+	}
+
+	#tabular
+	{
+		margin-left: -17px;
+		margin-top: -15px;
+	}
+	#content
+	{
 		margin-top: -10%;
- 	}
- }
+	}
 
- /*smartphone verticali*/
- @media only screen and (max-width: 600px) 
- {
- 	#tabLog
- 	{
- 		width: 70%;
- 		height: 10%;
- 	}
- 	#tabular
- 	{
- 		margin-left: -13px;
- 		margin-top: -10px;
- 	}
- 	 	#label_menu
- 	{
- 		margin-left: 3px;
- 	}
- } 
+	#provaImmagine
+	{
+		height: 20%;
+		width: 20%;
+	}
+	body{
+		background-color: grey;
+	}
+} 
+
+
+/*smartphone verticali*/
+@media only screen and (max-width: 600px) 
+{
+
+
+	#tabLog
+	{
+		width: 70%;
+		height: 10%;
+		margin-top: -70%;
+	}
+	#tabular
+	{
+		margin-left: -13px;
+		margin-top: -10px;
+	}
+	#label_menu
+	{
+		margin-left: 3px;
+	}
+	#content
+	{
+		margin-top: -10%;
+	}
+} 
 
 
 
