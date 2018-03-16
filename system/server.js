@@ -1,4 +1,4 @@
-var ip='192.168.10.111';
+var ip='192.168.1.11';
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
@@ -45,28 +45,27 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 	socket.on('registrazione',function(data)  //controllo su nickname(indice4) e email(indice5)
 	{
 
-		var controllaRgeg = verify(data);
-		if(passa==0)
+		var controllaReg = verify(data,socket);
+		if(controllaReg==0)
 		{
 
-		control=0;
-		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
-		{
-			if(realm.objects(RegistrationSchema.name)[i].nickname==data[4])
+			control=0;
+			for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
 			{
-				control=1
-				socket.emit('noReg','il nickname esiste già,riprova');
-				break;
-			}
-			if(realm.objects(RegistrationSchema.name)[i].email==data[5])
-			{
-				control=1;
-				socket.emit('noReg','email già esistente, riprovare');
-				break;
-			}
+				if(realm.objects(RegistrationSchema.name)[i].nickname==data[4])
+				{
+					control=1
+					socket.emit('noReg','il nickname esiste già,riprova');
+					break;
+				}
+				if(realm.objects(RegistrationSchema.name)[i].email==data[5])
+				{
+					control=1;
+					socket.emit('noReg','email già esistente, riprovare');
+					break;
+				}
 
-		};
-	}
+			};
 
 
 
@@ -81,64 +80,70 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 		});
 
 	}
+}
 
 });
 	socket.on('accedi',function(data)
 	{
+		var esistente = 0;
 		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
 		{
 			if(realm.objects(RegistrationSchema.name)[i].email==data[0])
 			{
+				esistente ++;
 				if(realm.objects(RegistrationSchema.name)[i].password==data[1])
 				{
-					socket.emit('noReg','benvenuto'+realm.objects(RegistrationSchema.name)[i].nickname);
+					socket.emit('noReg','benvenuto '+realm.objects(RegistrationSchema.name)[i].nickname);				
 				}
 				else 
 				{
 					socket.emit('noReg','password invalida');
 				}
 			}
-			else
-			{
-				socket.emit('noReg','account inesistente');
-			}
+
+		}
+		if(esistente == 0)
+		{
+			socket.emit('noReg','account inesistente');
 		}
 	});
 });
 
 
 
-    server.listen( 4200, function ()
+    server.listen( 4400, function ()
     {
     	console.log( 'server online,porta 4200' );
     } );
 
 
-    function verify(data)
+    function verify(data,socket)
     {
     	var passa=0;
     	var email=data[5];
     	var password=data[6];
     	var conf_password=data[7];
-    	var result_email = patt.test(email);
-    	var result_password = patt2.test(password);
+    	var result_email = regEm.test(email);
+    	var result_password = regPass.test(password);
 
     	if (result_email==false)
-    	 {
-    	 	socket.emit('formatoInvalido','1');
-    	 	passa+=1;
-    	 }
+    	{
+    		socket.emit('formatoInvalido','1');
+    		passa+=1;
+    	}
 
-    	 if(result_password==false)
-    	 {
-    	 	socket.emit('formatoInvalido','2');
-    	 	passa+=1;
-    	 }
+    	if(result_password==false)
+    	{
+    		socket.emit('formatoInvalido','2');
+    		passa+=1;
+    	}
 
-    	 if(password != conf_password)
-    	 {
-    	 	socket.emit('formatoInvalido','3');
-    	 	passa+=1;
-    	 }
-    	 return passa;
+    	if(password != conf_password)
+    	{
+    		socket.emit('formatoInvalido','3');
+    		passa+=1;
+    	}
+
+
+    	return passa;
     }
