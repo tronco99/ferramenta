@@ -1,4 +1,4 @@
-var ip='192.168.1.35';
+var ip='192.168.10.111';
 var socket = io.connect(ip+":4200");
 
 
@@ -81,4 +81,15 @@ socket.on('noReg',function(data)
 	alert(data);
 
 });
+
+		socket.on('formatoInvalido',function(data)
+		{
+			switch(data)
+			{
+				case 1:
+				case 2:
+				case 3:
+			}
+		});
+
 
