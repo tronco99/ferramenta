@@ -1,7 +1,8 @@
-var ip='192.168.1.11';
+var ip='192.168.1.209';
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
+
     // var result_email = patt.test(email);
     // var result_password = patt2.test(password);
 
@@ -107,22 +108,31 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 			socket.emit('noReg','account inesistente');
 		}
 	});
+
 });
 
 
 
-    server.listen( 4400, function ()
+    server.listen( 4600, function ()
     {
-    	console.log( 'server online,porta 4200' );
+    	console.log( 'server online,porta 4600' );
     } );
 
 
     function verify(data,socket)
     {
+    	for (var i = 0; i < data.length; i++) {
+    		if(data[i] == "")
+    		{
+    			socket.emit('formatoInvalido','5');
+    			break;
+    		}
+    	}
     	var passa=0;
     	var email=data[5];
     	var password=data[6];
     	var conf_password=data[7];
+    	var nickname = data[4];
     	var result_email = regEm.test(email);
     	var result_password = regPass.test(password);
 
@@ -145,5 +155,14 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
     	}
 
 
+    	if(nickname.includes("@"))
+    	{
+    		socket.emit('formatoInvalido','4');
+    		passa+=1;
+    	}
+
     	return passa;
     }
+
+
+

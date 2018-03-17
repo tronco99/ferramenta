@@ -1,8 +1,9 @@
-var ip='localhost';
-var socket = io.connect(ip+":4400");
+var ip='192.168.1.209';
+var socket = io.connect(ip+":4600");
 
 
-$(document).ready(function() {
+$(document).ready(function()
+{
 	$('.special.cards .image').dimmer({
 		on: 'hover'
 	});
@@ -19,6 +20,16 @@ $(document).ready(function() {
 
 	$('#test').on('click',function(e)
 	{
+		$('#emailField').removeClass('field error');
+		$('#emailField').addClass('field');
+		$('#passwordField').removeClass('field error');
+		$('#passwordField').addClass('field');
+		$('#confirmPasswordfield').removeClass('field error');
+		$('#confirmPasswordfield').addClass('field');
+		$('#nicknameField').removeClass('field error');
+		$('#nicknameField').addClass('field');
+
+
 		$( '#second' ).hide();
 		$('#first').show();
 		$('.tiny.modal')
@@ -80,6 +91,32 @@ $(document).ready(function() {
 
 	});
 
+	$('#nickname').on('change',function()
+	{
+		var veryControlled=$('#nicknameField').attr('class');
+		$('#nicknameField').removeClass(veryControlled);
+		$('#nicknameField').addClass('field')
+	});
+	$('#email').on('change',function()
+	{
+		var veryControlled=$('#emailField').attr('class');
+		$('#emailField').removeClass(veryControlled);
+		$('#emailField').addClass('field')
+	});
+	$('#password').on('change',function()
+	{
+		var veryControlled=$('#passwordField').attr('class');
+		$('#passwordField').removeClass(veryControlled);
+		$('#passwordField').addClass('field')
+		
+	});
+	$('#password2').on('change',function()
+	{
+		var veryControlled=$('#confirmPasswordfield').attr('class');
+		$('#confirmPasswordfield').removeClass(veryControlled);
+		$('#confirmPasswordfield').addClass('field')
+	});
+
 
 });
 
@@ -89,6 +126,7 @@ socket.on('noReg',function(data)
 	if(data.includes("benvenuto")==true)
 	{
 		alert(data);
+		changeView(data);
 		$('.tiny.modal').modal('hide');
 		return;
 	}
@@ -112,31 +150,66 @@ socket.on('formatoInvalido',function(data)
 	{
 		case "1":
 		{
-			$('#emailField').removeClass('field');
-			$('#emailField').addClass('field error');
-			$('#email')
-			.popup({
-				position : 'right center',
-				target   : '#email',
-				title    : 'Errore',
-				content  : 'email invalida'
-			})
-			;
-			break;
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) 
+			{
+				$('#emailField').removeClass('field');
+				$('#emailField').addClass('field error');
+				$('#email')
+				.popup({
+					position : 'bottom center',
+					target   : '#email',
+					title    : 'Errore',
+					content  : 'email invalida',
+					hideOnScroll: 'false'
+				});
+				break;
+			}
+			else
+			{
+				$('#emailField').removeClass('field');
+				$('#emailField').addClass('field error');
+				$('#email')
+				.popup({
+					position : 'right center',
+					target   : '#email',
+					title    : 'Errore',
+					content  : 'email invalida'
+				})
+				;
+				break;
+			}
 		}
 		case "2":
 		{
-			$('#passwordField').removeClass('field');
-			$('#passwordField').addClass('field error');
-			$('#password')
-			.popup({
-				position : 'left center',
-				target   : '#password',
-				title    : 'Errore',
-				content  : 'almeno 1 lettera maiuscola e un numero'
-			})
-			;
-			break;
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) 
+			{
+				$('#passwordField').removeClass('field');
+				$('#passwordField').addClass('field error');
+				$('#password')
+				.popup({
+					position : 'top center',
+					target   : '#password',
+					title    : 'Errore',
+					content  : 'almeno 1 lettera maiuscola e un numero',
+					hideOnScroll: 'false'
+
+				});
+				break;
+			}
+			else
+			{
+				$('#passwordField').removeClass('field');
+				$('#passwordField').addClass('field error');
+				$('#password')
+				.popup({
+					position : 'left center',
+					target   : '#password',
+					title    : 'Errore',
+					content  : 'almeno 1 lettera maiuscola e un numero'
+				})
+				;
+				break;
+			}
 		}
 		case "3":
 		{
@@ -152,8 +225,36 @@ socket.on('formatoInvalido',function(data)
 			;
 			break;
 		}
+		case "4":
+		{
+			$('#nicknameField').removeClass('field');
+			$('#nicknameField').addClass('field error');
+			$('#nick')
+			.popup({
+				position : 'left center',
+				target   : '#nick',
+				title    : 'Errore',
+				content  : 'il nickname non può contenere la @'
+			})
+			;
+			break;
+		}
+		case "5":
+		{
+			alert('nessun campo può esser lasciato vuoto');
+			break;
+		}
 
 	}
+
+
 });
+
+function changeView(a)
+{
+	var name = a.replace('benvenuto ','');
+	$('#test').find("i").removeClass("user circle icon");
+	$('#test').find("i").addClass("address card icon");
+}
 
 
