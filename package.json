@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/tronco99/ferramenta#readme",
   "dependencies": {
-    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "nodemailer": "^4.6.2",
     "realm": "^2.3.0",
