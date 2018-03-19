@@ -1,4 +1,4 @@
-var ip='192.168.1.209';
+var ip='192.168.10.106';
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
@@ -89,7 +89,7 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 		var esistente = 0;
 		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
 		{
-			if(realm.objects(RegistrationSchema.name)[i].email==data[0])
+			if(realm.objects(RegistrationSchema.name)[i].email==data[0] || realm.objects(RegistrationSchema.name)[i].nickname==data[0])
 			{
 				esistente ++;
 				if(realm.objects(RegistrationSchema.name)[i].password==data[1])
@@ -113,9 +113,9 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 
 
 
-    server.listen( 4600, function ()
+    server.listen( 4200, function ()
     {
-    	console.log( 'server online,porta 4600' );
+    	console.log( 'server online,porta 4200' );
     } );
 
 

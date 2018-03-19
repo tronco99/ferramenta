@@ -1,9 +1,23 @@
-var ip='192.168.1.209';
-var socket = io.connect(ip+":4600");
-
+var ip='192.168.10.106';
+var socket = io.connect(ip+":4200");
+var currentItem = null;
+var name; 
 
 $(document).ready(function()
 {
+
+
+	$("#tabLog").keypress(function(e) {
+	    if(e.which == 13) {
+	    	$('#confirm').click();
+	    }
+	});
+
+	$('html').on('click',function()
+	{
+		$('#carrello').removeClass('active');
+		$('#test').removeClass('active');
+	});
 	$('.special.cards .image').dimmer({
 		on: 'hover'
 	});
@@ -18,32 +32,43 @@ $(document).ready(function()
 		$('.ui.labeled.icon.sidebar').sidebar('toggle');
 	});
 
-	$('#test').on('click',function(e)
+	$('#test').on('click',function()
 	{
-		$('#emailField').removeClass('field error');
-		$('#emailField').addClass('field');
-		$('#passwordField').removeClass('field error');
-		$('#passwordField').addClass('field');
-		$('#confirmPasswordfield').removeClass('field error');
-		$('#confirmPasswordfield').addClass('field');
-		$('#nicknameField').removeClass('field error');
-		$('#nicknameField').addClass('field');
+
+		var classe = $('#icona').attr("class");
+
+		if(classe=='user circle icon')
+		{
+			$('#test').popup('hide');
+			$('#emailField').removeClass('field error');
+			$('#emailField').addClass('field');
+			$('#passwordField').removeClass('field error');
+			$('#passwordField').addClass('field');
+			$('#confirmPasswordfield').removeClass('field error');
+			$('#confirmPasswordfield').addClass('field');
+			$('#nicknameField').removeClass('field error');
+			$('#nicknameField').addClass('field');
 
 
-		$( '#second' ).hide();
-		$('#first').show();
-		$('.tiny.modal')
-		.modal({
-			closable  : true,
-			onDeny    : function(){
-				return false;
-			}
-		})
-		.modal('show')
-		;
-		$("#accedi").addClass('active');
-		$('#confirm').html('accedi');
+			$( '#second' ).hide();
+			$('#first').show();
+			$('.tiny.modal')
+			.modal({
+				closable  : true,
+				onDeny    : function(){
+					return false;
+				}
+			})
+			.modal('show')
+			;
+			$("#accedi").addClass('active');
+			$('#confirm').html('accedi');
+
+		}
+		
 	});
+
+	
 
 	$('#accedi').on('click',function()
 	{
@@ -65,9 +90,6 @@ $(document).ready(function()
 		{
 			$('#tabLog').css('width','auto');
 			$('.field').css('width','50%');
-
-
-
 		}
 
 		$( '#first' ).hide();
@@ -125,10 +147,21 @@ socket.on('noReg',function(data)
 {
 	if(data.includes("benvenuto")==true)
 	{
-		alert(data);
+		$('#utente').text(data.replace('benvenuto ',''));
+
 		changeView(data);
 		$('.tiny.modal').modal('hide');
+		$('#test')
+		.popup({
+			on : 'click',
+			popup : '#popup',
+			position : 'bottom center',
+			target   : '#test',
+			hideOnScroll: 'false'
+		});	
 		return;
+
+
 	}
 
 	if(data=="registrazione effettuata con successo")
@@ -138,7 +171,7 @@ socket.on('noReg',function(data)
 		return;
 
 	}
-	alert(data);
+	
 
 
 });
@@ -247,14 +280,14 @@ socket.on('formatoInvalido',function(data)
 
 	}
 
-
+	
 });
-
 function changeView(a)
-{
-	var name = a.replace('benvenuto ','');
-	$('#test').find("i").removeClass("user circle icon");
-	$('#test').find("i").addClass("address card icon");
-}
+	{
+		name = a.replace('benvenuto ','');
+		$('#test').find("i").removeClass("user circle icon");
+		$('#test').find("i").addClass("address card icon");
+	}
+
 
 

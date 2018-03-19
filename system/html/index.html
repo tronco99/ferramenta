@@ -20,7 +20,7 @@
 
 			<a class="right menu">
 				<a class="launch icon item" id="test">
-					<i class="user circle icon"></i>
+					<i class="user circle icon" id="icona"></i>
 				</a>
 				<a class="launch icon item" id="carrello" >
 					<i class="shopping cart icon"></i>
@@ -29,6 +29,16 @@
 			<!-- <div id="log" class="right menu">
 				<button  id="test">accedi/registrati</button>
 			</div> -->
+		</div>
+	</div>
+
+	<div class="ui flowing popup bottom left transition hidden" id="popup">
+		<div class="ui three column divided center aligned grid">
+			<div class="column">
+				<h4 class="ui header" id="utente"></h4>
+				<p><b>2</b> fumo per tutta la noche, penso al modo per andarmene</p>
+				<div class="ui button">via</div>
+			</div>
 		</div>
 	</div>
 
@@ -83,11 +93,11 @@
 			<div class="content" id="first">
 				<div class="ui form" id="login">
 					<div class="field" id="emailfield">
-						<label>e-mail:</label>
-						<input type="text" placeholder="inserisci e-mail" id="existmail">
+						<label>Nickname o E-mail:</label>
+						<input type="text" placeholder="inserisci e-mail o nickname" id="existmail">
 					</div>
 					<div class="field" id="passwordfield">
-						<label>passwod:</label>
+						<label>Password:</label>
 						<input type="password" placeholder="inserisci password" id="existpassword">
 					</div>
 				</div>
@@ -123,7 +133,7 @@
 						<input type="text" placeholder="inserisci un nickname" id="nick">
 					</div>
 					<div class="field" id="emailField">
-						<label>e-mail:</label>
+						<label>E-mail:</label>
 						<input type="text" placeholder="inserisci e-mail" id="email">
 					</div>
 				</div>
