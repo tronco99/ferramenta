@@ -1,4 +1,4 @@
-var ip='192.168.10.108';
+var ip='127.0.0.1';
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
@@ -141,7 +141,7 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
     		socket.emit('formatoInvalido','1');
     		passa+=1;
     	}
-
+ 
     	if(result_password==false)
     	{
     		socket.emit('formatoInvalido','2');

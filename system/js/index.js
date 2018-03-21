@@ -1,11 +1,36 @@
-var ip='192.168.10.108';
+var ip='127.0.0.1';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
 
 $(document).ready(function()
 {
+	var x = document.cookie;
+	x = x.replace('username=','');
 
+	if(x!="")
+	{
+		changeView(x);
+		$('#utente').text(x);
+		$('.tiny.modal').modal('hide');
+		$('#test')
+		.popup({
+			on : 'click',
+			popup : '#popup',
+			position : 'bottom center',
+			target   : '#test',
+			hideOnScroll: 'false'
+		});	
+	}
+	else
+	{
+		alert("0 cookie");
+	}
+	
+	$("#logOut").click(function(){
+		document.cookie="username=";
+ 		location.reload();
+	});
 
 	$("#tabLog").keypress(function(e) {
 	    if(e.which == 13) {
@@ -34,7 +59,6 @@ $(document).ready(function()
 
 	$('#test').on('click',function()
 	{
-
 		var classe = $('#icona').attr("class");
 
 		if(classe=='user circle icon')
@@ -72,6 +96,7 @@ $(document).ready(function()
 
 	$('#accedi').on('click',function()
 	{
+
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) 
 		{
 			$('#tabLog').css('width','70%');
@@ -148,6 +173,8 @@ socket.on('noReg',function(data)
 	if(data.includes("benvenuto")==true)
 	{
 		$('#utente').text(data.replace('benvenuto ',''));
+		document.cookie = "username="+data.replace('benvenuto ','');
+		
 
 		changeView(data);
 		$('.tiny.modal').modal('hide');
@@ -161,6 +188,7 @@ socket.on('noReg',function(data)
 		});	
 		return;
 
+		
 
 	}
 
@@ -279,6 +307,8 @@ socket.on('formatoInvalido',function(data)
 		}
 
 	}
+
+	
 
 	
 });

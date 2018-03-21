@@ -4,7 +4,8 @@
   "description": "progetto",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon system/server.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,6 @@
     "velocity-animate": "^2.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.17.1"
+    "nodemon": "^1.17.2"
   }
 }
