@@ -1,4 +1,4 @@
-var ip='192.168.10.106';
+var ip='192.168.10.116';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
@@ -22,10 +22,7 @@ $(document).ready(function()
 			hideOnScroll: 'false'
 		});	
 	}
-	else
-	{
-		alert("0 cookie");
-	}
+
 	
 	$("#logOut").click(function(){
 		document.cookie="username=";
@@ -170,13 +167,11 @@ $(document).ready(function()
 
 socket.on('noReg',function(data)
 {
-	if(data.includes("benvenuto")==true)
+	if(data[0]=="benvenuto")
 	{
-		$('#utente').text(data.replace('benvenuto ',''));
-		document.cookie = "username="+data.replace('benvenuto ','');
-		
-
-		changeView(data);
+		$('#utente').text(data[1]);
+		document.cookie = "username="+data[1];
+		changeView(data[1]);
 		$('.tiny.modal').modal('hide');
 		$('#test')
 		.popup({
@@ -192,10 +187,12 @@ socket.on('noReg',function(data)
 
 	}
 
-	if(data=="registrazione effettuata con successo")
+	if(data[0]=="registrazione effettuata con successo")
 	{
-		alert(data);
+		alert(data[0]);
 		$('.tiny.modal').modal('hide');
+		document.cookie="username="+data[1];
+ 		location.reload();
 		return;
 
 	}

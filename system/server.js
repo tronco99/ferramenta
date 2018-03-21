@@ -1,4 +1,4 @@
-var ip='192.168.10.106';
+var ip='192.168.10.116';
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
@@ -77,7 +77,7 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 		{
 			option=realm.create(RegistrationSchema.name,{nome:data[0],indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7]});
 			
-			socket.emit('noReg','registrazione effettuata con successo');
+			socket.emit('noReg',new Array("registrazione effettuata con successo",data[4]));
 		});
 
 	}
@@ -94,18 +94,18 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 				esistente ++;
 				if(realm.objects(RegistrationSchema.name)[i].password==data[1])
 				{
-					socket.emit('noReg','benvenuto '+realm.objects(RegistrationSchema.name)[i].nickname);				
+					socket.emit('noReg',new Array('benvenuto',realm.objects(RegistrationSchema.name)[i].nickname));				
 				}
 				else 
 				{
-					socket.emit('noReg','password invalida');
+					socket.emit('noReg',new Array('password invalida'));
 				}
 			}
 
 		}
 		if(esistente == 0)
 		{
-			socket.emit('noReg','account inesistente');
+			socket.emit('noReg',new Array('account inesistente'));
 		}
 	});
 
