@@ -1,4 +1,4 @@
-var ip='127.0.0.1';
+var ip='192.168.10.106';
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
