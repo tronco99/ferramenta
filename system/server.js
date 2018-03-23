@@ -1,4 +1,5 @@
-var ip='192.168.10.116';
+var ip='192.168.1.209';
+var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
@@ -18,10 +19,11 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
     		email: 'string',
     		password: 'string',
     		password2:     'string',
+    		immagine: 'string',
     	}
     };
 
-    var realm=new Realm({schema:[RegistrationSchema],schemaVersion:1})
+    var realm=new Realm({schema:[RegistrationSchema],schemaVersion:2})
     var nodemailer = require('nodemailer');
     var express = require( 'express' );
     var app = express();
@@ -29,7 +31,6 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
     var io = require( 'socket.io' )( server );
     var path = __dirname;
     var verify_path=path.replace('\\system',"");
-    console.log(verify_path);
     app.use( express.static(verify_path));
     app.get( '/', function ( req, res, next )
     {
@@ -75,7 +76,7 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 		var option;
 		realm.write(() => 
 		{
-			option=realm.create(RegistrationSchema.name,{nome:data[0],indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7]});
+			option=realm.create(RegistrationSchema.name,{nome:data[0],indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7],immagine:'vuota'});
 			
 			socket.emit('noReg',new Array("registrazione effettuata con successo",data[4]));
 		});
@@ -109,13 +110,80 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 		}
 	});
 
+	socket.on('richiestaDati',function(data)
+	{
+		var dati;
+		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
+		{
+			if(realm.objects(RegistrationSchema.name)[i].nickname==data)
+			{
+				dati = new Array(realm.objects(RegistrationSchema.name)[i].indirizzo, realm.objects(RegistrationSchema.name)[i].città, realm.objects(RegistrationSchema.name)[i].cap,realm.objects(RegistrationSchema.name)[i].nickname, realm.objects(RegistrationSchema.name)[i].email, realm.objects(RegistrationSchema.name)[i].password, realm.objects(RegistrationSchema.name)[i].password2,realm.objects(RegistrationSchema.name)[i].immagine);
+			}
+		}
+		socket.emit('riceviDatiVecchi',dati);	
+	});
+
+	socket.on('aggiornaDati',function(data)
+	{
+		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
+		{
+			if(realm.objects(RegistrationSchema.name)[i].nickname==data[0])
+			{
+				if(data[8]!=0)
+				{
+					var help=realm.objects(RegistrationSchema.name)[i].nome;
+					realm.write(() => 
+					{
+						let result=realm.objects(RegistrationSchema.name);
+						let r=result.filtered('nickname = "'+data[0]+'"');
+						realm.delete(r);
+						option=realm.create(RegistrationSchema.name,{nome:help,indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7],immagine:data[8]});
+						socket.emit('updateNick',data[4]);
+
+					});
+					break;
+				}
+				else
+				{
+					var help=realm.objects(RegistrationSchema.name)[i].nome;
+					realm.write(() => 
+					{
+						let result=realm.objects(RegistrationSchema.name);
+						let r=result.filtered('nickname = "'+data[0]+'"');
+						realm.delete(r);
+						option=realm.create(RegistrationSchema.name,{nome:help,indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7],immagine:'vuota'});
+						socket.emit('updateNick',data[4]);
+
+					});
+					break;
+				}
+
+			}
+		}
+
+	});
+
+	socket.on('aggiornaFoto',function(data)
+	{
+		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
+		{
+			if(realm.objects(RegistrationSchema.name)[i].nickname==data)
+			{
+				socket.emit('fotoAgg',realm.objects(RegistrationSchema.name)[i].immagine);
+			}
+		}
+	});
+
+
+
+
 });
 
 
 
-    server.listen( 4200, function ()
+    server.listen( porta, function ()
     {
-    	console.log( 'server online,porta 4200' );
+    	console.log( 'server online : '+ip+':'+porta);
     } );
 
 
@@ -141,7 +209,7 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
     		socket.emit('formatoInvalido','1');
     		passa+=1;
     	}
- 
+
     	if(result_password==false)
     	{
     		socket.emit('formatoInvalido','2');

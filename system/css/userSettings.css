@@ -1,0 +1,80 @@
+ 
+#indirizzo
+{
+	margin-top: 9px;
+}
+
+#etichettaFoto
+{
+	margin-top: 80px;
+	height: 90px;
+}
+
+#foto
+{
+	height: 170px;
+}
+
+#prova
+{
+	margin-top: 30px;
+}
+
+
+/*pc:*/
+@media only screen and (min-width: 992px)
+{
+	body
+	{
+		background-color:gray;
+	}
+	.etichetta
+	{
+		height: 60px;
+		font-weight: bold;
+	}
+
+	#container
+	{
+		background-color: white;
+		width: 80.5%;
+		margin:0 auto;
+		align-items: center;
+		margin-top: 2%;
+	}
+	.space
+	{
+		margin-left: 4px;
+		margin-right: 4px;
+	}
+} 
+
+
+/*smartphone verticali*/
+@media only screen and (max-width: 600px) 
+{
+
+	.etichetta
+	{
+		height: 50px;
+		font-weight: bold;
+	}
+
+	#container
+	{
+		background-color: white;
+		margin:0 auto;
+		align-items: center;
+		margin-top: 2%;
+	}
+	.space
+	{
+		margin-left: 4px;
+		margin-right: 4px;
+	}
+
+	#scegli
+	{
+		margin-top: 10px;
+	}
+} 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/node_modules/jquery/dist/jquery.js"></script>
+	<script src="../js/userSettings.js"></script>
+	<script src="/node_modules/semantic-ui/dist/semantic.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/node_modules/semantic-ui/dist/semantic.min.css">
+	<link rel="stylesheet" href="../css/userSettings.css" />
+	<meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport" />
+</head>
+<body>
+	<div class="ui basic modal">
+		<div class="ui icon header">
+			<i class="archive icon"></i>
+			Sei sicuro di voler modificare?
+		</div>
+		<div class="content">
+			<p>Se modificherai i dati non potrai più recuperare i vecchi, ma potrai modificarli in seguito</p>
+		</div>
+		<div class="actions">
+			<div class="ui red basic cancel inverted button">
+				<i class="remove icon"></i>
+				No
+			</div>
+			<div class="ui green ok inverted button">
+				<i class="checkmark icon"></i>
+				Si
+			</div>
+		</div>
+	</div>
+	<div class="ui fixed inverted menu">
+		<div class="ui container">
+			<a class="item" id="home">
+				<i class="home icon"></i>
+				<label>HOME</label>
+			</a>
+
+			<a class="right menu">
+				<a class=" item">
+					<i class="user circle icon"></i>
+					<label id="name"></label>
+				</a>
+			</a>
+		</div>
+	</div>
+
+	<div class="ui centered grid" id="container">
+		<div class="ui centered container">
+			<div class="introduction">
+				<h1 class="ui header">
+					Impostazioni: 
+				</h1>
+				
+				<div class="ui circular image">
+					<div class="ui dimmer">
+						<div class="content">
+								<button id="modificaFoto" class="ui mini inverted button">Modifica</button>
+						</div>
+					</div>
+						<img class="ui small circular image" id="profilo" src="/images/user.jpg">	
+				</div>
+
+			<!-- 	<div class="ui special centered cards">
+					<div class="ui circular image">
+						<div class="ui dimmer">
+							<div class="content">
+								<button class="ui mini inverted button">Modifica</button>
+							</div>
+						</div>
+						<img class="ui small circular image" src="/images/user.jpg">	
+					</div>
+				</div> -->
+
+
+				<div class="ui two column centered grid" id="prova">
+					<div class="ui form">
+						<div class="fields" >
+
+							<div class="column">
+								<div class="etichetta space" id="indirizzo">Indirizzo: </div>
+								<div class="etichetta space" id="citta">Città: </div>
+								<div class="etichetta space" id="cap">CAP: </div>
+								<div class="etichetta space" id="nickname">Nickname: </div>
+								<div class="etichetta space" id="email">E-mail: </div>
+								<div class="etichetta space" id="password">Password: </div>
+								<div class="etichetta space" id="password2">Conferma password: </div>
+							</div>
+							<div class="column">
+								<div class="etichetta"><input type="text" id="indirizzo3" placeholder="Indirizzo:"></div>
+								<div class="etichetta"><input type="text" id="città3" placeholder="Città:"></div>
+								<div class="etichetta"><input type="text" id="cap3" placeholder="CAP:"></div>
+								<div class="etichetta"><input type="text" id="nickname3" placeholder="Nickname:"></div>
+								<div class="etichetta"><input type="text" id="email3" placeholder="E-mail:"></div>
+								<div class="etichetta"><input type="password" id="password3" placeholder="Password:"></div>				<div class="etichetta"><input id="confermaPassword3" type="password" placeholder="Conferma password:"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="scegli" class="ui buttons">
+					<button class="ui button" id="annulla">Annulla</button>
+					<div class="or" data-text="o"></div>
+					<button class="ui positive button" id="confermaCambio">Conferma</button>
+				</div>
+				<br>
+				<div> <button class="ui basic inverted button"></button></div>
+				<input id="inp" type='file'>
+
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

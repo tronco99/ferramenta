@@ -1,4 +1,4 @@
-var ip='192.168.10.116';
+var ip='192.168.1.209';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
@@ -24,15 +24,15 @@ $(document).ready(function()
 	}
 
 	
-	$("#logOut").click(function(){
+	$("#logOut").on('click',function(){
 		document.cookie="username=";
- 		location.reload();
+		location.reload();
 	});
 
 	$("#tabLog").keypress(function(e) {
-	    if(e.which == 13) {
-	    	$('#confirm').click();
-	    }
+		if(e.which == 13) {
+			$('#confirm').click();
+		}
 	});
 
 	$('html').on('click',function()
@@ -161,6 +161,22 @@ $(document).ready(function()
 		$('#confirmPasswordfield').addClass('field')
 	});
 
+	$('#userSett').on('click',function()
+	{
+		window.location.href= '/system/html/userSettings.html' ;
+	});
+
+
+	socket.on('fotoAgg',function(data)
+	{
+		if(data!=0 && data!='vuota')
+		{
+			$('#img').attr('src',data);
+		}
+
+	});
+
+
 
 });
 
@@ -182,9 +198,6 @@ socket.on('noReg',function(data)
 			hideOnScroll: 'false'
 		});	
 		return;
-
-		
-
 	}
 
 	if(data[0]=="registrazione effettuata con successo")
@@ -192,12 +205,11 @@ socket.on('noReg',function(data)
 		alert(data[0]);
 		$('.tiny.modal').modal('hide');
 		document.cookie="username="+data[1];
- 		location.reload();
+		location.reload();
 		return;
-
 	}
 	
-
+	alert(data[0]);
 
 });
 
@@ -305,16 +317,16 @@ socket.on('formatoInvalido',function(data)
 
 	}
 
-	
 
 	
 });
 function changeView(a)
-	{
-		name = a.replace('benvenuto ','');
-		$('#test').find("i").removeClass("user circle icon");
-		$('#test').find("i").addClass("address card icon");
-	}
+{
+	name = a.replace('benvenuto ','');
+	socket.emit('aggiornaFoto',name);
+	$('#test').find("i").removeClass("user circle icon");
+	$('#test').find("i").addClass("address card icon");
+}
 
 
 
