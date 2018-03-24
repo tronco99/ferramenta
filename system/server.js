@@ -1,48 +1,47 @@
-var ip='192.168.1.209';
+var ip='192.168.10.110';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
 
-    // var result_email = patt.test(email);
-    // var result_password = patt2.test(password);
 
-    var Realm = require('realm');
-    const RegistrationSchema = {
-    	name: 'Database',
-    	properties: {
-    		nome:     'string',
-    		indirizzo: 'string',
-    		città:     'string',
-    		cap:     'string',
-    		nickname: 'string',
-    		email: 'string',
-    		password: 'string',
-    		password2:     'string',
-    		immagine: 'string',
-    	}
-    };
 
-    var realm=new Realm({schema:[RegistrationSchema],schemaVersion:2})
-    var nodemailer = require('nodemailer');
-    var express = require( 'express' );
-    var app = express();
-    var server = require( 'http' ).createServer( app );
-    var io = require( 'socket.io' )( server );
-    var path = __dirname;
-    var verify_path=path.replace('\\system',"");
-    app.use( express.static(verify_path));
-    app.get( '/', function ( req, res, next )
-    {
-    	res.sendFile( __dirname + '/html/index.html' );
+var Realm = require('realm');
+const RegistrationSchema = {
+	name: 'Database',
+	properties: {
+		nome:     'string',
+		indirizzo: 'string',
+		città:     'string',
+		cap:     'string',
+		nickname: 'string',
+		email: 'string',
+		password: 'string',
+		password2:     'string',
+		immagine: 'string',
+	}
+};
 
-    } );
+var realm=new Realm({schema:[RegistrationSchema],schemaVersion:4})
+var nodemailer = require('nodemailer');
+var express = require( 'express' );
+var app = express();
+var server = require( 'http' ).createServer( app );
+var io = require( 'socket.io' )( server );
+var path = __dirname;
+var verify_path=path.replace('\\system',"");
+app.use( express.static(verify_path));
+app.get( '/', function ( req, res, next )
+{
+	res.sendFile( __dirname + '/html/index.html' );
 
+} );
 
 
 
-    io.on( 'connection', function ( socket )
-    {
+
+io.on( 'connection', function ( socket )
+{
 
 	socket.on('registrazione',function(data)  //controllo su nickname(indice4) e email(indice5)
 	{
@@ -181,56 +180,58 @@ var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 
 
 
-    server.listen( porta, function ()
-    {
-    	console.log( 'server online : '+ip+':'+porta);
-    } );
+server.listen( porta, function ()
+{
+	console.log(ip+':'+porta);
+} );
 
 
-    function verify(data,socket)
-    {
-    	for (var i = 0; i < data.length; i++) {
-    		if(data[i] == "")
-    		{
-    			socket.emit('formatoInvalido','5');
-    			break;
-    		}
-    	}
-    	var passa=0;
-    	var email=data[5];
-    	var password=data[6];
-    	var conf_password=data[7];
-    	var nickname = data[4];
-    	var result_email = regEm.test(email);
-    	var result_password = regPass.test(password);
+function verify(data,socket)
+{
+	for (var i = 0; i < data.length; i++) {
+		if(data[i] == "")
+		{
+			socket.emit('formatoInvalido','5');
+			break;
+		}
+	}
+	var passa=0;
+	var email=data[5];
+	var password=data[6];
+	var conf_password=data[7];
+	var nickname = data[4];
+	var result_email = regEm.test(email);
+	var result_password = regPass.test(password);
 
-    	if (result_email==false)
-    	{
-    		socket.emit('formatoInvalido','1');
-    		passa+=1;
-    	}
+	if (result_email==false)
+	{
+		socket.emit('formatoInvalido','1');
+		passa+=1;
+	}
 
-    	if(result_password==false)
-    	{
-    		socket.emit('formatoInvalido','2');
-    		passa+=1;
-    	}
+	if(result_password==false)
+	{
+		socket.emit('formatoInvalido','2');
+		passa+=1;
+	}
 
-    	if(password != conf_password)
-    	{
-    		socket.emit('formatoInvalido','3');
-    		passa+=1;
-    	}
+	if(password != conf_password)
+	{
+		socket.emit('formatoInvalido','3');
+		passa+=1;
+	}
 
 
-    	if(nickname.includes("@"))
-    	{
-    		socket.emit('formatoInvalido','4');
-    		passa+=1;
-    	}
+	if(nickname.includes("@"))
+	{
+		socket.emit('formatoInvalido','4');
+		passa+=1;
+	}
 
-    	return passa;
-    }
+	return passa;
+}
+
+
 
 
 
