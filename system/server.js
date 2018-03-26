@@ -1,8 +1,9 @@
-var ip='192.168.10.110';
+var ip='192.168.10.119';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
-var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i; 
+var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
+var fs = require('fs'); 
 
 
 
@@ -18,11 +19,10 @@ const RegistrationSchema = {
 		email: 'string',
 		password: 'string',
 		password2:     'string',
-		immagine: 'string',
 	}
 };
 
-var realm=new Realm({schema:[RegistrationSchema],schemaVersion:4})
+var realm=new Realm({schema:[RegistrationSchema],schemaVersion:5})
 var nodemailer = require('nodemailer');
 var express = require( 'express' );
 var app = express();
@@ -75,7 +75,7 @@ io.on( 'connection', function ( socket )
 		var option;
 		realm.write(() => 
 		{
-			option=realm.create(RegistrationSchema.name,{nome:data[0],indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7],immagine:'vuota'});
+			option=realm.create(RegistrationSchema.name,{nome:data[0],indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7]});
 			
 			socket.emit('noReg',new Array("registrazione effettuata con successo",data[4]));
 		});
@@ -116,7 +116,7 @@ io.on( 'connection', function ( socket )
 		{
 			if(realm.objects(RegistrationSchema.name)[i].nickname==data)
 			{
-				dati = new Array(realm.objects(RegistrationSchema.name)[i].indirizzo, realm.objects(RegistrationSchema.name)[i].città, realm.objects(RegistrationSchema.name)[i].cap,realm.objects(RegistrationSchema.name)[i].nickname, realm.objects(RegistrationSchema.name)[i].email, realm.objects(RegistrationSchema.name)[i].password, realm.objects(RegistrationSchema.name)[i].password2,realm.objects(RegistrationSchema.name)[i].immagine);
+				dati = new Array(realm.objects(RegistrationSchema.name)[i].indirizzo, realm.objects(RegistrationSchema.name)[i].città, realm.objects(RegistrationSchema.name)[i].cap,realm.objects(RegistrationSchema.name)[i].nickname, realm.objects(RegistrationSchema.name)[i].email, realm.objects(RegistrationSchema.name)[i].password, realm.objects(RegistrationSchema.name)[i].password2);
 			}
 		}
 		socket.emit('riceviDatiVecchi',dati);	
@@ -128,15 +128,23 @@ io.on( 'connection', function ( socket )
 		{
 			if(realm.objects(RegistrationSchema.name)[i].nickname==data[0])
 			{
-				if(data[8]!=0)
+				if(data[8] != "")
 				{
+					fs.writeFile("../profile_images/"+data[0]+".txt", data[8], function(err){
+						if (err) 
+						{
+							return console.log(err);
+						}
+						console.log('Sanata');
+					});
+
 					var help=realm.objects(RegistrationSchema.name)[i].nome;
 					realm.write(() => 
 					{
 						let result=realm.objects(RegistrationSchema.name);
 						let r=result.filtered('nickname = "'+data[0]+'"');
 						realm.delete(r);
-						option=realm.create(RegistrationSchema.name,{nome:help,indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7],immagine:data[8]});
+						option=realm.create(RegistrationSchema.name,{nome:help,indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7]});
 						socket.emit('updateNick',data[4]);
 
 					});
@@ -150,7 +158,7 @@ io.on( 'connection', function ( socket )
 						let result=realm.objects(RegistrationSchema.name);
 						let r=result.filtered('nickname = "'+data[0]+'"');
 						realm.delete(r);
-						option=realm.create(RegistrationSchema.name,{nome:help,indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7],immagine:'vuota'});
+						option=realm.create(RegistrationSchema.name,{nome:help,indirizzo:data[1],città:data[2],cap:data[3],nickname:data[4],email:data[5],password:data[6],password2:data[7]});
 						socket.emit('updateNick',data[4]);
 
 					});
@@ -164,13 +172,10 @@ io.on( 'connection', function ( socket )
 
 	socket.on('aggiornaFoto',function(data)
 	{
-		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
-		{
-			if(realm.objects(RegistrationSchema.name)[i].nickname==data)
-			{
-				socket.emit('fotoAgg',realm.objects(RegistrationSchema.name)[i].immagine);
-			}
-		}
+		fs.readFile("../profile_images/"+data+".txt", {encoding: 'utf-8'}, function(err,data){
+		    socket.emit('fotoAgg',data); 
+		});
+
 	});
 
 

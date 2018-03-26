@@ -34,193 +34,374 @@
 			<div class="column">
 				<div class="ui special cards">
 					<div class="ui circular image">
-						<div class="ui dimmer">
+						<div  class="ui active dimmer togli">
 							<div class="content">
+								<div id="caricamentoIndex" class="ui indeterminate text loader"> </div>
 								<button id="userSett" class="ui mini inverted button">Setting</button>
 							</div>
 						</div>
 						<img src="/images/user.jpg" id="img">
 					</div>
 				</div>
-				</div> 
-				<div class="column">
-					<h4 class="ui header" id="utente"></h4>
-					<div class="ui button mini" id="logOut">Logout</div>
+			</div> 
+			<div class="column">
+				<h4 class="ui header" id="utente"></h4>
+				<div class="ui button mini" id="logOut">Logout</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui left demo vertical inverted sidebar labeled icon menu">
+		<a class="item">
+			<div class="ui search">
+				<div class="ui icon input">
+					<input class="prompt" type="text" placeholder="Inserisci prodotto:">
+					<i class="search icon"></i>
 				</div>
+				<div class="results"></div>
+			</div>
+		</a>
+		<a class="item">
+			Home
+		</a>
+
+		<div class="item">
+			<div class="active header">Categorie:</div>
+			<div class="menu">
+				<a class="active item">Interni</a>
+			</div>
+			<div class="menu">
+				<a class="active item">Esterni</a>
+			</div>
+			<div class="menu">
+				<a class="active item">Aziendali</a>
 			</div>
 		</div>
 
-		<div class="ui left demo vertical inverted sidebar labeled icon menu">
-			<a class="item">
-				<div class="ui search">
-					<div class="ui icon input">
-						<input class="prompt" type="text" placeholder="Inserisci prodotto:">
-						<i class="search icon"></i>
-					</div>
-					<div class="results"></div>
-				</div>
-			</a>
-			<a class="item">
-				Home
-			</a>
+		<a class="item" href="https://github.com/divino-marchese">
+			Chi siamo
+		</a>
 
-			<div class="item">
-				<div class="active header">Categorie:</div>
-				<div class="menu">
-					<a class="active item">Interni</a>
-				</div>
-				<div class="menu">
-					<a class="active item">Esterni</a>
-				</div>
-				<div class="menu">
-					<a class="active item">Aziendali</a>
-				</div>
+		<a class="item" href="https://www.google.it/maps/place/30010+Calcroci+VE/data=!4m2!3m1!1s0x477ec7bcd436d1fd:0xe81581287e7b1358?sa=X&ved=0ahUKEwih-ertyObZAhVMlCwKHd-8AfYQ8gEIlQEwCg">
+			Dove siamo
+		</a>
+	</div>
+
+
+
+	<div class="ui tiny modal" id="tabLog">
+		<div class="content">
+			<div class="ui tabular menu" id="tabular">
+				<a class="item active" id="accedi">
+					Accedi
+				</a>
+				<a class="item" id="registrati">
+					Registrati
+				</a>
 			</div>
+			<div class="content" id="first">
+				<div class="ui form" id="login">
+					<div class="field" id="emailfield">
+						<label>Nickname o E-mail:</label>
+						<input type="text" placeholder="inserisci e-mail o nickname" id="existmail">
+					</div>
+					<div class="field" id="passwordfield">
+						<label>Password:</label>
+						<input type="password" placeholder="inserisci password" id="existpassword">
+					</div>
+				</div>
 
-			<a class="item" href="https://github.com/divino-marchese">
-				Chi siamo
-			</a>
-
-			<a class="item" href="https://www.google.it/maps/place/30010+Calcroci+VE/data=!4m2!3m1!1s0x477ec7bcd436d1fd:0xe81581287e7b1358?sa=X&ved=0ahUKEwih-ertyObZAhVMlCwKHd-8AfYQ8gEIlQEwCg">
-				Dove siamo
-			</a>
+			</div> 
 		</div>
 
-
-
-		<div class="ui tiny modal" id="tabLog">
-			<div class="content">
-				<div class="ui tabular menu" id="tabular">
-					<a class="item active" id="accedi">
-						Accedi
-					</a>
-					<a class="item" id="registrati">
-						Registrati
-					</a>
-				</div>
-				<div class="content" id="first">
-					<div class="ui form" id="login">
-						<div class="field" id="emailfield">
-							<label>Nickname o E-mail:</label>
-							<input type="text" placeholder="inserisci e-mail o nickname" id="existmail">
-						</div>
-						<div class="field" id="passwordfield">
-							<label>Password:</label>
-							<input type="password" placeholder="inserisci password" id="existpassword">
-						</div>
+		<div class="content" id="second">
+			<div class="ui form" id="content">
+				<div class="fields">
+					<div class="field">
+						<label>Nome:</label>
+						<input type="text" placeholder="inserisci il tuo nome" id="nome">
 					</div>
-
-				</div> 
-			</div>
-
-			<div class="content" id="second">
-				<div class="ui form" id="content">
-					<div class="fields">
-						<div class="field">
-							<label>Nome:</label>
-							<input type="text" placeholder="inserisci il tuo nome" id="nome">
-						</div>
-						<div class="field">
-							<label>Indirizzo:</label>
-							<input type="text" placeholder="dove abiti" id="indirizzo">
-						</div>
-					</div>
-					<div class="fields">
-						<div class="field">
-							<label>Città:</label>
-							<input type="text" placeholder="città di provenienza" id="città">
-						</div>
-						<div class="field">
-							<label>CAP:</label>
-							<input type="text" placeholder="codice postale" id="cap">
-						</div>
-					</div>
-					<div class="fields" id="nicknameField">
-						<div class="field" id="nicknameField">
-							<label>Nickname:</label>
-							<input type="text" placeholder="inserisci un nickname" id="nick">
-						</div>
-						<div class="field" id="emailField">
-							<label>E-mail:</label>
-							<input type="text" placeholder="inserisci e-mail" id="email">
-						</div>
-					</div>
-					<div class="fields">
-						<div class="field" id="passwordField">
-							<label>Password:</label>
-							<input type="password" placeholder="••••••••" id="password">
-						</div>
-						<div class="field" id="confirmPasswordfield">
-							<label>Conferma password:</label>
-							<input type="password" placeholder="••••••••" id="password2">
-						</div>
+					<div class="field">
+						<label>Indirizzo:</label>
+						<input type="text" placeholder="dove abiti" id="indirizzo">
 					</div>
 				</div>
-			</div>		
-			<div class="actions">
-				<div class="ui deny button" id="confirm"></div>
+				<div class="fields">
+					<div class="field">
+						<label>Città:</label>
+						<input type="text" placeholder="città di provenienza" id="città">
+					</div>
+					<div class="field">
+						<label>CAP:</label>
+						<input type="text" placeholder="codice postale" id="cap">
+					</div>
+				</div>
+				<div class="fields">
+					<div class="field" id="nicknameField">
+						<label>Nickname:</label>
+						<input type="text" placeholder="inserisci nickname" id="nick">
+					</div>
+					<div class="field" id="emailField">
+						<label>E-mail:</label>
+						<input type="text" placeholder="inserisci e-mail" id="email">
+					</div>
+				</div>
+				<div class="fields">
+					<div class="field" id="passwordField">
+						<label>Password:</label>
+						<input type="password" placeholder="••••••••" id="password">
+					</div>
+					<div class="field" id="confirmPasswordfield">
+						<label>Conferma password:</label>
+						<input type="password" placeholder="••••••••" id="password2">
+					</div>
+				</div>
+
 			</div>
+		</div>		
+		<div class="actions">
+			<div class="ui deny button" id="confirm"></div>
 		</div>
+	</div>
 
-		<div class="ui centered grid" id="container">
-	
-			<img src="/images/logo.png" id="logo">
+	<!-- <div class="ui centered grid" id="container">
 
-			<div class="ui special cards">
-				<div class="card" id="provaImmagine">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
-							<div class="content">
-								<div class="center">
-									<div class="ui inverted button">Dettagli</div>
-								</div>
+		<img src="/images/logo.png" id="logo">
+
+		<div class="ui special cards">
+			<div class="card" id="provaImmagine">
+				<div class="blurring dimmable image">
+					<div class="ui dimmer">
+						<div class="content">
+							<div class="center">
+								<div class="ui inverted button">Dettagli</div>
 							</div>
 						</div>
-						<img src="/images/skere.jpg">
 					</div>
-					<div class="content">
-						<a class="header">Andrea Morettin</a>
-						<div class="meta">
-							<span class="date">Created in Sep 2014</span>
-						</div>
-					</div>
-					<div class="extra content">
-						<a>
-							<i class="users icon"></i>
-							ASGARAAA
-						</a>
+					<img src="/images/skere.jpg">
+				</div>
+				<div class="content">
+					<a class="header">Andrea Morettin</a>
+					<div class="meta">
+						<span class="date">Created in Sep 2014</span>
 					</div>
 				</div>
-				<div class="card" >
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
-							<div class="content">
-								<div class="center">
-									<div class="ui inverted button">Add Friend</div>
-								</div>
+				<div class="extra content">
+					<a>
+						<i class="users icon"></i>
+						ASGARAAA
+					</a>
+				</div>
+			</div>
+			<div class="card" >
+				<div class="blurring dimmable image">
+					<div class="ui dimmer">
+						<div class="content">
+							<div class="center">
+								<div class="ui inverted button">Add Friend</div>
 							</div>
 						</div>
-						<img src="/images/MMM.jpg">
 					</div>
-					<div class="content">
-						<a class="header">Team Hess</a>
-						<div class="meta">
-							<span class="date">Created in Aug 2014</span>
-						</div>
+					<img src="/images/MMM.jpg">
+				</div>
+				<div class="content">
+					<a class="header">Team Hess</a>
+					<div class="meta">
+						<span class="date">Created in Aug 2014</span>
 					</div>
-					<div class="extra content">
-						<a>
-							<i class="users icon"></i>
-							2 Members
-						</a>
-					</div>
-				</div> 
-			</div>
+				</div>
+				<div class="extra content">
+					<a>
+						<i class="users icon"></i>
+						2 Members
+					</a>
+				</div>
+			</div> 
 		</div>
+	</div> -->
+
+	<div class="cont">
+		<div class="card-slider">
+			<ul class="card-slider_list">
+				<li class="card-slider_card">
+					<div class="ui special cards">
+						<div class="card" id="provaImmagine">
+							<div class="blurring dimmable image">
+								<div class="ui dimmer">
+									<div class="content">
+										<div class="center">
+											<div class="ui inverted button">Dettagli</div>
+										</div>
+									</div>
+								</div>
+								<img src="/images/skere.jpg">
+							</div>
+							<div class="content">
+								<a class="header">Andrea Morettin</a>
+								<div class="meta">
+									<span class="date">Created in Sep 2014</span>
+								</div>
+							</div>
+							<div class="extra content">
+								<a>
+									<i class="users icon"></i>
+									ASGARAAA
+								</a>
+							</div>
+						</div>
+					</li>
+
+<li class="card-slider_card">
+					<div class="ui special cards">
+						<div class="card" id="provaImmagine">
+							<div class="blurring dimmable image">
+								<div class="ui dimmer">
+									<div class="content">
+										<div class="center">
+											<div class="ui inverted button">Dettagli</div>
+										</div>
+									</div>
+								</div>
+								<img src="/images/skere.jpg">
+							</div>
+							<div class="content">
+								<a class="header">Andrea Morettin</a>
+								<div class="meta">
+									<span class="date">Created in Sep 2014</span>
+								</div>
+							</div>
+							<div class="extra content">
+								<a>
+									<i class="users icon"></i>
+									ASGARAAA
+								</a>
+							</div>
+						</div>
+					</li>
+					<li class="card-slider_card">
+					<div class="ui special cards">
+						<div class="card" id="provaImmagine">
+							<div class="blurring dimmable image">
+								<div class="ui dimmer">
+									<div class="content">
+										<div class="center">
+											<div class="ui inverted button">Dettagli</div>
+										</div>
+									</div>
+								</div>
+								<img src="/images/skere.jpg">
+							</div>
+							<div class="content">
+								<a class="header">Andrea Morettin</a>
+								<div class="meta">
+									<span class="date">Created in Sep 2014</span>
+								</div>
+							</div>
+							<div class="extra content">
+								<a>
+									<i class="users icon"></i>
+									ASGARAAA
+								</a>
+							</div>
+						</div>
+					</li>
+					<li class="card-slider_card">
+					<div class="ui special cards">
+						<div class="card" id="provaImmagine">
+							<div class="blurring dimmable image">
+								<div class="ui dimmer">
+									<div class="content">
+										<div class="center">
+											<div class="ui inverted button">Dettagli</div>
+										</div>
+									</div>
+								</div>
+								<img src="/images/skere.jpg">
+							</div>
+							<div class="content">
+								<a class="header">Andrea Morettin</a>
+								<div class="meta">
+									<span class="date">Created in Sep 2014</span>
+								</div>
+							</div>
+							<div class="extra content">
+								<a>
+									<i class="users icon"></i>
+									ASGARAAA
+								</a>
+							</div>
+						</div>
+					</li>
+
+					<li class="card-slider_card">
+						<div class="ui special cards">
+							<div class="card" >
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<div class="ui inverted button">Add Friend</div>
+											</div>
+										</div>
+									</div>
+									<img src="/images/MMM.jpg">
+								</div>
+								<div class="content">
+									<a class="header">Team Hess</a>
+									<div class="meta">
+										<span class="date">Created in Aug 2014</span>
+									</div>
+								</div>
+								<div class="extra content">
+									<a>
+										<i class="users icon"></i>
+										2 Members
+									</a>
+								</div>
+							</div> 
+						</div>
+					</li>
+					<li class="card-slider_card">
+						<div class="ui special cards">
+							<div class="card" id="provaImmagine">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<div class="ui inverted button">Dettagli</div>
+											</div>
+										</div>
+									</div>
+									<img src="/images/skere.jpg">
+								</div>
+								<div class="content">
+									<a class="header">Andrea Morettin</a>
+									<div class="meta">
+										<span class="date">Created in Sep 2014</span>
+									</div>
+								</div>
+								<div class="extra content">
+									<a>
+										<i class="users icon"></i>
+										ASGARAAA
+									</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="text-center">
+				<hr />
+				<button class="previous">Previous</button>
+				<button class="next">Next</button>
+				</
+			</div>
 
 
 
 
 
-	</body>
-	</html>
+		</body>
+		</html>

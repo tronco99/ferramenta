@@ -1,15 +1,18 @@
-var ip='192.168.10.110';
+var ip='192.168.10.119';
 var socket = io.connect(ip+":4200");
 var x=0;
 
 
 $(document).ready(function()
 {
+	
+	$('#modificaFoto').hide();
+
 	$('#inp').hide();
 
 	$("#name").text(document.cookie.replace('username=','').toUpperCase());
 	socket.emit('richiestaDati',document.cookie.replace('username=',''));
-
+	socket.emit('aggiornaFoto',document.cookie.replace('username=',''));
 	$('#home').on('click',function()
 	{
 		document.location.href="/";
@@ -41,7 +44,7 @@ $(document).ready(function()
 			onApprove : function() {
 				if($('#password3').val() == $('#confermaPassword3').val())
 				{
-					socket.emit('aggiornaDati',new Array(document.cookie.replace('username=',''),$("#indirizzo3").val(),$("#città3").val(),$("#cap3").val(),$("#nickname3").val(),$("#email3").val(),$("#password3").val(),$("#confermaPassword3").val(),x));
+					socket.emit('aggiornaDati',new Array(document.cookie.replace('username=',''),$("#indirizzo3").val(),$("#città3").val(),$("#cap3").val(),$("#nickname3").val(),$("#email3").val(),$("#password3").val(),$("#confermaPassword3").val(), x));
 					return;
 				}
 				alert('le password non coincidono');
@@ -50,6 +53,20 @@ $(document).ready(function()
 		.modal('show')
 		;
 
+	});
+
+	socket.on('fotoAgg',function(data)
+	{
+		$('#pro').hover(function(){
+			$('#caricamento').hide();
+		});
+		if(data!=null && data!='vuota')
+		{
+			$('#profilo').attr('src',data);
+		}
+		$('#caricamento').hide();
+		$('#modificaFoto').show();
+		$('.togli').removeClass('active');
 	});
 
 
@@ -62,14 +79,6 @@ $(document).ready(function()
 		$("#email3").val(data[4]);
 		$("#password3").val(data[5]);
 		$("#confermaPassword3").val(data[6]);
-		if(data[7]=='vuota')
-		{
-			$('#profilo').attr('src','/images/user.jpg');
-		}
-		else
-		{
-			$('#profilo').attr('src', data[7]);
-		}
 	});
 
 	socket.on('updateNick',function(data)
@@ -85,8 +94,6 @@ $(document).ready(function()
 	{
 		readFile();
 	});
-
-
 });
 
 function readFile() {
