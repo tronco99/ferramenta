@@ -54,38 +54,7 @@
 .active-out ~ .card-slider_card.active-in {
   animation: activeInRight 0.5s ease-in-out;
 }
-.panel {
-  background: white;
-  padding: 15px 15px 0;
-  border: 1px solid #eee;
-  box-shadow: 0 2px 15px 0 rgba(67, 134, 179, 0.25);
-  height: 100%;
-  border-radius: 5px;
-  font-size: 18px;
-  font-family: sans-serif;
-}
-.panel h3 {
-  background: #0A9928;
-  color: white;
-  margin: -15px -15px 15px;
-  padding: 30px 15px;
-  border-radius: 4px 4px 0 0;
-}
-.panel ul {
-  list-style-type: none;
-  padding: 0;
-  margin: -15px -15px 0;
-}
-.panel ul li {
-  padding: 10px 15px;
-  border-top: 1px solid #eee;
-}
-.panel ul li span {
-  float: right;
-}
-.panel ul li span.no {
-  color: #ccc;
-}
+
 @keyframes activeInRight {
   0% {
     transform: scale(0.8);

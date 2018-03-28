@@ -1,10 +1,14 @@
-var ip='192.168.10.113';
+var ip='192.168.10.108';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
 
 $(document).ready(function()
 {
+	$('.card-slider_list').css({
+		transform: 'translateX(-50%)'
+	}, 0);
+
 	const totalCards = $('.card-slider_card').length;
 	const cardWidth = $('.card-slider_card:not(.active)').width();
 	const activeCardWidth = $('.card-slider_card.active').width();
@@ -30,7 +34,7 @@ $(document).ready(function()
 	}
 	
 	let currentPos = $('.card-slider_card').index($card);
-	let scrollPos = cardWidth * currentPos;
+	let scrollPos = cardWidth * (currentPos);
 
 	$('.card-slider_list').css({
 		transform: 'translateX(-'+scrollPos+'px)'
