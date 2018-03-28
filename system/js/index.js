@@ -1,63 +1,23 @@
-var ip='192.168.10.108';
+var ip='192.168.10.114';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
 
 $(document).ready(function()
 {
-	$('.card-slider_list').css({
-		transform: 'translateX(-50%)'
-	}, 0);
-
-	const totalCards = $('.card-slider_card').length;
-	const cardWidth = $('.card-slider_card:not(.active)').width();
-	const activeCardWidth = $('.card-slider_card.active').width();
-
-	//goToCard($('.primo.card-slider_card.active'));
-
-	$('.card-slider_card').click((e) => {
-	let $currentCard = $(e.target).closest('.card-slider_card');
-	goToCard($currentCard); 
-	});
-
-	$('.previous').click(goToPreviousCard);
-	$('.next').click(goToNextCard);
-
-	function goToCard($card) {
-
-		
 	
-	if (!$card.hasClass('active')) {
-		$('.active-out, .active-in').removeClass('active-out active-in');
-		$('.card-slider_card.active').addClass('active-out').removeClass('active');
-		$card.closest('.card-slider_card').addClass('active active-in');
-	}
-	
-	let currentPos = $('.card-slider_card').index($card);
-	let scrollPos = cardWidth * (currentPos);
-
-	$('.card-slider_list').css({
-		transform: 'translateX(-'+scrollPos+'px)'
-	}, 200);
-	}
-
-	function goToNextCard() {
-	let $nextCard = $('.card-slider_card.active').next('.card-slider_card');
-	if ($nextCard.length) {
-		goToCard($nextCard);
-	}
-	}
-	function goToPreviousCard() {
-	let $previousCard = $('.card-slider_card.active').prev('.card-slider_card');
-	if ($previousCard.length) {
-		goToCard($previousCard);
-	}
-	}
-
-
-
-
-
+$('#productSlider').bxSlider({
+   nextText          :  "",
+   prevText          :  "",
+   pager             :  false,
+   minSlides         :  1,
+   maxSlides         :  5,
+   startSlide        :  1,
+   slideMargin       :  15,
+   slideWidth        :  210,
+   infiniteLoop      :  false,
+   hideControlOnEnd  :  true,
+});
 	///////////////////////////////////////////////////////////////////////////////
 	var x = document.cookie;
 	x = x.replace('username=','');
@@ -98,7 +58,7 @@ $(document).ready(function()
 		$('#test').removeClass('active');
 	});
 	$('.special.cards .image').dimmer({
-		on: 'hover'
+	 	on: 'hover'
 	});
 
 	$('.ui .item').on('click', function() {
@@ -230,7 +190,7 @@ $(document).ready(function()
 		{
 			$('#img').attr('src',data);
 		}
-	
+
 		$('#caricamentoIndex').hide();
 		$('#userSett').show();
 		$('.togli').removeClass('active');

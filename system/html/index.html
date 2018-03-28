@@ -7,6 +7,9 @@
 	<script src="/node_modules/semantic-ui/dist/semantic.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/node_modules/semantic-ui/dist/semantic.min.css">
 	<link rel="stylesheet" href="system/css/index.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+		<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
 	<meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport" />
 </head>
 <body>
@@ -164,39 +167,9 @@
 		</div>
 	</div>
 
-	<div class="cont">
-		<div class="card-slider">
-			<ul class="card-slider_list">
-				<li class="card-slider_card active">
-					<div class="ui special cards">
-						<div class="card" id="provaImmagine">
-							<div class="blurring dimmable image">
-								<div class="ui dimmer">
-									<div class="content">
-										<div class="center">
-											<div class="ui inverted button">Dettagli</div>
-										</div>
-									</div>
-								</div>
-								<img src="/images/skere.jpg">
-							</div>
-							<div class="content">
-								<a class="header">Andrea Morettin</a>
-								<div class="meta">
-									<span class="date">Created in Sep 2014</span>
-								</div>
-							</div>
-							<div class="extra content">
-								<a>
-									<i class="users icon"></i>
-									ASGARAAA
-								</a>
-							</div>
-						</div>
-					</li>
 
-				<li class="card-slider_card">
-					<div class="ui special cards">
+	<div class="container"></div>
+					<!-- <div class="ui special cards">
 						<div class="card" id="provaImmagine">
 							<div class="blurring dimmable image">
 								<div class="ui dimmer">
@@ -219,133 +192,83 @@
 									<i class="users icon"></i>
 									ASGARAAA
 								</a>
-							</div>
-						</div>
-					</li>
-					<li class="card-slider_card">
-					<div class="ui special cards">
-						<div class="card" id="provaImmagine">
-							<div class="blurring dimmable image">
-								<div class="ui dimmer">
-									<div class="content">
-										<div class="center">
-											<div class="ui inverted button">Dettagli</div>
-										</div>
-									</div>
-								</div>
-								<img src="/images/skere.jpg">
-							</div>
-							<div class="content">
-								<a class="header">Andrea Morettin</a>
-								<div class="meta">
-									<span class="date">Created in Sep 2014</span>
-								</div>
-							</div>
-							<div class="extra content">
-								<a>
-									<i class="users icon"></i>
-									ASGARAAA
-								</a>
-							</div>
-						</div>
-					</li>
-					<li class="card-slider_card">
-					<div class="ui special cards">
-						<div class="card" id="provaImmagine">
-							<div class="blurring dimmable image">
-								<div class="ui dimmer">
-									<div class="content">
-										<div class="center">
-											<div class="ui inverted button">Dettagli</div>
-										</div>
-									</div>
-								</div>
-								<img src="/images/skere.jpg">
-							</div>
-							<div class="content">
-								<a class="header">Andrea Morettin</a>
-								<div class="meta">
-									<span class="date">Created in Sep 2014</span>
-								</div>
-							</div>
-							<div class="extra content">
-								<a>
-									<i class="users icon"></i>
-									ASGARAAA
-								</a>
-							</div>
-						</div>
-					</li>
-
-					<li class="card-slider_card">
-						<div class="ui special cards">
-							<div class="card" >
-								<div class="blurring dimmable image">
-									<div class="ui dimmer">
-										<div class="content">
-											<div class="center">
-												<div class="ui inverted button">Add Friend</div>
-											</div>
-										</div>
-									</div>
-									<img src="/images/MMM.jpg">
-								</div>
-								<div class="content">
-									<a class="header">Team Hess</a>
-									<div class="meta">
-										<span class="date">Created in Aug 2014</span>
-									</div>
-								</div>
-								<div class="extra content">
-									<a>
-										<i class="users icon"></i>
-										2 Members
-									</a>
-								</div>
 							</div> 
 						</div>
-					</li>
-					<li class="card-slider_card">
-						<div class="ui special cards">
-							<div class="card" id="provaImmagine">
-								<div class="blurring dimmable image">
-									<div class="ui dimmer">
-										<div class="content">
-											<div class="center">
-												<div class="ui inverted button">Dettagli</div>
-											</div>
-										</div>
-									</div>
-									<img src="/images/skere.jpg">
-								</div>
-								<div class="content">
-									<a class="header">Andrea Morettin</a>
-									<div class="meta">
-										<span class="date">Created in Sep 2014</span>
-									</div>
-								</div>
-								<div class="extra content">
-									<a>
-										<i class="users icon"></i>
-										ASGARAAA
-									</a>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</div>
+					</div>-->
+					
+
+<div class="cont">
+		<div class="slider"> <!-- slider-->
+			<div id="productSlider">
+				<div class="thumbnail product"> <!-- item -->
+					<figure>
+						<a href=""><img src="/images/skere.jpg" alt="Poster name" /></a>
+					</figure>
+					<div class="caption">
+						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
+						<div class="price">Rs. 18,400/-</div>
+					</div>
+				</div> <!-- /.item -->
+				<div class="thumbnail product"> <!-- item -->
+					<figure>
+						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
+					</figure>
+					<div class="caption">
+						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
+						<div class="price">Rs. 18,400/-</div>
+					</div>
+				</div> <!-- /.item -->
+				<div class="thumbnail product"> <!-- item -->
+					<figure>
+						<a href=""><img src="/images/skere.jpg" alt="Poster name" /></a>
+					</figure>
+					<div class="caption">
+						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
+						<div class="price">Rs. 18,400/-</div>
+					</div>
+				</div> <!-- /.item -->
+				<div class="thumbnail product"> <!-- item -->
+					<figure>
+						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
+					</figure>
+					<div class="caption">
+						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
+						<div class="price">Rs. 18,400/-</div>
+					</div>
+				</div> <!-- /.item -->
+				<div class="thumbnail product"> <!-- item -->
+					<figure>
+						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
+					</figure>
+					<div class="caption">
+						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
+						<div class="price">Rs. 18,400/-</div>
+					</div>
+				</div> <!-- /.item -->
+				<div class="thumbnail product"> <!-- item -->
+					<figure>
+						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
+					</figure>
+					<div class="caption">
+						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
+						<div class="price">Rs. 18,400/-</div>
+					</div>
+				</div> <!-- /.item -->
+				<div class="thumbnail product"> <!-- item -->
+					<figure>
+						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
+					</figure>
+					<div class="caption">
+						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
+						<div class="price">Rs. 18,400/-</div>
+					</div>
+				</div> <!-- /.item -->
 			</div>
-
-			<div class="text-center">
-				<hr />
-				<button class="previous">Previous</button>
-				<button class="next">Next</button>
-				</
-			</div>
+		</div> <!-- /.slider-->
+	</div>
+	<!-- //////////////////////// -->
 
 
 
-
-
-		</body>
-		</html>
+					</body>
+					</html>
