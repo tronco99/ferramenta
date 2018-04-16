@@ -7,8 +7,8 @@
 	<script src="/node_modules/semantic-ui/dist/semantic.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/node_modules/semantic-ui/dist/semantic.min.css">
 	<link rel="stylesheet" href="system/css/index.css" />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-		<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 	<meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport" />
 </head>
@@ -19,6 +19,9 @@
 			<a class="fixed item" id="openMenu">
 				<i class="content icon"></i>
 				<label id="label_menu">MENU</label>
+			</a>
+			<a id="tagP" class="ui black tag menu label" hidden>
+				
 			</a>
 
 			<a class="right menu">
@@ -71,13 +74,13 @@
 		<div class="item">
 			<div class="active header">Categorie:</div>
 			<div class="menu">
-				<a class="active item">Interni</a>
+				<a class="active item pressed">Interni</a>
 			</div>
 			<div class="menu">
-				<a class="active item">Esterni</a>
+				<a class="active item pressed">Esterni</a>
 			</div>
 			<div class="menu">
-				<a class="active item">Aziendali</a>
+				<a class="active item pressed">Aziendali</a>
 			</div>
 		</div>
 
@@ -167,108 +170,356 @@
 		</div>
 	</div>
 
+	<div class="ui centered grid" id="container">
+		<div class="ui centered container">
 
-	<div class="container"></div>
-					<!-- <div class="ui special cards">
-						<div class="card" id="provaImmagine">
-							<div class="blurring dimmable image">
-								<div class="ui dimmer">
-									<div class="content">
-										<div class="center">
-											<div class="ui inverted button">Dettagli</div>
+			<div class="introduction">
+				<h1 class="ui header">
+					Prodotti: 
+				</h1>
+			</div> 
+			<div class="container">
+				<div class="cont">
+					<div class="slider">  	
+						<div id="productSlider">
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
 										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
 									</div>
 								</div>
-								<img src="/images/skere.jpg">
-							</div>
-							<div class="content">
-								<a class="header">Andrea Morettin</a>
-								<div class="meta">
-									<span class="date">Created in Sep 2014</span>
+							</div> 
+
+
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
 								</div>
-							</div>
-							<div class="extra content">
-								<a>
-									<i class="users icon"></i>
-									ASGARAAA
-								</a>
+							</div> 
+
+
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
+							</div> 
+
+
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
+							</div> 
+
+
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
 							</div> 
 						</div>
-					</div>-->
-					
-
-<div class="cont">
-		<div class="slider"> <!-- slider-->
-			<div id="productSlider">
-				<div class="thumbnail product"> <!-- item -->
-					<figure>
-						<a href=""><img src="/images/skere.jpg" alt="Poster name" /></a>
-					</figure>
-					<div class="caption">
-						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
-						<div class="price">Rs. 18,400/-</div>
-					</div>
-				</div> <!-- /.item -->
-				<div class="thumbnail product"> <!-- item -->
-					<figure>
-						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
-					</figure>
-					<div class="caption">
-						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
-						<div class="price">Rs. 18,400/-</div>
-					</div>
-				</div> <!-- /.item -->
-				<div class="thumbnail product"> <!-- item -->
-					<figure>
-						<a href=""><img src="/images/skere.jpg" alt="Poster name" /></a>
-					</figure>
-					<div class="caption">
-						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
-						<div class="price">Rs. 18,400/-</div>
-					</div>
-				</div> <!-- /.item -->
-				<div class="thumbnail product"> <!-- item -->
-					<figure>
-						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
-					</figure>
-					<div class="caption">
-						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
-						<div class="price">Rs. 18,400/-</div>
-					</div>
-				</div> <!-- /.item -->
-				<div class="thumbnail product"> <!-- item -->
-					<figure>
-						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
-					</figure>
-					<div class="caption">
-						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
-						<div class="price">Rs. 18,400/-</div>
-					</div>
-				</div> <!-- /.item -->
-				<div class="thumbnail product"> <!-- item -->
-					<figure>
-						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
-					</figure>
-					<div class="caption">
-						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
-						<div class="price">Rs. 18,400/-</div>
-					</div>
-				</div> <!-- /.item -->
-				<div class="thumbnail product"> <!-- item -->
-					<figure>
-						<a href=""><img src="http://projects.mostlikers.com/_images/product.jpg" alt="Poster name" /></a>
-					</figure>
-					<div class="caption">
-						<a href="" class="product-name">Trendy Beige Jute - Silk Saree</a>
-						<div class="price">Rs. 18,400/-</div>
-					</div>
-				</div> <!-- /.item -->
+					</div> 
+				</div>
 			</div>
-		</div> <!-- /.slider-->
+
+			<div class="introduction">
+				<h1 class="ui header">
+					Prodotti: 
+				</h1>
+			</div>
+			<div class="container">
+				<div class="cont">
+					<div class="slider">  	
+						<div id="productSlider1">
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
+							</div> 
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
+							</div> 
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
+							</div> 
+
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
+							</div> 
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
+							</div> 
+							<div class="thumbnail product">
+								<div class="ui special cards">
+									<div class="card" id="provaImmagine">
+										<div class="blurring dimmable image">
+											<div class="ui dimmer">
+												<div class="content">
+													<div class="center">
+														<div class="ui inverted button">Dettagli</div>
+													</div>
+												</div>
+											</div>
+											<img src="/images/skere.jpg">
+										</div>
+										<div class="content">
+											<a class="header">Andrea Morettin</a>
+											<div class="meta">
+												<span class="date">Created in Sep 2014</span>
+											</div>
+										</div>
+										<div class="extra content">
+											<a>
+												<i class="users icon"></i>
+												ASGARAAA
+											</a>
+										</div> 
+									</div>
+								</div>
+							</div> 
+						</div>
+					</div> 
+				</div>
+			</div>
+		
+		</div>
 	</div>
-	<!-- //////////////////////// -->
-
-
-
-					</body>
-					</html>
+	
+</body>
+</html>

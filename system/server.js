@@ -1,4 +1,4 @@
-var ip='192.168.10.114';
+var ip='192.168.10.117';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -22,7 +22,18 @@ const RegistrationSchema = {
 	}
 };
 
-var realm=new Realm({schema:[RegistrationSchema],schemaVersion:5})
+const ProductSchema = {
+	name: 'Productdb',
+	properties: {
+		nome:     'string',
+		tipo: 'string',
+		recensione:'string',
+		prezzo: 'string',
+		immagine:'string'
+	}
+};
+
+var realm=new Realm({schema:[RegistrationSchema],schemaVersion:7});
 var nodemailer = require('nodemailer');
 var express = require( 'express' );
 var app = express();

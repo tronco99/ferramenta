@@ -1,24 +1,47 @@
-var ip='192.168.10.114';
+var ip='192.168.10.117';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
 
 $(document).ready(function()
 {
-	
-$('#productSlider').bxSlider({
-   nextText          :  "",
-   prevText          :  "",
-   pager             :  false,
-   minSlides         :  1,
-   maxSlides         :  5,
-   startSlide        :  1,
-   slideMargin       :  15,
-   slideWidth        :  210,
-   infiniteLoop      :  false,
-   hideControlOnEnd  :  true,
-});
-	///////////////////////////////////////////////////////////////////////////////
+	$("#tagP").hide();
+	$(".pressed").on('click',function()
+	{
+		var text=$(this).text();
+		$("#tagP").html(text);
+		$('#tagP').removeClass('black');
+		$('#tagP').addClass('blue');
+		$("#tagP").show();
+		$('.ui.labeled.icon.sidebar').sidebar('hide');
+
+	});
+
+	$('#productSlider').bxSlider({
+	   nextText          :  "",
+	   prevText          :  "",
+	   pager             :  false,
+	   minSlides         :  1,
+	   maxSlides         :  5,
+	   startSlide        :  0,
+	   slideMargin       :  15,
+	   slideWidth        :  210,
+	   infiniteLoop      :  false,
+	   hideControlOnEnd  :  true,
+	});
+
+	$('#productSlider1').bxSlider({
+	   nextText          :  "",
+	   prevText          :  "",
+	   pager             :  false,
+	   minSlides         :  1,
+	   maxSlides         :  5,
+	   startSlide        :  0,
+	   slideMargin       :  15,
+	   slideWidth        :  210,
+	   infiniteLoop      :  false,
+	   hideControlOnEnd  :  true,
+	});
 	var x = document.cookie;
 	x = x.replace('username=','');
 

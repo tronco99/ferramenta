@@ -494,7 +494,9 @@ a:active {
 
 /*pc:*/
 
-/// /*non togliere*/
+
+
+ /*non togliere*/
 @media only screen and (min-width: 992px)
 { 
 	#img
@@ -532,11 +534,6 @@ a:active {
 		margin-top: -10%;
 	}
 
-	#provaImmagine
-	{
-		height: 20%;
-		width: 20%;
-	}
 	body{
 		background-color: grey;
 	}
