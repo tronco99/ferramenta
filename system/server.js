@@ -1,4 +1,4 @@
-var ip='192.168.10.117';
+var ip='192.168.10.109';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -27,13 +27,24 @@ const ProductSchema = {
 	properties: {
 		nome:     'string',
 		tipo: 'string',
+		tipo2: 'string',
 		recensione:'string',
 		prezzo: 'string',
 		immagine:'string'
 	}
 };
+const ValutationSchema = {
+	name: 'Valutationdb',
+	properties: {
+		nickname:     'string',
+		tipo: 'string',
+		nome: 'string',
+		recensione:'string',
+		valutazione:'string'
+	}
+};
 
-var realm=new Realm({schema:[RegistrationSchema],schemaVersion:7});
+var realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
 var nodemailer = require('nodemailer');
 var express = require( 'express' );
 var app = express();
@@ -53,6 +64,13 @@ app.get( '/', function ( req, res, next )
 
 io.on( 'connection', function ( socket )
 {
+	socket.on('caricaProdotti',function(data)
+	{
+		var type=data.toLowerCase();
+		socket.emit('mandaProdotti','array');
+
+	});
+
 
 	socket.on('registrazione',function(data)  //controllo su nickname(indice4) e email(indice5)
 	{
@@ -184,7 +202,7 @@ io.on( 'connection', function ( socket )
 	socket.on('aggiornaFoto',function(data)
 	{
 		fs.readFile("../profile_images/"+data+".txt", {encoding: 'utf-8'}, function(err,data){
-		    socket.emit('fotoAgg',data); 
+			socket.emit('fotoAgg',data); 
 		});
 
 	});
