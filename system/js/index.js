@@ -1,4 +1,4 @@
-var ip='192.168.10.109';
+var ip='192.168.137.112';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
@@ -205,6 +205,11 @@ socket.on('mandaProdotti',function(data)
 	$('#pro3').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="/images/skere.jpg"></div><div class="content"><a class="header">Andrea Morettin</a><div class="meta"><span class="date">Created in Sep 2014</span></div></div><div class="extra content"><a><i class="users icon"></i>ASGARAAA</a></div></div></div></div>'));
 
 });
+		socket.on('accessoAdmin',function(data)
+		{
+			window.location="/system/html/adminPage.html";
+		});
+
 
 
 }); 	
