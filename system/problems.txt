@@ -1,1 +1,0 @@
-1) userSetting, durante il caricamento della foto il dimmer active si disattiva se ci passi sopra

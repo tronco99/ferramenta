@@ -1,4 +1,4 @@
-var ip='192.168.10.109';
+var ip='192.168.137.112';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -44,7 +44,9 @@ const ValutationSchema = {
 	}
 };
 
+
 var realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
+//var realm3=new Realm({schema:[ValutationSchema],schemaVersion:9});
 var nodemailer = require('nodemailer');
 var express = require( 'express' );
 var app = express();
@@ -60,14 +62,38 @@ app.get( '/', function ( req, res, next )
 } );
 
 
-
+var prodotti =[];
 
 io.on( 'connection', function ( socket )
 {
 	socket.on('caricaProdotti',function(data)
 	{
+		prodotti = [];
 		var type=data.toLowerCase();
-		socket.emit('mandaProdotti','array');
+		realm.close();
+		var realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		let result=realm2.objects('Productdb');
+		var r=result.filtered('tipo="'+type+'"');
+		var a = JSON.parse(JSON.stringify(r));
+
+		var size = Object.keys(a).length;
+		
+		for(var i = 0; i<size; i++)
+		{
+			var nuovoProdotto =
+			{
+				"nome": a[i].nome,
+				"tipo": a[i].tipo,
+				"tipo2": a[i].tipo2,
+				"recensione": a[i].recensione,
+				"prezzo": a[i].prezzo,
+				"immagine": a[i].immagine
+			}
+			prodotti.push(nuovoProdotto);
+		}
+
+		socket.emit('mandaProdotti',prodotti);
+
 
 	});
 
@@ -115,6 +141,14 @@ io.on( 'connection', function ( socket )
 });
 	socket.on('accedi',function(data)
 	{
+		if(data[0]=='admin')
+		{
+			if(data[1]=='password')
+			{
+				socket.emit('accessoAdmin','string');
+				return;
+			}
+		}
 		var esistente = 0;
 		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
 		{
@@ -136,6 +170,7 @@ io.on( 'connection', function ( socket )
 		{
 			socket.emit('noReg',new Array('account inesistente'));
 		}
+
 	});
 
 	socket.on('richiestaDati',function(data)

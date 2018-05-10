@@ -356,6 +356,3 @@ function changeView(a)
 	$('#test').find("i").removeClass("user circle icon");
 	$('#test').find("i").addClass("address card icon");
 }
-
-
-
