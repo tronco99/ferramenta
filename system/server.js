@@ -1,4 +1,4 @@
-var ip='192.168.137.112';
+var ip='10.0.0.3';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 

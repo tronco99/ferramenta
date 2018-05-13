@@ -12,8 +12,65 @@
 <body>
 	<div class="ui one centered grid">
 		<h1>
+			<br>
 			ADMIN PAGES
 		</h1>
+		<div class="row">
+			<div class="ui four column grid">
+				<div class="column">
+					<div class="ui selection dropdown">
+						<input name="gender" type="hidden" value="default">
+						<i class="dropdown icon"></i>
+						<div class="default text" id="tipo">Tipo</div>
+						<div class="menu">
+							<div class="item" data-value="0">Value</div>
+							<div class="item" data-value="1">Another Value</div>
+						</div>
+					</div>
+				</div>
+				<div class="column">
+					<div class="ui selection dropdown">
+						<input name="gender" type="hidden" value="default">
+						<i class="dropdown icon"></i>
+						<div class="default text" id="tipo2">Tipo2</div>
+						<div class="menu">
+							<div class="item" data-value="0">Value</div>
+							<div class="item" data-value="1">Another Value</div>
+						</div>
+					</div>
+				</div>
+				<div class="column">
+					<button class="ui button" id="filtra">Filtra</button>
+				</div>
+			</div>
+		</div>
 	</div>
-</body>
-</html>
+	<div class="row">
+		<table class="ui celled table">
+			<thead>
+				<tr>
+					<th>Nome:</th>
+					<th>Tipo:</th>
+					<th>Tipo2:</th>
+					<th>Descrizione:</th>
+					<th>Prezzo:</th>
+					<th>Immagine:</th>
+				</tr>
+			</thead>
+			<tbody id="corpo">
+				<tr id="1riga">
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<div class="ui vertical animated basic button" tabindex="0" id="add">
+			<div class="hidden content">Aggiungi</div>
+			<div class="visible content">
+			<i class="plus circle icon"></i>
+			</div>
+		</div>
+	</div>
+	</body>
+	</html>
