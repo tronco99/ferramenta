@@ -4,6 +4,7 @@ var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 var fs = require('fs'); 
+var realm2=0;
 
 
 
@@ -66,12 +67,18 @@ var prodotti =[];
 
 io.on( 'connection', function ( socket )
 {
+			socket.on('cambiaDb',function(data)
+			{
+				 realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
+			});
+		
 	socket.on('caricaProdotti',function(data)
 	{
 		prodotti = [];
 		var type=data.toLowerCase();
 		realm.close();
-		var realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		delete realm;
+	    realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
 		let result=realm2.objects('Productdb');
 		var r=result.filtered('tipo="'+type+'"');
 		var a = JSON.parse(JSON.stringify(r));
@@ -91,6 +98,8 @@ io.on( 'connection', function ( socket )
 			}
 			prodotti.push(nuovoProdotto);
 		}
+						realm2.close();
+		// Realm.open({schema: [RegistrationSchema],schemaVersion:9});
 
 		socket.emit('mandaProdotti',prodotti);
 

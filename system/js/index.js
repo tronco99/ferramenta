@@ -79,6 +79,7 @@ $('#test').on('click',function()
 
 	if(classe=='user circle icon')
 	{
+		socket.emit('cambiaDb','qualsiasi');
 		$('#test').popup('hide');
 		$('#emailField').removeClass('field error');
 		$('#emailField').addClass('field');
