@@ -1,10 +1,45 @@
-var ip='10.0.0.3';
+var ip='10.0.0.8';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
 var p = 0;
+var prodotti=0;
 $(document).ready(function()
 {
+	$('.ui.dropdown')
+	.dropdown();
+
+  $('#drop1').on('change',function() //seleziono prodotti
+  {
+  	$('#pro1').html();
+  	for (var i = 0; i < prodotti.length; i++) {
+  		if(prodotti[i].tipo2==$('#pro1').val())
+  		{
+  			//appende prodotti
+  		}
+  	}
+  });
+    $('#drop2').on('change',function() //seleziono prodotti
+  {
+  	$('#pro2').html();
+  	for (var i = 0; i < prodotti.length; i++) {
+  		if(prodotti[i].tipo2==$('#pro1').val())
+  		{
+  			//appende prodotti
+  		}
+  	}
+  });
+      $('#drop3').on('change',function() //seleziono prodotti
+  {
+  	$('#pro3').html();
+  	for (var i = 0; i < prodotti.length; i++) {
+  		if(prodotti[i].tipo2==$('#pro1').val())
+  		{
+  			//appende prodotti
+  		}
+  	}
+  });
+
 
 //--------------------------------------
 
@@ -201,15 +236,24 @@ socket.on('fotoAgg',function(data)
 
 socket.on('mandaProdotti',function(data)
 {
-	$('#pro').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="/images/skere.jpg"></div><div class="content"><a class="header">Andrea Morettin</a><div class="meta"><span class="date">Created in Sep 2014</span></div></div><div class="extra content"><a><i class="users icon"></i>ASGARAAA</a></div></div></div></div>'));
-	$('#pro2').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="/images/skere.jpg"></div><div class="content"><a class="header">Andrea Morettin</a><div class="meta"><span class="date">Created in Sep 2014</span></div></div><div class="extra content"><a><i class="users icon"></i>ASGARAAA</a></div></div></div></div>'));
-	$('#pro3').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="/images/skere.jpg"></div><div class="content"><a class="header">Andrea Morettin</a><div class="meta"><span class="date">Created in Sep 2014</span></div></div><div class="extra content"><a><i class="users icon"></i>ASGARAAA</a></div></div></div></div>'));
+	$('#menu1').html();
+	$('#menu2').html();
+	$('#menu3').html();
+	prodotti=data;
+	for (var i = 0; i < data.length; i++) {
+		$('#menu1').append($('<div class="item" data-value='+""+data[i].tipo2+"'"+'>'+data[i].tipo2+'</div>'));
+		$('#menu2').append($('<div class="item" data-value='+""+data[i].tipo2+"'"+'>'+data[i].tipo2+'</div>'));
+		$('#menu3').append($('<div class="item" data-value='+""+data[i].tipo2+"'"+'>'+data[i].tipo2+'</div>'));
+	}
+	//-----------------------------------------------------------------------------------------------------------
+	
+
 
 });
-		socket.on('accessoAdmin',function(data)
-		{
-			window.location="/system/html/adminPage.html";
-		});
+socket.on('accessoAdmin',function(data)
+{
+	window.location="/system/html/adminPage.html";
+});
 
 
 

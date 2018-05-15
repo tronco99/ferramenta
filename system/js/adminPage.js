@@ -1,4 +1,4 @@
-var ip='10.0.0.3';
+var ip='10.0.0.8';
 var socket = io.connect(ip+":4200");
 
 $(document).ready(function()
