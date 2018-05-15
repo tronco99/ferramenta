@@ -11,34 +11,17 @@ $(document).ready(function()
 
   $('#drop1').on('change',function() //seleziono prodotti
   {
-  	$('#pro1').html();
+  	 var control=$('#drop1').val().replace("'","");
+  	 alert(control);
+  	$('#pro1').html("");
   	for (var i = 0; i < prodotti.length; i++) {
-  		if(prodotti[i].tipo2==$('#pro1').val())
+  		if(prodotti[i].tipo2==control)
   		{
-  			//appende prodotti
+  			$('#pro1').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="/images/skere.jpg"></div><div class="content"><a class="header">Andrea Morettin</a><div class="meta"><span class="date">Created in Sep 2014</span></div></div><div class="extra content"><a><i class="users icon"></i>ASGARAAA</a></div></div></div></div>'));
   		}
   	}
   });
-    $('#drop2').on('change',function() //seleziono prodotti
-  {
-  	$('#pro2').html();
-  	for (var i = 0; i < prodotti.length; i++) {
-  		if(prodotti[i].tipo2==$('#pro1').val())
-  		{
-  			//appende prodotti
-  		}
-  	}
-  });
-      $('#drop3').on('change',function() //seleziono prodotti
-  {
-  	$('#pro3').html();
-  	for (var i = 0; i < prodotti.length; i++) {
-  		if(prodotti[i].tipo2==$('#pro1').val())
-  		{
-  			//appende prodotti
-  		}
-  	}
-  });
+
 
 
 //--------------------------------------
@@ -236,9 +219,9 @@ socket.on('fotoAgg',function(data)
 
 socket.on('mandaProdotti',function(data)
 {
-	$('#menu1').html();
-	$('#menu2').html();
-	$('#menu3').html();
+	$('#menu1').html("");
+	$('#menu2').html("");
+	$('#menu3').html("");
 	prodotti=data;
 	for (var i = 0; i < data.length; i++) {
 		$('#menu1').append($('<div class="item" data-value='+""+data[i].tipo2+"'"+'>'+data[i].tipo2+'</div>'));
