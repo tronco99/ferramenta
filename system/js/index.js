@@ -11,16 +11,37 @@ $(document).ready(function()
 
   $('#drop1').on('change',function() //seleziono prodotti
   {
-  	 var control=$('#drop1').val().replace("'","");
-  	 alert(control);
+  	var control=$('#drop1').val().replace("'","");
+  	alert(prodotti[0].immagine);
   	$('#pro1').html("");
   	for (var i = 0; i < prodotti.length; i++) {
   		if(prodotti[i].tipo2==control)
   		{
-  			$('#pro1').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="/images/skere.jpg"></div><div class="content"><a class="header">Andrea Morettin</a><div class="meta"><span class="date">Created in Sep 2014</span></div></div><div class="extra content"><a><i class="users icon"></i>ASGARAAA</a></div></div></div></div>'));
+  			$('#pro1').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="'+prodotti[i].immagine+'"></div><div class="content"><a class="header">'+prodotti[i].nome+'</a><div class="meta"><span class="date">'+prodotti[i].recensione+'</span></div></div><div class="extra content"><a><i class="users icon"></i>'+prodotti[i].prezzo+'</a></div></div></div></div>'));
   		}
   	}
   });
+    $('#drop2').on('change',function() //seleziono prodotti
+    {
+    	var control=$('#drop2').val().replace("'","");
+    	$('#pro2').html("");
+    	for (var i = 0; i < prodotti.length; i++) {
+    		if(prodotti[i].tipo2==control)
+    		{
+    			$('#pro2').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="'+prodotti[i].immagine+'"></div><div class="content"><a class="header">'+prodotti[i].nome+'</a><div class="meta"><span class="date">'+prodotti[i].recensione+'</span></div></div><div class="extra content"><a><i class="users icon"></i>'+prodotti[i].prezzo+'</a></div></div></div></div>'));
+    		}
+    	}
+    });
+      $('#drop3').on('change',function() //seleziono prodotti
+      {
+      	var control=$('#drop3').val().replace("'","");
+      	$('#pro3').html("");
+      	for (var i = 0; i < prodotti.length; i++) {
+      		if(prodotti[i].tipo2==control)
+      		{
+      			$('#pro3').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="'+prodotti[i].immagine+'"></div><div class="content"><a class="header">'+prodotti[i].nome+'</a><div class="meta"><span class="date">'+prodotti[i].recensione+'</span></div></div><div class="extra content"><a><i class="users icon"></i>'+prodotti[i].prezzo+'</a></div></div></div></div>'));      		}
+      		}
+      	});
 
 
 
