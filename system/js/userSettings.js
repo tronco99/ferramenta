@@ -1,11 +1,10 @@
-var ip='10.0.0.8';
+var ip='192.168.10.104';
 var socket = io.connect(ip+":4200");
 var x=0;
 
 
 $(document).ready(function()
 {
-	
 	$('#modificaFoto').hide();
 
 	$('#inp').hide();

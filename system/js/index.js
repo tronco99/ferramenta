@@ -1,4 +1,4 @@
-var ip='10.0.0.8';
+var ip='192.168.10.104';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
@@ -6,13 +6,15 @@ var p = 0;
 var prodotti=0;
 $(document).ready(function()
 {
+	$('#tipo').text("--seleziona tipo--");
+	$('#tipo2').text("--seleziona tipo--");
+	$('#tipo3').text("--seleziona tipo--");
 	$('.ui.dropdown')
 	.dropdown();
 
   $('#drop1').on('change',function() //seleziono prodotti
   {
   	var control=$('#drop1').val().replace("'","");
-  	alert(prodotti[0].immagine);
   	$('#pro1').html("");
   	for (var i = 0; i < prodotti.length; i++) {
   		if(prodotti[i].tipo2==control)
@@ -50,6 +52,9 @@ $(document).ready(function()
 $("#tagP").hide();
 $(".pressed").on('click',function()
 {
+	$('#tipo').text("--seleziona tipo--");
+	$('#tipo2').text("--seleziona tipo--");
+	$('#tipo3').text("--seleziona tipo--");
 	var text=$(this).text();
 	$("#tagP").html(text);
 	$('#tagP').removeClass('black');
@@ -58,6 +63,14 @@ $(".pressed").on('click',function()
 	$('.ui.labeled.icon.sidebar').sidebar('hide');
 	$('#forproduct').css('visibility','visible');
 	socket.emit('caricaProdotti',text);
+	$('#pro1').html('');
+	$('#pro2').html('');
+	$('#pro3').html('');
+
+	$('#drop1').val().replace($('#drop1').val()+"","yaya come ture");
+
+//	alert(control);
+	//$('#drop1').val().replace('','');
 
 });
 var x = document.cookie;
@@ -240,20 +253,35 @@ socket.on('fotoAgg',function(data)
 
 socket.on('mandaProdotti',function(data)
 {
+	var tipi=new Array();
+	for (var i = 0; i < data.length; i++) {
+		tipi.push(data[i].tipo2);
+	}
+	var uniqueNames = [];
+	$.each(tipi, function(i, el){
+		if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+	});
 	$('#menu1').html("");
 	$('#menu2').html("");
 	$('#menu3').html("");
 	prodotti=data;
-	for (var i = 0; i < data.length; i++) {
-		$('#menu1').append($('<div class="item" data-value='+""+data[i].tipo2+"'"+'>'+data[i].tipo2+'</div>'));
-		$('#menu2').append($('<div class="item" data-value='+""+data[i].tipo2+"'"+'>'+data[i].tipo2+'</div>'));
-		$('#menu3').append($('<div class="item" data-value='+""+data[i].tipo2+"'"+'>'+data[i].tipo2+'</div>'));
+	for (var i = 0; i < uniqueNames.length; i++) {
+		$('#menu1').append($('<div class="item" data-value='+""+uniqueNames[i]+"'"+'>'+uniqueNames[i]+'</div>'));
+		$('#menu2').append($('<div class="item" data-value='+""+uniqueNames[i]+"'"+'>'+uniqueNames[i]+'</div>'));
+		$('#menu3').append($('<div class="item" data-value='+""+uniqueNames[i]+"'"+'>'+uniqueNames[i]+'</div>'));
 	}
+	$('#drop1').val(uniqueNames[0]);
+	$('#drop1').change();
+	$('#drop2').val(uniqueNames[1]);
+	$('#drop2').change();
+
+	$('#drop3').val(uniqueNames[2]);
+	$('#drop3').change();
+
+
 	//-----------------------------------------------------------------------------------------------------------
-	
-
-
 });
+
 socket.on('accessoAdmin',function(data)
 {
 	window.location="/system/html/adminPage.html";

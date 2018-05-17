@@ -1,4 +1,4 @@
-var ip='10.0.0.8';
+var ip='192.168.10.104';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -62,15 +62,16 @@ app.get( '/', function ( req, res, next )
 
 } );
 
-
+var tuttiProdotti = [];
+var uniqueProduct = [];
 var prodotti =[];
 
 io.on( 'connection', function ( socket )
 {
-			socket.on('cambiaDb',function(data)
-			{
-				 realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
-			});
+	socket.on('cambiaDb',function(data)
+	{
+		 realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
+	});
 		
 	socket.on('caricaProdotti',function(data)
 	{
@@ -97,14 +98,26 @@ io.on( 'connection', function ( socket )
 				"immagine": a[i].immagine
 			}
 			prodotti.push(nuovoProdotto);
+			tuttiProdotti.push(nuovoProdotto);
 		}
-						realm2.close();
+		realm2.close();
 		// Realm.open({schema: [RegistrationSchema],schemaVersion:9});
 
 		socket.emit('mandaProdotti',prodotti);
 
 
 	});
+
+
+	socket.on('aggiungiProdotti',function(data)
+	{
+		console.log(tuttiProdotti.length)
+		for(let i = 0; i<data.length; i++)
+		{
+			console.log(data[i].nome+", "+data[i].tipo+", "+data[i].tipo2+", "+data[i].recensione+", "+data[i].prezzo+", "+data[i].immagine);
+		}
+	});
+		
 
 
 	socket.on('registrazione',function(data)  //controllo su nickname(indice4) e email(indice5)
@@ -252,7 +265,9 @@ io.on( 'connection', function ( socket )
 	});
 
 
+	// 
 
+			
 
 });
 
