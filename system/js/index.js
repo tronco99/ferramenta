@@ -1,4 +1,4 @@
-var ip='192.168.10.104';
+var ip='192.168.10.101';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 

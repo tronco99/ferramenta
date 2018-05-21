@@ -1,4 +1,4 @@
-var ip='192.168.10.104';
+var ip='192.168.10.101';
 var socket = io.connect(ip+":4200")
 var indice = 0;
 $(document).ready(function()
@@ -20,12 +20,8 @@ $(document).ready(function()
 
 			if($('#nome'+i).val() != "" && $('#tipo'+i).val() != "" && $('#tipo2'+i).val() != "" && $('#recensione'+i).val() != "" &&$('#prezzo'+i).val() != "" && $('#immagine'+i).val() != "" )
 			{
-				if($('#nome'+i).val() == "" || $('#tipo'+i).val()  == "" || $('#tipo2'+i).val() == "" || $('#recensione'+i).val()  == "" || $('#prezzo'+i).val()  == "" || $('#immagine'+i).val()  == "" )
+				if($('#nome'+i).val() != "" || $('#tipo'+i).val()  != "" || $('#tipo2'+i).val() != "" || $('#recensione'+i).val()  != "" || $('#prezzo'+i).val()  != "" || $('#immagine'+i).val()  != "" )
 				{
-										alert("riempi tutti i campi")
- 	
-				}
-				else{
 					var nuovoOggetto = 
 					{
 						"nome" : $('#nome'+i).val(),
@@ -37,8 +33,17 @@ $(document).ready(function()
 					}
 					prodotti.push(nuovoOggetto);
 				}
+				else{
+					alert("riempi tutti i campi")
+				}
 			}
 		}
 		socket.emit('aggiungiProdotti',prodotti);
 	});
+
+			socket.on('prodottoEsistente',function(data)
+			{
+				alert('il prodotto: '+data+' è gia presente nel database');
+			});
+		
 });

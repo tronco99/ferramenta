@@ -1,4 +1,4 @@
-var ip='192.168.10.104';
+var ip='192.168.10.101';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -70,16 +70,16 @@ io.on( 'connection', function ( socket )
 {
 	socket.on('cambiaDb',function(data)
 	{
-		 realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
+		realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
 	});
-		
+
 	socket.on('caricaProdotti',function(data)
 	{
-		prodotti = [];
+		var prodotti = [];
 		var type=data.toLowerCase();
 		realm.close();
 		delete realm;
-	    realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
 		let result=realm2.objects('Productdb');
 		var r=result.filtered('tipo="'+type+'"');
 		var a = JSON.parse(JSON.stringify(r));
@@ -111,13 +111,200 @@ io.on( 'connection', function ( socket )
 
 	socket.on('aggiungiProdotti',function(data)
 	{
-		console.log(tuttiProdotti.length)
+		console.log('entro');
+		realm.close();
+		var prodotti1 = [];
+		var prodotti2 = [];
+		var prodotti3 = [];
+		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		let result=realm2.objects('Productdb');
+		var a=result.filtered('tipo="interni"');
+		var b=result.filtered('tipo="esterni"');
+		var c=result.filtered('tipo="aziendali"');
+		var a1 = JSON.parse(JSON.stringify(a));
+		var a2 = JSON.parse(JSON.stringify(b));
+		var a3 = JSON.parse(JSON.stringify(c));
+		var size1 = Object.keys(a1).length;
+		var size2 = Object.keys(a2).length;
+		var size3 = Object.keys(a3).length;
+		
+		
+		for(var i = 0; i<size1; i++)
+		{
+			var nuovoProdotto1 =
+			{
+				"nome": a[i].nome,
+				"tipo": a[i].tipo,
+				"tipo2": a[i].tipo2,
+				"recensione": a[i].recensione,
+				"prezzo": a[i].prezzo,
+				"immagine": a[i].immagine
+			}
+			prodotti1.push(nuovoProdotto1);
+		}
+		for(var i = 0; i<size2; i++)
+		{
+			var nuovoProdotto2 =
+			{
+				"nome": a[i].nome,
+				"tipo": a[i].tipo,
+				"tipo2": a[i].tipo2,
+				"recensione": a[i].recensione,
+				"prezzo": a[i].prezzo,
+				"immagine": a[i].immagine
+			}
+			prodotti2.push(nuovoProdotto2);
+		}
+		for(var i = 0; i<size3; i++)
+		{
+			var nuovoProdotto3 =
+			{
+				"nome": a[i].nome,
+				"tipo": a[i].tipo,
+				"tipo2": a[i].tipo2,
+				"recensione": a[i].recensione,
+				"prezzo": a[i].prezzo,
+				"immagine": a[i].immagine
+			}
+			prodotti3.push(nuovoProdotto3);
+		}
+
 		for(let i = 0; i<data.length; i++)
 		{
-			console.log(data[i].nome+", "+data[i].tipo+", "+data[i].tipo2+", "+data[i].recensione+", "+data[i].prezzo+", "+data[i].immagine);
+			if(data[i].tipo == "interni")
+			{
+				for(let x = 0; x<prodotti1.length; x++)
+				{
+					if(data[i].nome == prodotti1[i].nome)
+					{
+						socket.emit('prodottoEsistente',prodotti1[i].nome);
+					}
+					else
+					{
+						var option;
+						realm2.write(() => 
+						{
+							option=realm2.create(ProductSchema.name,{nome:data[i].nome, tipo:data[i].tipo, tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:data[i].prezzo, immagine:data[i].immagine});
+						});
+						
+						break;
+					}
+				}
+			}
+			else 
+			{
+				if(data[i].tipo== "esterni")
+				{
+					for(let x = 0; x<prodotti2.length; x++)
+					{
+						if(data[i].nome == prodotti2[i].nome)
+						{
+							socket.emit('prodottoEsistente',prodotti2[i].nome);
+						}
+						else
+						{
+							var option;
+							realm2.write(() => 
+							{
+								option=realm2.create(ProductSchema.name,{nome:data[i].nome, tipo:data[i].tipo, tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:data[i].prezzo, immagine:data[i].immagine});
+							});
+							break;
+						}
+					}
+				}
+				else
+				{
+					if(data[i].tipo== "aziendali")
+					{
+						for(let x = 0; x<prodotti3.length; x++)
+						{
+							if(data[i].nome == prodotti3[i].nome)
+							{
+								socket.emit('prodottoEsistente',prodotti3[i].nome);
+							}
+							else
+							{
+								var option;
+								realm2.write(() => 
+								{
+									option=realm2.create(ProductSchema.name,{nome:data[i].nome, tipo:data[i].tipo, tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:data[i].prezzo, immagine:data[i].immagine});
+								});
+								break;
+							}
+						}
+					}
+				}
+			}
 		}
+
+		/*
+		for(let i = 0; i<prodotti1.length; i++)
+		{
+			for (let l = 0; l < data.length; l++) {
+				if(prodotti1[i].tipo==data[l].tipo)
+				{
+					if(prodotti1[i].nome==data[l].nome)
+					{
+						socket.emit('prodottoEsistente',prodotti1[i].nome);
+					}
+					else {
+
+console.log("skkkkkk"+i)
+						var option;
+						realm2.write(() => 
+						{
+							option=realm2.create(ProductSchema.name,{nome:'prova', tipo:data[i].tipo', tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:'prova', immagine:data[i].immagine});
+						});
+					}
+				}
+			}
+		}
+		for(let i = 0; i<prodotti2.length; i++)
+		{
+			for (var l = 0; l < data.length; l++) {
+				if(prodotti2[i].tipo==data[l].tipo)
+				{
+					if(prodotti2[i].nome==data[l].nome)
+					{
+						socket.emit('prodottoEsistente',prodotti2[i].nome);
+					}
+					else {
+
+						var option;
+						realm2.write(() => 
+						{
+							option=realm2.create(ProductSchema.name,{nome:data[i].nome,tipo:data[i].tipo,tipo2:data[i].tipo2,recensione:data[i].recensione,prezzo:data[i].prezzo,immagine:data[i].immagine});
+						});
+						
+						
+					}
+				}
+			}
+		}
+		for(let i = 0; i<prodotti3.length; i++)
+		{
+			for (var l = 0; l < data.length; l++) {
+				if(prodotti3[i].tipo==data[l].tipo)
+				{
+					if(prodotti3[i].nome==data[l].nome)
+					{
+						socket.emit('prodottoEsistente',prodotti3[i].nome);
+					}
+					else {
+
+						var option;
+						realm2.write(() => 
+						{
+							option=realm2.create(ProductSchema.name,{nome:data[i].nome,tipo:data[i].tipo,tipo2:data[i].tipo2,recensione:data[i].recensione,prezzo:data[i].prezzo,immagine:data[i].immagine});
+						});
+						
+						
+					}
+				}
+			}
+		}*/
 	});
-		
+
 
 
 	socket.on('registrazione',function(data)  //controllo su nickname(indice4) e email(indice5)
@@ -267,7 +454,7 @@ io.on( 'connection', function ( socket )
 
 	// 
 
-			
+
 
 });
 
