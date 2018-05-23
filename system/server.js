@@ -1,10 +1,11 @@
-var ip='192.168.10.101';
+var ip='127.0.0.1';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
 var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 var fs = require('fs'); 
 var realm2=0;
+var realm3 = 0;
 
 
 
@@ -68,6 +69,34 @@ var prodotti =[];
 
 io.on( 'connection', function ( socket )
 {
+	socket.on('caricato',function(data)
+	{
+		realm.close();
+		realm3=new Realm({schema:[ProductSchema],schemaVersion:9});
+		let result=realm3.objects('Productdb');
+		var a3 = JSON.parse(JSON.stringify(result));
+
+		var size3 = Object.keys(a3).length;
+		
+		for(var i = 0; i<size3; i++)
+		{
+			var nuovoProdotto =
+			{
+				"nome": a3[i].nome,
+				"tipo": a3[i].tipo,
+				"tipo2": a3[i].tipo2,
+				"recensione": a3[i].recensione,
+				"prezzo": a3[i].prezzo,
+				"immagine": a3[i].immagine
+			}
+			prodotti.push(nuovoProdotto);
+		}
+
+		realm3.close();
+
+		socket.emit('caricaRow',prodotti);
+	});
+
 	socket.on('cambiaDb',function(data)
 	{
 		realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
@@ -81,6 +110,7 @@ io.on( 'connection', function ( socket )
 		delete realm;
 		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
 		let result=realm2.objects('Productdb');
+
 		var r=result.filtered('tipo="'+type+'"');
 		var a = JSON.parse(JSON.stringify(r));
 
@@ -98,7 +128,6 @@ io.on( 'connection', function ( socket )
 				"immagine": a[i].immagine
 			}
 			prodotti.push(nuovoProdotto);
-			tuttiProdotti.push(nuovoProdotto);
 		}
 		realm2.close();
 		// Realm.open({schema: [RegistrationSchema],schemaVersion:9});
@@ -111,7 +140,6 @@ io.on( 'connection', function ( socket )
 
 	socket.on('aggiungiProdotti',function(data)
 	{
-		console.log('entro');
 		realm.close();
 		var prodotti1 = [];
 		var prodotti2 = [];
@@ -186,7 +214,7 @@ io.on( 'connection', function ( socket )
 						{
 							option=realm2.create(ProductSchema.name,{nome:data[i].nome, tipo:data[i].tipo, tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:data[i].prezzo, immagine:data[i].immagine});
 						});
-						
+
 						break;
 					}
 				}
@@ -237,72 +265,7 @@ io.on( 'connection', function ( socket )
 			}
 		}
 
-		/*
-		for(let i = 0; i<prodotti1.length; i++)
-		{
-			for (let l = 0; l < data.length; l++) {
-				if(prodotti1[i].tipo==data[l].tipo)
-				{
-					if(prodotti1[i].nome==data[l].nome)
-					{
-						socket.emit('prodottoEsistente',prodotti1[i].nome);
-					}
-					else {
-
-console.log("skkkkkk"+i)
-						var option;
-						realm2.write(() => 
-						{
-							option=realm2.create(ProductSchema.name,{nome:'prova', tipo:data[i].tipo', tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:'prova', immagine:data[i].immagine});
-						});
-					}
-				}
-			}
-		}
-		for(let i = 0; i<prodotti2.length; i++)
-		{
-			for (var l = 0; l < data.length; l++) {
-				if(prodotti2[i].tipo==data[l].tipo)
-				{
-					if(prodotti2[i].nome==data[l].nome)
-					{
-						socket.emit('prodottoEsistente',prodotti2[i].nome);
-					}
-					else {
-
-						var option;
-						realm2.write(() => 
-						{
-							option=realm2.create(ProductSchema.name,{nome:data[i].nome,tipo:data[i].tipo,tipo2:data[i].tipo2,recensione:data[i].recensione,prezzo:data[i].prezzo,immagine:data[i].immagine});
-						});
-						
-						
-					}
-				}
-			}
-		}
-		for(let i = 0; i<prodotti3.length; i++)
-		{
-			for (var l = 0; l < data.length; l++) {
-				if(prodotti3[i].tipo==data[l].tipo)
-				{
-					if(prodotti3[i].nome==data[l].nome)
-					{
-						socket.emit('prodottoEsistente',prodotti3[i].nome);
-					}
-					else {
-
-						var option;
-						realm2.write(() => 
-						{
-							option=realm2.create(ProductSchema.name,{nome:data[i].nome,tipo:data[i].tipo,tipo2:data[i].tipo2,recensione:data[i].recensione,prezzo:data[i].prezzo,immagine:data[i].immagine});
-						});
-						
-						
-					}
-				}
-			}
-		}*/
+		
 	});
 
 
@@ -313,7 +276,6 @@ console.log("skkkkkk"+i)
 		var controllaReg = verify(data,socket);
 		if(controllaReg==0)
 		{
-
 			control=0;
 			for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
 			{
