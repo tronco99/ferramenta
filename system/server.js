@@ -1,4 +1,4 @@
-var ip='127.0.0.1';
+var ip='192.168.1.218';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -71,6 +71,8 @@ io.on( 'connection', function ( socket )
 {
 	socket.on('caricato',function(data)
 	{
+		var prodotti =[];
+
 		realm.close();
 		realm3=new Realm({schema:[ProductSchema],schemaVersion:9});
 		let result=realm3.objects('Productdb');

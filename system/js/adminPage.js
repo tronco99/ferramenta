@@ -1,8 +1,9 @@
-var ip='127.0.0.1';
+var ip='192.168.1.218';
 var socket = io.connect(ip+":4200")
 var indice = 0;
 var indice2=0;
-var prodotti;
+var prodotti =[];
+
 $(document).ready(function()
 {
 		socket.emit('caricato','si');
@@ -21,7 +22,7 @@ $(document).ready(function()
 				for (var i = 0; i < prodotti.length; i++) {
 					if(prodotti[i].tipo==$('#drop1').val())
 					{
-						$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" placeholder="'+prodotti[i].nome+'"></td><td><input id="tipo'+indice2+'" type="text" placeholder="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" placeholder="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" placeholder="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" placeholder="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" placeholder="'+prodotti[i].immagine+'"></td></tr>'));
+						$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" value="'+prodotti[i].nome+'"></td><td><input id="tipo'+indice2+'" type="text" value="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" value="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" value="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" value="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" value="'+prodotti[i].immagine+'"></td><td><div class="ui fitted checkbox"><input type = "checkbox" name="h"><label></label></div></td></tr>'));
 						indice2++;
 					}
 
@@ -32,7 +33,7 @@ $(document).ready(function()
 				for (var i = 0; i < prodotti.length; i++) {
 					if(prodotti[i].tipo2==$('#drop2').val())
 					{
-						$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" placeholder="'+prodotti[i].nome+'"></td><td><input id="tipo'+indice2+'" type="text" placeholder="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" placeholder="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" placeholder="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" placeholder="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" placeholder="'+prodotti[i].immagine+'"></td></tr>'));
+						$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" value="'+prodotti[i].nome+'"></td><td><input id="tipo'+indice2+'" type="text" value="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" value="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" value="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" value="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" value="'+prodotti[i].immagine+'"></td></tr>'));
 						indice2++;
 					}
 
@@ -71,7 +72,7 @@ $(document).ready(function()
 	.dropdown();
 	$('#add').on('click',function()
 	{
-		$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice+'" type="text" placeholder="nome"></td><td><input id="tipo'+indice+'" type="text" placeholder="tipo"></td><td><input id="tipo2'+indice+'" type="text" placeholder="tipo2"></td><td><input id="recensione'+indice+'" type="text" placeholder="recensione"></td><td><input id="prezzo'+indice+'" type="text" placeholder="prezzo"></td><td><input id="immagine'+indice+'" type="text" placeholder="immagine"></td></tr>'));
+		$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice+'" type="text" value="nome"></td><td><input id="tipo'+indice+'" type="text" value="tipo"></td><td><input id="tipo2'+indice+'" type="text" value="tipo2"></td><td><input id="recensione'+indice+'" type="text" value="recensione"></td><td><input id="prezzo'+indice+'" type="text" value="prezzo"></td><td><input id="immagine'+indice+'" type="text" value="immagine"></td></tr>'));
 		indice++;
 	});
 

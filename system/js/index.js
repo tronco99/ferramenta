@@ -1,4 +1,4 @@
-var ip='127.0.0.1';
+var ip='192.168.1.218';
 var socket = io.connect(ip+":4200");
 var currentItem = null;
 var name; 
@@ -6,6 +6,9 @@ var p = 0;
 var prodotti=0;
 $(document).ready(function()
 {
+	$('.special.cards .image').dimmer({
+		on: 'hover'
+	});
 	$('#tipo').text("--seleziona tipo--");
 	$('#tipo2').text("--seleziona tipo--");
 	$('#tipo3').text("--seleziona tipo--");
@@ -110,9 +113,6 @@ $('html').on('click',function()
 {
 	$('#carrello').removeClass('active');
 	$('#test').removeClass('active');
-});
-$('.special.cards .image').dimmer({
-	on: 'hover'
 });
 
 $('.ui .item').on('click', function() {
