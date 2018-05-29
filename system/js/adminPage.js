@@ -9,6 +9,7 @@ var vecchiProdotti = []
 
 $(document).ready(function()
 {
+
 	socket.emit('caricato','si');
 
 	$('#filtra').on('click',function()
@@ -29,7 +30,7 @@ $(document).ready(function()
 				if(prodotti[i].tipo==$('#drop1').val())
 				{
 					vecchiProdotti.push(prodotti[i].nome);
-					$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" value="'+prodotti[i].nome+'"></td><td><input id="tipo1'+indice2+'" type="text" value="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" value="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" value="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" value="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" value="'+prodotti[i].immagine+'"></td><td><div class="ui fitted checkbox"><input type = "checkbox" name="h"><label></label></div></td></tr>'));
+					$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" value="'+prodotti[i].nome+'"></td><td><input id="tipo1'+indice2+'" type="text" value="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" value="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" value="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" value="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" value="'+prodotti[i].immagine+'"></td><td><div class="ui fitted checkbox"><input type = "checkbox" id="check'+indice2+'" name="check'+indice2+'"><label></label></div></td></tr>'));
 					indice2=indice2+1;;
 					indice = indice +1;;
 				}
@@ -81,7 +82,7 @@ $(document).ready(function()
 	.dropdown();
 	$('#add').on('click',function()
 	{
-		$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice+'" type="text" placeholder="nome"></td><td><input id="tipo1'+indice+'" type="text" placeholder="tipo"></td><td><input id="tipo2'+indice+'" type="text" placeholder="tipo2"></td><td><input id="recensione'+indice+'" type="text" placeholder="recensione"></td><td><input id="prezzo'+indice+'" type="text" placeholder="prezzo"></td><td><input id="immagine'+indice+'" type="text" placeholder="immagine"></td><td><div class="ui fitted checkbox"><input type = "checkbox" name="h"><label></label></div></td></tr>'));
+		$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice+'" type="text" placeholder="nome"></td><td><input id="tipo1'+indice+'" type="text" placeholder="tipo"></td><td><input id="tipo2'+indice+'" type="text" placeholder="tipo2"></td><td><input id="recensione'+indice+'" type="text" placeholder="recensione"></td><td><input id="prezzo'+indice+'" type="text" placeholder="prezzo"></td><td><input id="immagine'+indice+'" type="text" placeholder="immagine"></td><td><div class="ui fitted checkbox"><input type = "checkbox" id="check+'+indice+'" name="h"><label></label></div></td></tr>'));
 		indice = indice+1;
 		indiceNuovo++;
 	});
@@ -124,15 +125,30 @@ $(document).ready(function()
 						}
 					}
 					
-					prodotti.push(nuovoOggetto);
-					prodottiAggiornati.push(nuovoOggetto)
 
-				}
-				else{
-					alert("riempi tutti i campi")
-				}
-			}
-		}
+		// 			$('.callback.example .checkbox')
+  // .checkbox()
+  // .first().checkbox({
+  //   onChecked: function() {
+  //     console.log('onChecked called<br>');
+  //   },
+  //   onUnchecked: function() {
+  //     console.log('onUnchecked called<br>');
+  //   }
+
+  
+
+
+
+  prodotti.push(nuovoOggetto);
+  prodottiAggiornati.push(nuovoOggetto)
+
+}
+else{
+	alert("riempi tutti i campi")
+}
+}
+}
 
 	/*	for (var i = 0; i < prodottiAggiornati.length; i++) {
 			alert(prodottiAggiornati[i].vecchio+ ", "+ prodottiAggiornati[i].nome +", "+prodottiAggiornati[i].tipo +", "+ prodottiAggiornati[i].tipo2 +", "+prodottiAggiornati[i].recensione +", "+prodottiAggiornati[i].prezzo +", "+prodottiAggiornati[i].immagine)
