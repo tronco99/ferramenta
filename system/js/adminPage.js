@@ -10,28 +10,6 @@ var vecchiProdotti = []
 $(document).ready(function()
 {
 	socket.emit('caricato','si');
-	// $('#conferma').on('click',function()
-	// {
-	// 	prodottiAggiornati=[];
-	// 	for (var i = 0; i<indice2; i++) {
-			
-	// 		var nuovoOggetto = 
-	// 		{
-	// 			"vecchio" : vecchiProdotti[i],
-	// 			"nome" : $('#nome'+i).val(),
-	// 			"tipo" : $('#tipo'+i).val(),
-	// 			"tipo2" : $('#tipo2'+i).val(),
-	// 			"recensione" : $('#recensione'+i).val(),
-	// 			"prezzo" : $('#prezzo'+i).val(),
-	// 			"immagine" : $('#immagine'+i).val()
-	// 		}
-
-	// 		prodottiAggiornati.push(nuovoOggetto);
-
-	// 	}
-	// 	socket.emit('aggiornaProdotti',prodottiAggiornati);
-	// });
-
 
 	$('#filtra').on('click',function()
 	{
@@ -51,7 +29,7 @@ $(document).ready(function()
 				if(prodotti[i].tipo==$('#drop1').val())
 				{
 					vecchiProdotti.push(prodotti[i].nome);
-					$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" value="'+prodotti[i].nome+'"></td><td><input id="tipo'+indice2+'" type="text" value="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" value="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" value="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" value="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" value="'+prodotti[i].immagine+'"></td><td><div class="ui fitted checkbox"><input type = "checkbox" name="h"><label></label></div></td></tr>'));
+					$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" value="'+prodotti[i].nome+'"></td><td><input id="tipo1'+indice2+'" type="text" value="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" value="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" value="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" value="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" value="'+prodotti[i].immagine+'"></td><td><div class="ui fitted checkbox"><input type = "checkbox" name="h"><label></label></div></td></tr>'));
 					indice2=indice2+1;;
 					indice = indice +1;;
 				}
@@ -64,15 +42,12 @@ $(document).ready(function()
 				if(prodotti[i].tipo2==$('#drop2').val())
 				{
 					vecchiProdotti.push(prodotti[i].nome);
-					$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" value="'+prodotti[i].nome+'"></td><td><input id="tipo'+indice2+'" type="text" value="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" value="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" value="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" value="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" value="'+prodotti[i].immagine+'"></td></tr>'));
+					$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice2+'" type="text" value="'+prodotti[i].nome+'"></td><td><input id="tipo1'+indice2+'" type="text" value="'+prodotti[i].tipo+'"></td><td><input id="tipo2'+indice2+'" type="text" value="'+prodotti[i].tipo2+'"></td><td><input id="recensione'+indice2+'" type="text" value="'+prodotti[i].recensione+'"></td><td><input id="prezzo'+indice2+'" type="text" value="'+prodotti[i].prezzo+'"></td><td><input id="immagine'+indice2+'" type="text" value="'+prodotti[i].immagine+'"></td><td><div class="ui fitted checkbox"><input type = "checkbox" name="h"><label></label></div></td></tr>'));
 					indice2=indice2+1;;
 					indice = indice +1;
 				}
 			}
 		}
-		alert("indice: "+indice)
-				alert("indice2: "+indice2)
-
 	});
 
 	$('#drop1').on('change',function()
@@ -106,37 +81,52 @@ $(document).ready(function()
 	.dropdown();
 	$('#add').on('click',function()
 	{
-		$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice+'" type="text" value="nome"></td><td><input id="tipo'+indice+'" type="text" value="tipo"></td><td><input id="tipo2'+indice+'" type="text" value="tipo2"></td><td><input id="recensione'+indice+'" type="text" value="recensione"></td><td><input id="prezzo'+indice+'" type="text" value="prezzo"></td><td><input id="immagine'+indice+'" type="text" value="immagine"></td></tr>'));
+		$('#corpo').append($('<tr class="ui fluid form"><td><input id="nome'+indice+'" type="text" placeholder="nome"></td><td><input id="tipo1'+indice+'" type="text" placeholder="tipo"></td><td><input id="tipo2'+indice+'" type="text" placeholder="tipo2"></td><td><input id="recensione'+indice+'" type="text" placeholder="recensione"></td><td><input id="prezzo'+indice+'" type="text" placeholder="prezzo"></td><td><input id="immagine'+indice+'" type="text" placeholder="immagine"></td><td><div class="ui fitted checkbox"><input type = "checkbox" name="h"><label></label></div></td></tr>'));
 		indice = indice+1;
-		alert("indice: "+indice)
 		indiceNuovo++;
 	});
 
 	$('#conferma').click(function()
 	{
 		var prodotti = [];
-		alert("indice: "+indice)
 		var prodottiAggiornati=[];
 
 		for(let i = 0; i<indice; i++)
 		{
-			alert("i: "+i)
-			if($('#nome'+i).val() != "" && $('#tipo'+i).val() != "" && $('#tipo2'+i).val() != "" && $('#recensione'+i).val() != "" &&$('#prezzo'+i).val() != "" && $('#immagine'+i).val() != "" )
+			if($('#nome'+i).val() != "" && $('#tipo1'+i).val() != "" && $('#tipo2'+i).val() != "" && $('#recensione'+i).val() != "" &&$('#prezzo'+i).val() != "" && $('#immagine'+i).val() != "" )
 			{
-				if($('#nome'+i).val() != "" || $('#tipo'+i).val()  != "" || $('#tipo2'+i).val() != "" || $('#recensione'+i).val()  != "" || $('#prezzo'+i).val()  != "" || $('#immagine'+i).val()  != "" )
+				if($('#nome'+i).val() != "" || $('#tipo1'+i).val()  != "" || $('#tipo2'+i).val() != "" || $('#recensione'+i).val()  != "" || $('#prezzo'+i).val()  != "" || $('#immagine'+i).val()  != "" )
 				{
-					var nuovoOggetto = 
+					if(vecchiProdotti[i] != null)
 					{
-						"vecchio" : vecchiProdotti[i],
-						"nome" : $('#nome'+i).val(),
-						"tipo" : $('#tipo'+i).val(),
-						"tipo2" : $('#tipo2'+i).val(),
-						"recensione" : $('#recensione'+i).val(),
-						"prezzo" : $('#prezzo'+i).val(),
-						"immagine" : $('#immagine'+i).val()
+						var nuovoOggetto = 
+						{
+							"vecchio" : vecchiProdotti[i],
+							"nome" : $('#nome'+i).val(),
+							"tipo" : $('#tipo1'+i).val(),
+							"tipo2" : $('#tipo2'+i).val(),
+							"recensione" : $('#recensione'+i).val(),
+							"prezzo" : $('#prezzo'+i).val(),
+							"immagine" : $('#immagine'+i).val()
+						}
 					}
+					else
+					{
+						var nuovoOggetto = 
+						{
+							"vecchio" : "",
+							"nome" : $('#nome'+i).val(),
+							"tipo" : $('#tipo1'+i).val(),
+							"tipo2" : $('#tipo2'+i).val(),
+							"recensione" : $('#recensione'+i).val(),
+							"prezzo" : $('#prezzo'+i).val(),
+							"immagine" : $('#immagine'+i).val()
+						}
+					}
+					
 					prodotti.push(nuovoOggetto);
-					prodottiAggiornati.push(nuovoOggetto);
+					prodottiAggiornati.push(nuovoOggetto)
+
 				}
 				else{
 					alert("riempi tutti i campi")
@@ -144,12 +134,9 @@ $(document).ready(function()
 			}
 		}
 
-		alert("prodotti aggionrati: "+prodottiAggiornati.length)
-		alert("indice2: "+indice2)
-
-		for (var i = 0; i < prodottiAggiornati.length; i++) {
+	/*	for (var i = 0; i < prodottiAggiornati.length; i++) {
 			alert(prodottiAggiornati[i].vecchio+ ", "+ prodottiAggiornati[i].nome +", "+prodottiAggiornati[i].tipo +", "+ prodottiAggiornati[i].tipo2 +", "+prodottiAggiornati[i].recensione +", "+prodottiAggiornati[i].prezzo +", "+prodottiAggiornati[i].immagine)
-		}
+		}*/
 		socket.emit('aggiornaProdotti',prodottiAggiornati);
 	});
 

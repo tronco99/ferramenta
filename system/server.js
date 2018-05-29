@@ -71,10 +71,10 @@ io.on( 'connection', function ( socket )
 {
 	socket.on('aggiornaProdotti',function(data)
 	{
-		console.log('RICEVO: ')
-		for (var i = 0; i < data.length; i++) {
-			console.log(data[i].vecchio, data[i].nome +", "+data[i].tipo +", "+ data[i].tipo2 +", "+data[i].recensione +", "+data[i].prezzo +", "+data[i].immagine)
-		}
+
+		// for (var i = 0; i < data.length; i++) {
+		// 	console.log(data[i].vecchio, data[i].nome +", "+data[i].tipo +", "+ data[i].tipo2 +", "+data[i].recensione +", "+data[i].prezzo +", "+data[i].immagine)
+		// }
 		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
 		var option;
 		realm2.write(()=>
