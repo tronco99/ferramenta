@@ -1,4 +1,4 @@
-var ip='192.168.1.218';
+var ip='127.0.0.1';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -69,13 +69,41 @@ var prodotti =[];
 
 io.on( 'connection', function ( socket )
 {
+	socket.on('aggiornaProdotti',function(data)
+	{
+		console.log('RICEVO: ')
+		for (var i = 0; i < data.length; i++) {
+			console.log(data[i].vecchio, data[i].nome +", "+data[i].tipo +", "+ data[i].tipo2 +", "+data[i].recensione +", "+data[i].prezzo +", "+data[i].immagine)
+		}
+		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		var option;
+		realm2.write(()=>
+		{	
+			for (var i = 0; i < data.length; i++) {
+					if(data[i].vecchio != "") {
+					let test=realm2.objects('Productdb').filtered('nome = "'+data[i].vecchio+'"');
+					realm2.delete(test);
+				}
+			}
+				
+
+			for (var i = 0; i < data.length; i++) {
+				realm2.create(ProductSchema.name,{nome:data[i].nome,tipo:data[i].tipo,tipo2:data[i].tipo2,recensione:data[i].recensione,prezzo:data[i].prezzo,immagine:data[i].immagine});
+			}		
+		});
+		realm2.close();
+
+	});
+
+
+
 	socket.on('caricato',function(data)
 	{
 		var prodotti =[];
 
 		realm.close();
-		realm3=new Realm({schema:[ProductSchema],schemaVersion:9});
-		let result=realm3.objects('Productdb');
+		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		let result=realm2.objects('Productdb');
 		var a3 = JSON.parse(JSON.stringify(result));
 
 		var size3 = Object.keys(a3).length;
@@ -94,7 +122,7 @@ io.on( 'connection', function ( socket )
 			prodotti.push(nuovoProdotto);
 		}
 
-		realm3.close();
+		realm2.close();
 
 		socket.emit('caricaRow',prodotti);
 	});
@@ -157,9 +185,8 @@ io.on( 'connection', function ( socket )
 		var size1 = Object.keys(a1).length;
 		var size2 = Object.keys(a2).length;
 		var size3 = Object.keys(a3).length;
-		
-		
-		for(var i = 0; i<size1; i++)
+
+		for(let i = 0; i<size1; i++)
 		{
 			var nuovoProdotto1 =
 			{
@@ -172,7 +199,7 @@ io.on( 'connection', function ( socket )
 			}
 			prodotti1.push(nuovoProdotto1);
 		}
-		for(var i = 0; i<size2; i++)
+		for(let i = 0; i<size2; i++)
 		{
 			var nuovoProdotto2 =
 			{
@@ -185,7 +212,7 @@ io.on( 'connection', function ( socket )
 			}
 			prodotti2.push(nuovoProdotto2);
 		}
-		for(var i = 0; i<size3; i++)
+		for(let i = 0; i<size3; i++)
 		{
 			var nuovoProdotto3 =
 			{
@@ -211,11 +238,13 @@ io.on( 'connection', function ( socket )
 					}
 					else
 					{
+
 						var option;
 						realm2.write(() => 
 						{
 							option=realm2.create(ProductSchema.name,{nome:data[i].nome, tipo:data[i].tipo, tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:data[i].prezzo, immagine:data[i].immagine});
 						});
+						console.log('aggiunto prodotto')
 
 						break;
 					}
@@ -238,6 +267,8 @@ io.on( 'connection', function ( socket )
 							{
 								option=realm2.create(ProductSchema.name,{nome:data[i].nome, tipo:data[i].tipo, tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:data[i].prezzo, immagine:data[i].immagine});
 							});
+													console.log('aggiunto prodotto')
+
 							break;
 						}
 					}
@@ -259,6 +290,8 @@ io.on( 'connection', function ( socket )
 								{
 									option=realm2.create(ProductSchema.name,{nome:data[i].nome, tipo:data[i].tipo, tipo2:data[i].tipo2, recensione:data[i].recensione, prezzo:data[i].prezzo, immagine:data[i].immagine});
 								});
+														console.log('aggiunto prodotto')
+
 								break;
 							}
 						}
