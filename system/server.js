@@ -1,4 +1,4 @@
-var ip='127.0.0.1';
+var ip='192.168.10.107';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -69,12 +69,36 @@ var prodotti =[];
 
 io.on( 'connection', function ( socket )
 {
+	socket.on('elimina',function(data)
+	{
+		console.log('da eliminare: ')
+		for (var i = 0; i < data.length; i++) {
+			console.log(data[i].vecchio, data[i].nome +", "+data[i].tipo +", "+ data[i].tipo2 +", "+data[i].recensione +", "+data[i].prezzo +", "+data[i].immagine)
+		}
+
+		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		var option;
+		realm2.write(()=>
+		{	
+			for (var i = 0; i < data.length; i++) {
+					if(data[i].vecchio != "") {
+					let test=realm2.objects('Productdb').filtered('nome = "'+data[i].vecchio+'"');
+					realm2.delete(test);
+				}
+			}
+				});
+		realm2.close();
+
+
+	});
+		
+
 	socket.on('aggiornaProdotti',function(data)
 	{
-
 		// for (var i = 0; i < data.length; i++) {
 		// 	console.log(data[i].vecchio, data[i].nome +", "+data[i].tipo +", "+ data[i].tipo2 +", "+data[i].recensione +", "+data[i].prezzo +", "+data[i].immagine)
 		// }
+
 		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
 		var option;
 		realm2.write(()=>
