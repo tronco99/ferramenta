@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/node_modules/jquery/dist/jquery.js"></script>
@@ -13,6 +14,7 @@
 
 	<meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport" />
 </head>
+
 <body>
 
 	<div class="ui fixed inverted menu">
@@ -22,14 +24,14 @@
 				<label id="label_menu">MENU</label>
 			</a>
 			<a id="tagP" class="ui black tag menu label" hidden>
-				
+
 			</a>
 
 			<a class="right menu">
 				<a class="launch icon item" id="test">
 					<i class="user circle icon" id="icona"></i>
 				</a>
-				<a class="launch icon item" id="carrello" >
+				<a class="launch icon item" id="carrello">
 					<i class="shopping cart icon"></i>
 				</a>
 			</a>
@@ -41,7 +43,7 @@
 			<div class="column">
 				<div class="ui special cards">
 					<div class="ui circular image">
-						<div  class="ui active dimmer togli">
+						<div class="ui active dimmer togli">
 							<div class="content">
 								<div id="caricamentoIndex" class="ui indeterminate text loader"> </div>
 								<button id="userSett" class="ui mini inverted button">Setting</button>
@@ -50,7 +52,7 @@
 						<img src="/images/user.jpg" id="img">
 					</div>
 				</div>
-			</div> 
+			</div>
 			<div class="column">
 				<h4 class="ui header" id="utente"></h4>
 				<div class="ui button mini" id="logOut">Logout</div>
@@ -95,7 +97,6 @@
 	</div>
 
 
-
 	<div class="ui tiny modal" id="tabLog">
 		<div class="content">
 			<div class="ui tabular menu" id="tabular">
@@ -118,7 +119,7 @@
 					</div>
 				</div>
 
-			</div> 
+			</div>
 		</div>
 
 		<div class="content" id="second">
@@ -165,7 +166,7 @@
 				</div>
 
 			</div>
-		</div>		
+		</div>
 		<div class="actions">
 			<div class="ui deny button" id="confirm"></div>
 		</div>
@@ -185,6 +186,62 @@
 		</div>
 		<div class="row">
 			<div class="wrapper" id="pro1">
+				<div class="elem">
+					<div class="ui special cards">
+						<div class="card">
+							<div class="blurring dimmable image">
+								<div class="ui dimmer">
+									<div class="content">
+										<div class="center">
+											<div class="ui inverted button">Add Friend</div>
+										</div>
+									</div>
+								</div>
+								<img src="/product_images/piatti.jpg">
+							</div>
+							<div class="content">
+								<a class="header">Team Fu</a>
+								<div class="meta">
+									<span class="date">Created in Sep 2014</span>
+								</div>
+							</div>
+							<div class="extra content">
+								<a>
+									<i class="users icon"></i>
+									2 Members
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="elem">
+						<div class="ui special cards">
+							<div class="card">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<div class="ui inverted button">Add Friend</div>
+											</div>
+										</div>
+									</div>
+									<img src="/product_images/piatti.jpg">
+								</div>
+								<div class="content">
+									<a class="header">Team Fu</a>
+									<div class="meta">
+										<span class="date">Created in Sep 2014</span>
+									</div>
+								</div>
+								<div class="extra content">
+									<a>
+										<i class="users icon"></i>
+										2 Members
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
 			</div>
 		</div>
 		<div class="row">
@@ -218,9 +275,5 @@
 
 
 </body>
+
 </html>
-
-
-
-
-
