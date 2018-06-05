@@ -1,4 +1,4 @@
-var ip='192.168.1.3';
+var ip='192.168.10.111';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -120,11 +120,30 @@ io.on( 'connection', function ( socket )
 	});
 
 
+	socket.on('mandaProdotto', function(data)
+	{
+		var prod =[];
+		realm.close();
+		delete realm;
+		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		let result=realm2.objects('Productdb');
+		var r=result.filtered('tipo="'+data[1]+'"');
+		r = result.filtered('nome="'+data[0]+'"' );
+	
+
+		var a = JSON.parse(JSON.stringify(r));
+		console.log(a[0].nome)
+
+		prod.push(a[0].nome, a[0].tipo, a[0].tipo2, a[0].recensione, a[0].prezzo, a[0].immagine)
+
+		realm2.close();
+		socket.emit('ricevoProdotto', prod)
+	})
+
 
 	socket.on('caricato',function(data)
 	{
 		var prodotti =[];
-
 		realm.close();
 		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
 		let result=realm2.objects('Productdb');

@@ -1,10 +1,16 @@
-var ip = '192.168.1.3';
+var ip='192.168.10.111';
 var socket = io.connect(ip + ":4200");
 var currentItem = null;
 var name;
 var p = 0;
 var prodotti = 0;
+var prodotto=[];
+function myFunction1(){
+
+	window.location.href = '/system/html/productPage.html?nome='+prodotto[0]+'&tipo='+prodotto[1];
+}
 $(document).ready(function () {
+
 	$('.special.cards .image').dimmer({
 		on: 'hover'
 	});
@@ -19,29 +25,21 @@ $(document).ready(function () {
 		var control = $('#drop1').val().replace("'", "");
 		$('#pro1').html("");
 		for (var i = 0; i < prodotti.length; i++) {
+			prodotto = [];
 			if (prodotti[i].tipo2 == control) {
-				// alert("sksk")
-				// $('#pro1').append($('<div class="elem"><div class="ui special cards" id="prodotto"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="' + prodotti[i].immagine + '"></div><div class="content"><a class="header">' + prodotti[i].nome + '</a><div class="meta"><span class="date">' + prodotti[i].recensione + '</span></div></div><div class="extra content"><a><i class="users icon"></i>' + prodotti[i].prezzo + '</a></div></div></div></div>'));
-				$('#pro1').append('<div class="elem"> <div class="ui special cards"> <div class="card"> <div class="blurring dimmable image"> <div class="ui dimmer"> <div class="content"> <div class="center"> <div class="ui inverted button">Add Friend</div> </div> </div> </div> <img src="/product_images/piatti.jpg"> </div> <div class="content"> <a class="header">Team Fu</a> <div class="meta"> <span class="date">Created in Sep 2014</span> </div> </div> <div class="extra content"> <a> <i class="users icon"></i> 2 Members </a> </div> </div> </div> </div>')
-				// $('#pro1').append($('	<div class="elem" id="prodotto">	<div class="ui special cards" id="prodotto">			<div class="card">			  <div class="blurring dimmable image">			<div class="ui dimmer">				  <div class="content">					<div class="center">					  <div class="ui inverted button" id="prodotto">Add HUYCFBVYUV HI NTIUN UITNBUIVTNUIEVNUITENVUIERNUI</div>					</div>				  </div>				</div>				<img src='+prodotti[i].immagine+' src="/images/avatar/large/elliot.jpg">  </div><div class="content">	<a class="header">Team Fu</a><div class="meta"> <span class="date">Created in Sep 2014</span></div></div> <div class="extra content">	<a> <i class="users icon"></i>sk</a></div></div></div></div>'))
+				$('#pro1').append('<div onclick="prodotto.push(\''+prodotti[i].nome+'\'); prodotto.push(\''+prodotti[i].tipo+'\');myFunction1()" class="elem"> <div class="ui special cards"> <div class="card"> <div class="blurring dimmable image"> <div class="ui dimmer"> <div class="content"> <div class="center"> <div class="ui inverted button">Add Friend</div> </div> </div> </div> <img src="' + prodotti[i].immagine + '"> </div> <div class="content"> <a class="header" id="prodottia">' + prodotti[i].nome + '</a> <div class="meta"> <span class="date">' + prodotti[i].recensione + '</span> </div> </div> <div class="extra content"> <a> <i class="users icon"></i> ' + prodotti[i].prezzo + '</a> </div> </div> </div> </div>')
 			}
-		}
-
-
+		}                                                                                                         
 	});
-
-	$('#prodotto').click(function(){
-		alert("sksk")
-	})
-
 
 	$('#drop2').on('change', function () //seleziono prodotti
 	{
 		var control = $('#drop2').val().replace("'", "");
 		$('#pro2').html("");
 		for (var i = 0; i < prodotti.length; i++) {
+			prodotto = [];
 			if (prodotti[i].tipo2 == control) {
-				$('#pro2').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="' + prodotti[i].immagine + '"></div><div class="content"><a class="header">' + prodotti[i].nome + '</a><div class="meta"><span class="date">' + prodotti[i].recensione + '</span></div></div><div class="extra content"><a><i class="users icon"></i>' + prodotti[i].prezzo + '</a></div></div></div></div>'));
+				$('#pro2').append('<div onclick="prodotto.push(\''+prodotti[i].nome+'\'); prodotto.push(\''+prodotti[i].tipo+'\');myFunction1()" class="elem"> <div class="ui special cards"> <div class="card"> <div class="blurring dimmable image"> <div class="ui dimmer"> <div class="content"> <div class="center"> <div class="ui inverted button">Add Friend</div> </div> </div> </div> <img src="' + prodotti[i].immagine + '"> </div> <div class="content"> <a class="header" id="prodottia">' + prodotti[i].nome + '</a> <div class="meta"> <span class="date">' + prodotti[i].recensione + '</span> </div> </div> <div class="extra content"> <a> <i class="users icon"></i> ' + prodotti[i].prezzo + '</a> </div> </div> </div> </div>')
 			}
 		}
 	});
@@ -50,15 +48,12 @@ $(document).ready(function () {
 		var control = $('#drop3').val().replace("'", "");
 		$('#pro3').html("");
 		for (var i = 0; i < prodotti.length; i++) {
+			prodotto = [];
 			if (prodotti[i].tipo2 == control) {
-				$('#pro3').append($('<div class="elem"><div class="ui special cards"><div class="card" id="provaImmagine"><div class="blurring dimmable image"><div class="ui dimmer"><div class="content"><div class="center"><div class="ui inverted button">Dettagli</div></div></div></div><img src="' + prodotti[i].immagine + '"></div><div class="content"><a class="header">' + prodotti[i].nome + '</a><div class="meta"><span class="date">' + prodotti[i].recensione + '</span></div></div><div class="extra content"><a><i class="users icon"></i>' + prodotti[i].prezzo + '</a></div></div></div></div>'));
+				$('#pro3').append('<div onclick="prodotto.push(\''+prodotti[i].nome+'\'); prodotto.push(\''+prodotti[i].tipo+'\');myFunction1()" class="elem"> <div class="ui special cards"> <div class="card"> <div class="blurring dimmable image"> <div class="ui dimmer"> <div class="content"> <div class="center"> <div class="ui inverted button">Add Friend</div> </div> </div> </div> <img src="' + prodotti[i].immagine + '"> </div> <div class="content"> <a class="header" id="prodottia">' + prodotti[i].nome + '</a> <div class="meta"> <span class="date">' + prodotti[i].recensione + '</span> </div> </div> <div class="extra content"> <a> <i class="users icon"></i> ' + prodotti[i].prezzo + '</a> </div> </div> </div> </div>')
 			}
 		}
 	});
-
-
-
-	//--------------------------------------
 
 	$("#tagP").hide();
 	$(".pressed").on('click', function () {
@@ -85,7 +80,7 @@ $(document).ready(function () {
 	});
 	var x = document.cookie;
 	x = x.replace('username=', '');
-
+	alert(document.cookie)
 	$('#userSett').hide();
 
 
@@ -105,7 +100,10 @@ $(document).ready(function () {
 
 
 	$("#logOut").on('click', function () {
-		document.cookie = "username=";
+		//PROVA	document.cookie = "username=";
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
 		location.reload();
 	});
 
@@ -143,7 +141,6 @@ $(document).ready(function () {
 			$('#confirmPasswordfield').addClass('field');
 			$('#nicknameField').removeClass('field error');
 			$('#nicknameField').addClass('field');
-
 
 			$('#second').hide();
 			$('#first').show();

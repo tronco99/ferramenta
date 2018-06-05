@@ -1,4 +1,4 @@
-var ip='192.168.1.3';
+var ip='192.168.10.111';
 var socket = io.connect(ip+":4200")
 var indice = 0;
 var indice2=0;
@@ -8,17 +8,17 @@ var prodottiAggiornati=[];
 var vecchiProdotti = []
 $(document).ready(function()
 {
-	var x = document.cookie;
+/*	var x = document.cookie;
 	if(x != "")
 	{
 		$('#drop1').val(x);
 		$('#filtra').trigger( "click" );
-	}
+	}*/
 
 	socket.emit('caricato','si');
 	$('#filtra').on('click',function()
 	{
-		document.cookie = $('#drop1').val();
+	//	document.cookie = $('#drop1').val();
 		daEliminare = [];
 		indice = 0;
 		indice2 =0;

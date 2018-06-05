@@ -4,39 +4,255 @@
 <head>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/node_modules/jquery/dist/jquery.js"></script>
-	<script src="../js/adminPage.js"></script>
+	<script src="../js/productPage.js"></script>
 	<script src="/node_modules/semantic-ui/dist/semantic.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/node_modules/semantic-ui/dist/semantic.min.css">
-	<link rel="stylesheet" href="../css/adminPage.css" />
+	<link rel="stylesheet" href="../css/productPage.css" />
 	<meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport" />
 </head>
 
 <body>
-	<div class="ui one centered column grid">
-		<br>
-		<div class="row">
-			<h1 id="nome"></h1>
+	<div class="ui fixed inverted menu">
+		<div class="ui container">
+			<a class="fixed item" id="openMenu">
+				<i class="content icon"></i>
+				<label id="label_menu">MENU</label>
+			</a>
+			<a id="tagP" class="ui black tag menu label" hidden>
+			</a>
+
+			<a class="right menu">
+				<a class="launch icon item" id="test">
+					<i class="user circle icon" id="icona"></i>
+				</a>
+				<a class="launch icon item" id="carrello">
+					<i class="shopping cart icon"></i>
+				</a>
+			</a>
 		</div>
-		<div class="row">
-			<div class="ui two column grid ">
-				<div class="row">
-					<div class="column">
+	</div>
 
-					</div>
-					<div class="column">
-
+	<div class="ui flowing popup bottom left transition hidden" id="popup">
+		<div class="ui two column center aligned grid">
+			<div class="column">
+				<div class="ui special cards">
+					<div class="ui circular image">
+						<div class="ui active dimmer togli">
+							<div class="content">
+								<div id="caricamentoIndex" class="ui indeterminate text loader"> </div>
+								<button id="userSett" class="ui mini inverted button">Setting</button>
+							</div>
+						</div>
+						<img src="/images/user.jpg" id="img">
 					</div>
 				</div>
 			</div>
+			<div class="column">
+				<h4 class="ui header" id="utente"></h4>
+				<div class="ui button mini" id="logOut">Logout</div>
+			</div>
 		</div>
-		<div class="row">
-
-		</div>
-		<div class="row">
-
-		</div>
-
 	</div>
+
+	<div class="ui left demo vertical inverted sidebar labeled icon menu">
+		<a class="item">
+			<div class="ui search">
+				<div class="ui icon input">
+					<input class="prompt" type="text" placeholder="Inserisci prodotto:">
+					<i class="search icon"></i>
+				</div>
+				<div class="results"></div>
+			</div>
+		</a>
+		<a class="item" id="home">
+			Home
+		</a>
+
+		<div class="item">
+			<div class="active header">Categorie:</div>
+			<div class="menu">
+				<a class="active item pressed">Interni</a>
+			</div>
+			<div class="menu">
+				<a class="active item pressed">Esterni</a>
+			</div>
+			<div class="menu">
+				<a class="active item pressed">Aziendali</a>
+			</div>
+		</div>
+
+		<a class="item" href="https://github.com/divino-marchese">
+			Chi siamo
+		</a>
+
+		<a class="item" href="https://www.google.it/maps/place/30010+Calcroci+VE/data=!4m2!3m1!1s0x477ec7bcd436d1fd:0xe81581287e7b1358?sa=X&ved=0ahUKEwih-ertyObZAhVMlCwKHd-8AfYQ8gEIlQEwCg">
+			Dove siamo
+		</a>
+	</div>
+
+
+	<div class="ui tiny modal" id="tabLog">
+		<div class="content">
+			<div class="ui tabular menu" id="tabular">
+				<a class="item active" id="accedi">
+					Accedi
+				</a>
+				<a class="item" id="registrati">
+					Registrati
+				</a>
+			</div>
+			<div class="content" id="first">
+				<div class="ui form" id="login">
+					<div class="field" id="emailfield">
+						<label>Nickname o E-mail:</label>
+						<input type="text" placeholder="inserisci e-mail o nickname" id="existmail">
+					</div>
+					<div class="field" id="passwordfield">
+						<label>Password:</label>
+						<input type="password" placeholder="inserisci password" id="existpassword">
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="content" id="second">
+			<div class="ui form" id="content">
+				<div class="fields">
+					<div class="field">
+						<label>Nome:</label>
+						<input type="text" placeholder="inserisci il tuo nome" id="nome">
+					</div>
+					<div class="field">
+						<label>Indirizzo:</label>
+						<input type="text" placeholder="dove abiti" id="indirizzo">
+					</div>
+				</div>
+				<div class="fields">
+					<div class="field">
+						<label>Città:</label>
+						<input type="text" placeholder="città di provenienza" id="città">
+					</div>
+					<div class="field">
+						<label>CAP:</label>
+						<input type="text" placeholder="codice postale" id="cap">
+					</div>
+				</div>
+				<div class="fields">
+					<div class="field" id="nicknameField">
+						<label>Nickname:</label>
+						<input type="text" placeholder="inserisci nickname" id="nick">
+					</div>
+					<div class="field" id="emailField">
+						<label>E-mail:</label>
+						<input type="text" placeholder="inserisci e-mail" id="email">
+					</div>
+				</div>
+				<div class="fields">
+					<div class="field" id="passwordField">
+						<label>Password:</label>
+						<input type="password" placeholder="••••••••" id="password">
+					</div>
+					<div class="field" id="confirmPasswordfield">
+						<label>Conferma password:</label>
+						<input type="password" placeholder="••••••••" id="password2">
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="actions">
+			<div class="ui deny button" id="confirm"></div>
+		</div>
+	</div>
+	<!-- DA QUI IN POI INIZIA LA PAGINA VERA E PROPRIA  -->
+
+	<div class="ui one centered column grid" id="cont">
+			<br>
+			<div class="row">
+				<h1 id="nomeProdotto">NOME PRODOTTO</h1>
+			</div>
+			<div class="row">
+				<div class="ui four column grid ">
+					<div class="row">
+						<div class="column">
+							
+						</div>
+						<div class="column">
+							<img class="ui medium bordered image" src="https://1.bp.blogspot.com/-CzqR11o8l2U/Vj0IIWnHIFI/AAAAAAAAeMM/fDJxvi2lJEs/s400/boh.png">
+						</div>
+						<div class="column">
+							<div class="ui message">
+								<p>qui ci sarà la descrizione del prodotto. se continuo a scrivere teoricamente dovrebbe andare a capo da solo</p>
+							</div>
+						</div>
+						<div class="column">
+							
+						</div>
+					</div>
+					<div class="row">
+						<div class="column">
+							
+						</div>
+						<div class="column">
+							<div id="rateYo"></div>
+						</div>
+						<div class="column"></div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ui comments">
+					<div class="comment">
+						<a class="avatar">
+							<img src="/images/avatar/small/joe.jpg">
+						</a>
+						<div class="content">
+							<a class="author">Joe Henderson</a>
+							<div class="metadata">
+								<div class="date">1 day ago</div>
+							</div>
+							<div class="text">
+								<p>The hours, minutes and seconds stand as visible reminders that your effort put them all there. </p>
+								<p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
+							</div>
+							<div class="actions">
+								<a class="reply">Reply</a>
+							</div>
+						</div>
+					</div>
+					<div class="comment">
+						<a class="avatar">
+							<img src="/images/avatar/small/christian.jpg">
+						</a>
+						<div class="content">
+							<a class="author">Christian Rocha</a>
+							<div class="metadata">
+								<div class="date">2 days ago</div>
+							</div>
+							<div class="text">
+								I re-tweeted this.
+							</div>
+							<div class="actions">
+								<a class="reply">Reply</a>
+							</div>
+						</div>
+					</div>
+					<form class="ui reply form" id="recensione">
+						<div class="field">
+							<textarea></textarea>
+						</div>
+						<div class="ui primary submit labeled icon button">
+							<i class="icon edit"></i> Recensisci
+						</div>
+					</form>
+				</div>
+	
+			</div>
+	
+		</div>
+	
 
 
 
