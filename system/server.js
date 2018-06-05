@@ -1,4 +1,4 @@
-var ip='192.168.10.111';
+var ip='192.168.1.15';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -127,17 +127,21 @@ io.on( 'connection', function ( socket )
 		delete realm;
 		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
 		let result=realm2.objects('Productdb');
-		var r=result.filtered('tipo="'+data[1]+'"');
-		r = result.filtered('nome="'+data[0]+'"' );
+		console.log('controlla: '+ data[1]+ ' e '+data[0])
+		var r=result.filtered('tipo="'+data[1]+'" AND nome="'+data[0]+'"' );
+	//	r = result.filtered('nome="'+data[0]+'"' );
 	
-
 		var a = JSON.parse(JSON.stringify(r));
-		console.log(a[0].nome)
 
+		console.log(a[0])
+		if(a[0] != undefined)
 		prod.push(a[0].nome, a[0].tipo, a[0].tipo2, a[0].recensione, a[0].prezzo, a[0].immagine)
+		else prod.push(null, null, null, null, null, null)
+
 
 		realm2.close();
 		socket.emit('ricevoProdotto', prod)
+		prod = [];
 	})
 
 
@@ -490,12 +494,6 @@ io.on( 'connection', function ( socket )
 		});
 
 	});
-
-
-	// 
-
-
-
 });
 
 

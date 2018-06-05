@@ -1,4 +1,4 @@
-var ip = '192.168.10.111';
+var ip = '192.168.1.15';
 var socket = io.connect(ip + ":4200")
 var prodotto = [];
 
@@ -234,9 +234,12 @@ $(document).ready(function () {
         //a[0] = nome, a[1] = tipo, a[2] = tipo2, a[3] = recensione, a[4] =prezzo, a[5] =immagine)
         if(data[0] != null)
         {
-            alert('esiste')
+            document.getElementById("productImage").src = data[5];
+            $('#productDescription').text(data[3]);
+            $('#productName').text(data[0].toUpperCase()+ " ("+data[2]+", "+data[1]+")");
+            $('#productPrice').text(data[4]+'€');
         }
-        else alert('sfigà')
+        else window.location.href = '/system/html/404.html'
     });
 
     socket.on("CONTROLLATI", data)

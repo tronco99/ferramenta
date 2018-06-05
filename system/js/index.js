@@ -1,4 +1,4 @@
-var ip='192.168.10.111';
+var ip='192.168.1.15';
 var socket = io.connect(ip + ":4200");
 var currentItem = null;
 var name;
@@ -80,7 +80,6 @@ $(document).ready(function () {
 	});
 	var x = document.cookie;
 	x = x.replace('username=', '');
-	alert(document.cookie)
 	$('#userSett').hide();
 
 
