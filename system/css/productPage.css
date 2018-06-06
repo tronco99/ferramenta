@@ -1,6 +1,21 @@
+h1{
+    font-size: 250%;
+
+}
+
+.row
+{
+	margin-top: 1em;
+}
+#productDescription
+{
+	overflow-y: scroll;
+	max-height: 95px;
+}
 
 
-	@media only screen and (min-width: 992px)
+
+	@media only screen and (min-width: 801px)
 { 
 	#img
 	{
@@ -18,13 +33,27 @@
 	}
 }
 
-@media only screen and (max-width: 600px) 
+@media only screen and (max-width: 800px) 
 {
-	#img
+	#descriprionContainer
 	{
-		width: 93px;
-		height: 93px;
+		width: 150%;
+
 	}
+
+	
+	#ingrandisci
+	{
+		width: 200%
+	}
+
+	#productImage
+	{
+		width: 200%
+
+	}
+
+	
 	#container
 	{
 		background-color: white;
@@ -33,4 +62,4 @@
 		align-items: center;
 		margin-top: 12%;
 	}
-	
+}

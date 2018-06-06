@@ -1,4 +1,4 @@
-var ip='192.168.1.15';
+var ip='192.168.1.120';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -69,6 +69,11 @@ var prodotti =[];
 
 io.on( 'connection', function ( socket )
 {
+	socket.on('chiediValutazioni', function(data)
+	{
+		//dovresti inviare a ricevoRecensioni un array che hain prima posizione il nome dell'autore della recensione, poi la volutazione(stelle) e poi la recensione. (quindi saranno 3 celle di ogni array per recensione)
+	});
+
 	socket.on('elimina',function(data)
 	{
 		console.log('da eliminare: ')

@@ -1,52 +1,58 @@
-var ip = '192.168.1.15';
+var ip = '192.168.1.120';
 var socket = io.connect(ip + ":4200")
 var prodotto = [];
 
 $(document).ready(function () {
 
-/*   
-    $("#rateYo").rateYo({
-		rating: 0,
-		halfStar: true,
-		starWidth: "25px",
 
-		onSet: function (rating, rateYoInstance) {
+    if ($(window).width() < 800) {
+        riduci();
+        $('#productName').css('font-size', '180%');
+    } 
+    else { ingrandisci();$('#productName').css('font-size', '250%'); }
 
-			alert('zanca è bueo: '+ rating+'/5');
-				$('#recensione').show();
+    $(window).resize(function () {
+        if ($(window).width() < 800) {
+            riduci();$('#productName').css('font-size', '180%');
 
+        } 
+        else { ingrandisci();
+            $('#productName').css('font-size', '250%');
+         }
+    });
 
-		}
-	});
- */
-    $('#recensione').hide();
     
-    var x = document.cookie;
-    var y = document.cookie;
-    x = x.replace('interni', '');
-    x = x.replace(';', '');
-    x = x.replace('username=', '');
+    
 
-    $('#userSett').hide();
-    if (x != "") {
-        changeView(x);
-        $('#utente').text(x);
-        $('.tiny.modal').modal('hide');
-        $('#test')
-            .popup({
-                on: 'click',
-                popup: '#popup',
-                position: 'bottom center',
-                target: '#test',
-                hideOnScroll: 'false'
-            });
+
+        $('#recensione').hide();
+
+        var x = document.cookie;
+        var y = document.cookie;
+        x = x.replace('interni', '');
+        x = x.replace(';', '');
+        x = x.replace('username=', '');
+
+        $('#userSett').hide();
+        if (x != "") {
+            changeView(x);
+            $('#utente').text(x);
+            $('.tiny.modal').modal('hide');
+            $('#test')
+                .popup({
+                    on: 'click',
+                    popup: '#popup',
+                    position: 'bottom center',
+                    target: '#test',
+                    hideOnScroll: 'false'
+                });
         }
 
 
         $("#logOut").on('click', function () {
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-            location.reload();   
+            location.reload();
         });
 
 
@@ -76,7 +82,7 @@ $(document).ready(function () {
 
         $('#test').on('click', function () {
             var classe = $('#icona').attr("class");
-                if (classe == 'user circle icon') {
+            if (classe == 'user circle icon') {
                 socket.emit('cambiaDb', 'qualsiasi');
                 $('#test').popup('hide');
                 $('#emailField').removeClass('field error');
@@ -108,26 +114,26 @@ $(document).ready(function () {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 $('#tabLog').css('width', '70%');
                 $('.field').css('width', 'auto');
-    
+
             }
             $('#second').hide();
             $('#first').show();
             $('#confirm').html('accedi');
-    
+
         });
-    
+
         $('#registrati').on('click', function () {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 $('#tabLog').css('width', 'auto');
                 $('.field').css('width', '50%');
             }
-    
+
             $('#first').hide();
             $('#second').show();
             $('#confirm').html('registrati');
-    
+
         });
-    
+
         $('#confirm').on('click', function () {
             if ($('#confirm').text() == 'registrati') {
                 var toDb = new Array($('#nome').val(), $('#indirizzo').val(), $('#città').val(), $('#cap').val(), $('#nick').val(), $('#email').val(), $('#password').val(), $('#password2').val());
@@ -137,12 +143,11 @@ $(document).ready(function () {
                 var login = new Array($('#existmail').val(), $('#existpassword').val());
                 socket.emit('accedi', login);
             }
-    
+
         });
-    
-        $('#home').click(function()
-        {
-            document.location.href="/";
+
+        $('#home').click(function () {
+            document.location.href = "/";
         })
 
         $('#nickname').on('change', function () {
@@ -159,19 +164,19 @@ $(document).ready(function () {
             var veryControlled = $('#passwordField').attr('class');
             $('#passwordField').removeClass(veryControlled);
             $('#passwordField').addClass('field')
-    
+
         });
         $('#password2').on('change', function () {
             var veryControlled = $('#confirmPasswordfield').attr('class');
             $('#confirmPasswordfield').removeClass(veryControlled);
             $('#confirmPasswordfield').addClass('field')
         });
-    
+
         $('#userSett').on('click', function () {
             window.location.href = '/system/html/userSettings.html';
         });
 
-        
+
         $('#confirm').on('click', function () {
             if ($('#confirm').text() == 'registrati') {
                 var toDb = new Array($('#nome').val(), $('#indirizzo').val(), $('#città').val(), $('#cap').val(), $('#nick').val(), $('#email').val(), $('#password').val(), $('#password2').val());
@@ -180,15 +185,15 @@ $(document).ready(function () {
             else {
                 var login = new Array($('#existmail').val(), $('#existpassword').val());
                 socket.emit('accedi', login);
-                
+
             }
-    
+
         });
 
         socket.on('noReg', function (data) {
             if (data[0] == "benvenuto") {
                 $('#utente').text(data[1]);
-                document.cookie = "username=" + data[1]+" path='/'";
+                document.cookie = "username=" + data[1] + " path='/'";
                 document.cookie = "username=" + data[1];
                 changeView(data[1]);
                 $('.tiny.modal').modal('hide');
@@ -200,64 +205,132 @@ $(document).ready(function () {
                         target: '#test',
                         hideOnScroll: 'false'
                     });
+
+                    $('#recensione').show();
+
                 return;
             }
-        
+
             if (data[0] == "registrazione effettuata con successo") {
                 alert(data[0]);
                 $('.tiny.modal').modal('hide');
                 document.cookie = "username=" + data[1];
                 location.reload();
+                $('#recensione').show();
                 return;
             }
-        
+
             alert(data[0]);
-        
+
         });
+
+
+
+
+        //SE MI LOGGO DALL'INDEX FUNZIONA OVUNQUE, SE MI LOGGO DA PRODUCT PAGE, NON VA SULLA PAGINA INIZIALE
+
+
+        var url = new URL(window.location.href);
+        var nomeProdotto = url.searchParams.get("nome");
+        var tipo = url.searchParams.get("tipo");
+
+        prodotto.push(nomeProdotto);
+        prodotto.push(tipo);
+
+        socket.emit("mandaProdotto", prodotto)
+        socket.on('ricevoProdotto', function (data) {
+            //a[0] = nome, a[1] = tipo, a[2] = tipo2, a[3] = recensione, a[4] =prezzo, a[5] =immagine)
+            if (data[0] != null) {
+                //aggiorna la pagina con foto, prezzo, descrizione e immagine
+                document.getElementById("productImage").src = data[5];
+                $('#productDescription').text(data[3]);
+                $('#productName').text(data[0].toUpperCase() + " (" + data[2] + ", " + data[1] + ")");
+                $('#productPrice').text(data[4] + '€');
+
+                socket.emit('chiediValutazioni', data);
+            }
+            else window.location.href = '/system/html/404.html'
+        });
+
+        $("#rateYo").rateYo({
+            rating: 0,
+            halfStar: true,
+            starWidth: "25px",
+
+            onSet: function (rating, rateYoInstance) {
+                var classe = $('#icona').attr("class");
+                if (classe == 'user circle icon') {
+                    socket.emit('cambiaDb', 'qualsiasi');
+                    $('#test').popup('hide');
+                    $('#emailField').removeClass('field error');
+                    $('#emailField').addClass('field');
+                    $('#passwordField').removeClass('field error');
+                    $('#passwordField').addClass('field');
+                    $('#confirmPasswordfield').removeClass('field error');
+                    $('#confirmPasswordfield').addClass('field');
+                    $('#nicknameField').removeClass('field error');
+                    $('#nicknameField').addClass('field');
+                    $('#second').hide();
+                    $('#first').show();
+                    $('.tiny.modal')
+                        .modal({
+                            closable: true,
+                            onDeny: function () {
+                                return false;
+                            }
+                        })
+                        .modal('show')
+                        ;
+                    $("#accedi").addClass('active');
+                    $('#confirm').html('accedi');
+                }
+                else
+                {
+                    alert('zanca è bueo: ' + rating + '/5');
+                }
+            }
+        });
+
+        socket.on('ricevoPunteggio', function (data) {
+            //qua dovrà avere il punteggio medio
+        });
+
+        socket.on('ricevoRecensioni', function (data) {
+            for(let i = 0; i<(data.length/3); i+3)
+            {
+
+            }
+
+            //qua dovrà avere le recensioni e chi le ha scritte
+        });
+
         
 
-  
-
-//SE MI LOGGO DALL'INDEX FUNZIONA OVUNQUE, SE MI LOGGO DA PRODUCT PAGE, NON VA SULLA PAGINA INIZIALE
-
-
-    var url = new URL(window.location.href);
-    var nomeProdotto = url.searchParams.get("nome");
-    var tipo = url.searchParams.get("tipo");
-
-    prodotto.push(nomeProdotto);
-    prodotto.push(tipo);
-    
-    socket.emit("mandaProdotto", prodotto)
-    socket.on('ricevoProdotto', function(data)
-    {
-        //a[0] = nome, a[1] = tipo, a[2] = tipo2, a[3] = recensione, a[4] =prezzo, a[5] =immagine)
-        if(data[0] != null)
-        {
-            document.getElementById("productImage").src = data[5];
-            $('#productDescription').text(data[3]);
-            $('#productName').text(data[0].toUpperCase()+ " ("+data[2]+", "+data[1]+")");
-            $('#productPrice').text(data[4]+'€');
-        }
-        else window.location.href = '/system/html/404.html'
     });
 
-    socket.on("CONTROLLATI", data)
-    {
-        if (data == true) {
-            $('#nomeProdotto').text(prodotto[0])
-        }
-    } 
-    
-    
-});
 
+    function changeView(a) {
+        name = a.replace('benvenuto ', '');
+        socket.emit('aggiornaFoto', name);
+        $('#test').find("i").removeClass("user circle icon");
+        $('#test').find("i").addClass("address card icon");
+        var classe = $('#icona').attr("class");
+    }
 
-function changeView(a) {
-    name = a.replace('benvenuto ', '');
-    socket.emit('aggiornaFoto', name);
-    $('#test').find("i").removeClass("user circle icon");
-    $('#test').find("i").addClass("address card icon");
-    var classe = $('#icona').attr("class");
+    function riduci() {
+        $('#togli').removeClass('two wide column');
+        $('#togli1').removeClass('two wide column');
+        $('#ingrandisci').removeClass('six wide column');
+        $('#ingrandisci').addClass('eight wide column');
+        $('#ingrandisci1').removeClass('six wide column');
+        $('#ingrandisci1').addClass('eight wide column');
+    }
 
-}
+    function ingrandisci() {
+        $('#togli').addClass('two wide column');
+        $('#togli1').addClass('two wide column');
+        $('#ingrandisci').removeClass('eight wide column');
+        $('#ingrandisci').addClass('six wide column');
+        $('#ingrandisci1').removeClass('eight wide column');
+        $('#ingrandisci1').addClass('six wide column');
+    }

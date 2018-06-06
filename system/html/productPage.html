@@ -6,6 +6,8 @@
 	<script src="/node_modules/jquery/dist/jquery.js"></script>
 	<script src="../js/productPage.js"></script>
 	<script src="/node_modules/semantic-ui/dist/semantic.min.js"></script>
+	<script src="/node_modules/rateyo/src/jquery.rateyo.js"></script>
+	<link rel="stylesheet" href="/node_modules/rateyo/src/jquery.rateyo.css" />
 	<link rel="stylesheet" type="text/css" href="/node_modules/semantic-ui/dist/semantic.min.css">
 	<link rel="stylesheet" href="../css/productPage.css" />
 	<meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport" />
@@ -168,94 +170,96 @@
 	<!-- DA QUI IN POI INIZIA LA PAGINA VERA E PROPRIA  -->
 
 	<div class="ui one centered column grid" id="container">
-			<br>
-			<div class="row">
-				<h1 id="productName">NOME PRODOTTO</h1>
-			</div>
-			<div class="row">
-				<div class="ui four column grid ">
-					<div class="row">
-						<div class="column">
-							
-						</div>
-						<div class="column">
-							<img class="ui medium bordered image" id="productImage" src="https://1.bp.blogspot.com/-CzqR11o8l2U/Vj0IIWnHIFI/AAAAAAAAeMM/fDJxvi2lJEs/s400/boh.png">
-						</div>
-						<div class="column">
-							<div class="ui message" >
+		<br>
+		<div class="row">
+			<h1 id="productName">NOME PRODOTTO</h1>
+		</div>
+		<div class="row">
+			<div class="ui five column grid ">
+				<div class="row">
+					<div class="two wide column" id="togli"></div>
+					<div class="six wide column" id="ingrandisci">
+						<img class="ui medium bordered image" id="productImage" src="https://1.bp.blogspot.com/-CzqR11o8l2U/Vj0IIWnHIFI/AAAAAAAAeMM/fDJxvi2lJEs/s400/boh.png">
+					</div>
+					<div class="six wide column" id="ingrandisci1">
+		
+							<div class="ui message" id="descriprionContainer">
 								<p id="productDescription"></p>
 							</div>
+						
+						<div class="row">
+							<div id="rateYo"></div>
+						</div>
+						<div class="row">
 							<div class="ui ">
 								<h3 id="productPrice"></h3>
 							</div>
 						</div>
-						<div class="column">
-							
-						</div>
 					</div>
-					<div class="row">
-						<div class="column">
-							
-						</div>
-						<div class="column">
-							<div id="rateYo"></div>
-						</div>
-						<div class="column"></div>
-						
+					<div class="two wide column" id="togli1"></div>
+				</div>
+				<div class="row">
+					<div class="column">
+
 					</div>
+					<div class="column">
+					</div>
+					<div class="column"></div>
+
 				</div>
 			</div>
-			<div class="row">
-				<div class="ui comments">
-					<div class="comment">
-						<a class="avatar">
-							<img src="/images/avatar/small/joe.jpg">
-						</a>
-						<div class="content">
-							<a class="author">Joe Henderson</a>
-							<div class="metadata">
-								<div class="date">1 day ago</div>
-							</div>
-							<div class="text">
-								<p>The hours, minutes and seconds stand as visible reminders that your effort put them all there. </p>
-								<p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
-							</div>
-							<div class="actions">
-								<a class="reply">Reply</a>
-							</div>
-						</div>
-					</div>
-					<div class="comment">
-						<a class="avatar">
-							<img src="/images/avatar/small/christian.jpg">
-						</a>
-						<div class="content">
-							<a class="author">Christian Rocha</a>
-							<div class="metadata">
-								<div class="date">2 days ago</div>
-							</div>
-							<div class="text">
-								I re-tweeted this.
-							</div>
-							<div class="actions">
-								<a class="reply">Reply</a>
-							</div>
-						</div>
-					</div>
-					<form class="ui reply form" id="recensione">
-						<div class="field">
-							<textarea></textarea>
-						</div>
-						<div class="ui primary submit labeled icon button">
-							<i class="icon edit"></i> Recensisci
-						</div>
-					</form>
-				</div>
-	
-			</div>
-	
 		</div>
-	
+		<div class="row">
+			<div class="ui comments">
+				<div class="comment">
+					<a class="avatar">
+						<img src="/images/avatar/small/joe.jpg">
+					</a>
+					<div class="content">
+						<a class="author">Joe Henderson</a>
+						<div class="metadata">
+							<div class="date">1 day ago</div>
+						</div>
+						<div class="text">
+							<p>The hours, minutes and seconds stand as visible reminders that your effort put them all there. </p>
+							<p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
+						</div>
+						<div class="actions">
+							<a class="reply">Reply</a>
+						</div>
+					</div>
+				</div>
+				<div class="comment">
+					<a class="avatar">
+						<img src="/images/avatar/small/christian.jpg">
+					</a>
+					<div class="content">
+						<a class="author">Christian Rocha</a>
+						<div class="metadata">
+							<div class="date">2 days ago</div>
+						</div>
+						<div class="text">
+							I re-tweeted this.
+						</div>
+						<div class="actions">
+							<a class="reply">Reply</a>
+						</div>
+					</div>
+				</div>
+				<form class="ui reply form" id="recensione">
+					<div class="field">
+						<textarea></textarea>
+					</div>
+					<div class="ui primary submit labeled icon button" id="recensisci">
+						<i class="icon edit"></i> Recensisci
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+
 
 
 
