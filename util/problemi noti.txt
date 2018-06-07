@@ -1,2 +1,3 @@
-conmtrolla il registrati dalla productPage
+controlla il 'registrati' dalla productPage
 icookieeee
+va aggiunta la possibilità di tornare alla home dalla pagina dell'amministratore
