@@ -1,4 +1,4 @@
-var ip='192.168.1.120';
+var ip='192.168.1.15';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -72,7 +72,7 @@ io.on( 'connection', function ( socket )
 	socket.on('chiediValutazioni', function(data)
 	{
 		//nome data[0], tipo data[1]
-		console.log(data[0] + ", ssss "+data[1])
+	//	console.log(data[0] + ", ssss "+data[1])
 		var valutazioni=[];
 		var persone =[];
 		realm2.close();
@@ -95,17 +95,16 @@ io.on( 'connection', function ( socket )
 			valutazioni.push(recensioni[i].nome)
 		}
 
-		console.log(valutazioni)
+	//	console.log(valutazioni)
 		realm3.close();
 		socket.emit('ricevoRecensioni',valutazioni);
 	});
 
 	socket.on('elimina',function(data)
 	{
-		console.log('da eliminare: ')
-		for (var i = 0; i < data.length; i++) {
+	/*	for (var i = 0; i < data.length; i++) {
 			console.log(data[i].vecchio, data[i].nome +", "+data[i].tipo +", "+ data[i].tipo2 +", "+data[i].recensione +", "+data[i].prezzo +", "+data[i].immagine)
-		}
+		}*/
 
 		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
 		var option;
@@ -164,7 +163,6 @@ io.on( 'connection', function ( socket )
 	
 	var a = JSON.parse(JSON.stringify(r));
 
-	console.log(a[0])
 	if(a[0] != undefined)
 		prod.push(a[0].nome, a[0].tipo, a[0].tipo2, a[0].recensione, a[0].prezzo, a[0].immagine)
 	else prod.push(null, null, null, null, null, null)
@@ -522,7 +520,7 @@ io.on( 'connection', function ( socket )
 
 	socket.on('aggiornaFoto',function(data)
 	{
-		fs.readFile("../profile_images/"+data+".txt", {encoding: 'utf-8'}, function(err,no){
+		fs.readFile("./ferramenta/profile_images/"+data+".txt", {encoding: 'utf-8'}, function(err,no){
 			socket.emit('fotoAgg',no); 
 		});
 	});
@@ -530,14 +528,40 @@ io.on( 'connection', function ( socket )
 	socket.on('chiediFoto', function(data)
 	{
 		var profilo = [];
+		console.log('RICEVO: '+data)
 		fs.readFile('./ferramenta/profile_images/'+data+'.txt', {encoding: 'utf-8'}, function(err,no){
+
 			profilo.push(data);
 			profilo.push(no);
 			socket.emit('mandoFoto',profilo); 
 		});
-	})
+	});
 
+	socket.on('inviaCommento', function(data){
+		realm2.close();
+		realm3.close();
+		realm.close();
+		delete realm;
+		delete realm2;
+		delete realm3;
 
+		realm3=new Realm({schema:[ValutationSchema],schemaVersion:9});
+		let result=realm3.objects('Valutationdb');
+		
+		var option;
+		realm3.write(() => 
+		{
+			option=realm3.create(ValutationSchema.name,{nickname:data[0], tipo:data[1], nome:data[2], recensione:data[3], valutazione:data[4]+""});
+		});
+		realm3.close();
+
+		var inviaDatiCommento = [];
+		fs.readFile('./ferramenta/profile_images/'+data[0]+'.txt', {encoding: 'utf-8'}, function(err,no){
+			inviaDatiCommento.push(data[0]);
+			inviaDatiCommento.push(no);
+			socket.emit('inviaNuovoCommento',inviaDatiCommento); 
+		});
+	});
 });
 
 

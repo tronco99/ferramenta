@@ -1,10 +1,13 @@
-var ip = '192.168.1.120';
+var ip = '192.168.1.15';
 var socket = io.connect(ip + ":4200")
 var prodotto = [];
 var nomi = [];
 var valutazioni = [];
 var recensioni = [];
 var fotoPersone = [];
+var valutazione = 0;
+var rate = 0;
+var x;
 
 $(document).ready(function () {
 
@@ -26,13 +29,9 @@ $(document).ready(function () {
         }
     });
 
-
-
-
-
     $('#recensione').hide();
 
-    var x = document.cookie;
+    x = document.cookie;
     var y = document.cookie;
     x = x.replace('interni', '');
     x = x.replace(';', '');
@@ -200,6 +199,7 @@ $(document).ready(function () {
             $('#utente').text(data[1]);
             document.cookie = "username=" + data[1] + " path='/'";
             document.cookie = "username=" + data[1];
+            x = data[1];
             changeView(data[1]);
             $('.tiny.modal').modal('hide');
             $('#test')
@@ -247,7 +247,7 @@ $(document).ready(function () {
             $('#productPrice').text(data[4] + '€');
 
             socket.emit('chiediValutazioni', data);
-        }  
+        }
         else window.location.href = '/system/html/404.html'
     });
 
@@ -282,15 +282,13 @@ $(document).ready(function () {
                     ;
                 $("#accedi").addClass('active');
                 $('#confirm').html('accedi');
+                rate = rating;
+
             }
             else {
-                alert('zanca è bueo: ' + rating + '/5');
+                rate = rating;
             }
         }
-    });
-
-    socket.on('ricevoPunteggio', function (data) {
-        //qua dovrà avere il punteggio medio
     });
 
     socket.on('ricevoRecensioni', function (data) {
@@ -298,39 +296,89 @@ $(document).ready(function () {
         valutazioni = [];
         recensioni = [];
         fotoPersone = [];
-        for (let i = 0; i < data.length; i ++) {
+        for (let i = 0; i < data.length; i++) {
             nomi.push(data[i]);
             valutazioni.push(data[i + 1]);
             recensioni.push(data[i + 2]);
-            socket.emit('chiediFoto',data[i]);
-            i = i+3;
+            socket.emit('chiediFoto', data[i]);
+            i = i + 3;
         }
+
+        for (let i = 0; i < valutazioni.length; i++) {
+            valutazione = parseInt(valutazione + parseInt(valutazioni[i]));
+        }
+        valutazione = parseInt(valutazione / parseInt(valutazioni.length)); //LA VALUTAZIONE DA METTERE SULLE STELLE
     });
-    
-    socket.on('mandoFoto', function(data)
+
+    var messaggiScritti = [];
+    socket.on('mandoFoto', function (data) 
     {
-        for(let i = 0; i<nomi.length; i++)
+        var vai = true;
+        for (let i = 0; i < messaggiScritti.length; i++) 
         {
-            if(nomi[i] == data[0])
+            if (data[0] == messaggiScritti[i]) 
             {
-                fotoPersone.push(data[1]);
-                if (data[1] != 'vuota' || data[1] != undefined) {
-                    if (data[1] != null)
-                    {
-                        $('#commenti').append('<div class="comment"><a class="avatar"><img id="imma" src="'+data[1]+'"></a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > '); 
-                    }
-                    else{
-                        $('#commenti').append('<div class="comment"><a class="avatar">'+nomi[i].charAt(0).toUpperCase()+'</a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
-                    }
-                }
-                else
-                {
-                    $('#commenti').append('<div class="comment"><a class="avatar">'+nomi[i].charAt(0)+'</a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
-                }
+                vai = false;
             }
         }
-    })
-}); 
+
+        if (vai) 
+        {
+            for (let i = 0; i < nomi.length; i++) 
+            {
+                if (data[0] == nomi[i]) 
+                {
+                    messaggiScritti.push(data[0]);
+                    if (data[1] != 'vuota' || data[1] != undefined) 
+                    {
+                        if (data[1] != null) 
+                        {
+                            $('#commenti').append('<div class="comment"><a class="avatar"><img id="imma" src="' + data[1] + '"></a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
+                        }
+                        else 
+                        {
+                            $('#commenti').append('<div class="comment"><a class="avatar">' + nomi[i].charAt(0).toUpperCase() + '</a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
+                        }
+                    }
+                }
+            
+            }
+        }
+        vai = true;
+
+    });
+
+    var commento = [];
+
+    $('#commenta').click(function () {
+        commento = [];
+
+        x = x.replace(' ', '');
+        commento.push(x);
+        commento.push(tipo);
+        commento.push(nomeProdotto);
+        commento.push($('#commento').val());
+        commento.push(rate);
+
+        if ($('#icona').attr("class") == "address card icon") {
+            socket.emit('inviaCommento', commento);
+            $('#commento').val("")
+        }
+        
+    });
+
+    socket.on('inviaNuovoCommento', function(data)
+    {
+        if (data[1] != null) 
+        {
+            $('#commenti').append('<div class="comment"><a class="avatar"><img id="imma" src="' + data[1] + '"></a><div class="content"<a class="author">' + commento[0] + '</a><div class="metadata"><div class="date">' + commento[4] + '</div></div><div class="text"><p>' + commento[3] + '</p></div></div></div > ');
+        }
+        else 
+        {
+            $('#commenti').append('<div class="comment"><a class="avatar">' + x.charAt(0).toUpperCase() + '</a><div class="content"<a class="author">' + commento[0] + '</a><div class="metadata"><div class="date">' +  commento[4] + '</div></div><div class="text"><p>' + commento[3] + '</p></div></div></div > ');
+        }
+    });
+});
 
 function changeView(a) {
     name = a.replace('benvenuto ', '');
@@ -338,6 +386,7 @@ function changeView(a) {
     $('#test').find("i").removeClass("user circle icon");
     $('#test').find("i").addClass("address card icon");
     var classe = $('#icona').attr("class");
+    $('#recensione').show();
 }
 
 function riduci() {
