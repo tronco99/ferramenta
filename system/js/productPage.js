@@ -308,43 +308,34 @@ $(document).ready(function () {
             valutazione = parseInt(valutazione + parseInt(valutazioni[i]));
         }
         valutazione = parseInt(valutazione / parseInt(valutazioni.length)); //LA VALUTAZIONE DA METTERE SULLE STELLE
-         $('#rateYo').rateYo("rating", valutazione);
-    
+        $('#rateYo').rateYo("rating", valutazione);
+
     });
 
     var messaggiScritti = [];
-    socket.on('mandoFoto', function (data) 
-    {
+    socket.on('mandoFoto', function (data) {
         var vai = true;
-        for (let i = 0; i < messaggiScritti.length; i++) 
-        {
-            if (data[0] == messaggiScritti[i]) 
-            {
+        for (let i = 0; i < messaggiScritti.length; i++) {
+            if (data[0] == messaggiScritti[i]) {
                 vai = false;
             }
         }
 
-        if (vai) 
-        {
-            for (let i = 0; i < nomi.length; i++) 
-            {
-                if (data[0] == nomi[i]) 
-                {
+        if (vai) {
+            for (let i = 0; i < nomi.length; i++) {
+                if (data[0] == nomi[i]) {
                     messaggiScritti.push(data[0]);
-                    if (data[1] != 'vuota' || data[1] != undefined) 
-                    {
-                        if (data[1] != null) 
-                        {
+                    if (data[1] != 'vuota' || data[1] != undefined) {
+                        if (data[1] != null) {
                             $('#commenti').append('<div class="comment"><a class="avatar"><img id="imma" src="' + data[1] + '"></a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
                         }
-                        else 
-                        {
+                        else {
                             $('#commenti').append('<div class="comment"><a class="avatar">' + nomi[i].charAt(0).toUpperCase() + '</a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
                         }
 
                     }
                 }
-            
+
             }
         }
         vai = true;
@@ -367,35 +358,29 @@ $(document).ready(function () {
             socket.emit('inviaCommento', commento);
             $('#commento').val("")
         }
-        
+
     });
 
-    socket.on('inviaNuovoCommento', function(data)
-    {
-        if(data[4] == tipo && data[5] == nomeProdotto)
-        {
-        valutazioni.push(data[3]);
+    socket.on('inviaNuovoCommento', function (data) {
+        if (data[4] == tipo && data[5] == nomeProdotto) {
+            valutazioni.push(data[3]);
 
-        valutazione = 0;
+            valutazione = 0;
 
-        for (let i = 0; i < valutazioni.length; i++) {
-            valutazione = parseInt(valutazione + parseInt(valutazioni[i]));
+            for (let i = 0; i < valutazioni.length; i++) {
+                valutazione = parseInt(valutazione + parseInt(valutazioni[i]));
+            }
+
+            valutazione = parseInt(valutazione / parseInt(valutazioni.length));
+            $('#rateYo').rateYo("rating", valutazione);
+
+            if (data[1] != null) {
+                $('#commenti').append('<div class="comment"><a class="avatar"><img id="imma" src="' + data[1] + '"></a><div class="content"<a class="author">' + data[0] + '</a><div class="metadata"><div class="date">' + data[3] + '</div></div><div class="text"><p>' + data[2] + '</p></div></div></div > ');
+            }
+            else {
+                $('#commenti').append('<div class="comment"><a class="avatar">' + data[0].charAt(0).toUpperCase() + '</a><div class="content"<a class="author">' + data[0] + '</a><div class="metadata"><div class="date">' + commento[4] + '</div></div><div class="text"><p>' + data[2] + '</p></div></div></div > ');
+            }
         }
-
-        valutazione = parseInt(valutazione / parseInt(valutazioni.length));
-         $('#rateYo').rateYo("rating", valutazione);
-
-        
-
-        if (data[1] != null) 
-        {
-            $('#commenti').append('<div class="comment"><a class="avatar"><img id="imma" src="' + data[1] + '"></a><div class="content"<a class="author">' + data[0] + '</a><div class="metadata"><div class="date">' + data[3] + '</div></div><div class="text"><p>' + data[2] + '</p></div></div></div > ');
-        }
-        else 
-        {
-            $('#commenti').append('<div class="comment"><a class="avatar">' + data[0    ].charAt(0).toUpperCase() + '</a><div class="content"<a class="author">' + data[0] + '</a><div class="metadata"><div class="date">' +  commento[4] + '</div></div><div class="text"><p>' + data[2] + '</p></div></div></div > ');
-        }
-    }
     });
 });
 

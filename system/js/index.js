@@ -82,8 +82,13 @@ $(document).ready(function () {
 	x = x.replace('username=', '');
 	$('#userSett').hide();
 
+	if(x == "admin")
+	{
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+	}
 
-	if (x != "") {
+	if (x != "" && x != "admin") {
 		changeView(x);
 		$('#utente').text(x);
 		$('.tiny.modal').modal('hide');
@@ -266,6 +271,11 @@ $(document).ready(function () {
 	});
 
 	socket.on('accessoAdmin', function (data) {
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+		document.cookie = "username=admin; path=/";
+		document.cookie = "username=admin;";
+
 		window.location = "/system/html/adminPage.html";
 	});
 

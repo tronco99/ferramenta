@@ -458,7 +458,7 @@ io.on( 'connection', function ( socket )
 	});
 
 	socket.on('richiestaDati',function(data)
-	{
+	{	
 		var dati;
 		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
 		{
