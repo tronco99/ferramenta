@@ -1,4 +1,4 @@
-var ip='192.168.1.15';
+var ip='192.168.10.101';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -559,7 +559,15 @@ io.on( 'connection', function ( socket )
 		fs.readFile('./ferramenta/profile_images/'+data[0]+'.txt', {encoding: 'utf-8'}, function(err,no){
 			inviaDatiCommento.push(data[0]);
 			inviaDatiCommento.push(no);
+			inviaDatiCommento.push(data[3]);
+			inviaDatiCommento.push(data[4]);
+			
+			inviaDatiCommento.push(data[1]);
+			inviaDatiCommento.push(data[2]);
+
+			socket.broadcast.emit('inviaNuovoCommento',inviaDatiCommento); 
 			socket.emit('inviaNuovoCommento',inviaDatiCommento); 
+
 		});
 	});
 });
