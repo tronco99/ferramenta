@@ -1,15 +1,22 @@
-var ip='192.168.10.101';
+var ip='192.168.1.209';
 var socket = io.connect(ip + ":4200");
 var currentItem = null;
 var name;
 var p = 0;
 var prodotti = 0;
 var prodotto=[];
+var conTr=0;
 function myFunction1(){
 
 	window.location.href = '/system/html/productPage.html?nome='+prodotto[0]+'&tipo='+prodotto[1];
 }
 $(document).ready(function () {
+
+
+	$('#container').hide();
+	$('.menu .item')
+	.tab()
+	;
 
 	$('.special.cards .image').dimmer({
 		on: 'hover'
@@ -18,7 +25,7 @@ $(document).ready(function () {
 	$('#tipo2').text("--seleziona tipo--");
 	$('#tipo3').text("--seleziona tipo--");
 	$('.ui.dropdown')
-		.dropdown();
+	.dropdown();
 
 	$('#drop1').on('change', function () //seleziono prodotti
 	{
@@ -57,6 +64,10 @@ $(document).ready(function () {
 
 	$("#tagP").hide();
 	$(".pressed").on('click', function () {
+		conTr=0;
+		$('.ui.labeled.icon.sidebar').sidebar('hide');
+		$('#container2').hide();
+		$('#container').show();
 		$('#tipo').text("--seleziona tipo--");
 		$('#tipo2').text("--seleziona tipo--");
 		$('#tipo3').text("--seleziona tipo--");
@@ -65,7 +76,6 @@ $(document).ready(function () {
 		$('#tagP').removeClass('black');
 		$('#tagP').addClass('blue');
 		$("#tagP").show();
-		$('.ui.labeled.icon.sidebar').sidebar('hide');
 		$('#forproduct').css('visibility', 'visible');
 		socket.emit('caricaProdotti', text);
 		$('#pro1').html('');
@@ -93,13 +103,13 @@ $(document).ready(function () {
 		$('#utente').text(x);
 		$('.tiny.modal').modal('hide');
 		$('#test')
-			.popup({
-				on: 'click',
-				popup: '#popup',
-				position: 'bottom center',
-				target: '#test',
-				hideOnScroll: 'false'
-			});
+		.popup({
+			on: 'click',
+			popup: '#popup',
+			position: 'bottom center',
+			target: '#test',
+			hideOnScroll: 'false'
+		});
 	}
 
 
@@ -128,7 +138,13 @@ $(document).ready(function () {
 	});
 
 	$('#openMenu').on('click', function () {
+		if(conTr==1)
+		{
+
+			location.reload();
+		}
 		$('.ui.labeled.icon.sidebar').sidebar('toggle');
+		conTr=1;
 	});
 
 	$('#test').on('click', function () {
@@ -149,14 +165,14 @@ $(document).ready(function () {
 			$('#second').hide();
 			$('#first').show();
 			$('.tiny.modal')
-				.modal({
-					closable: true,
-					onDeny: function () {
-						return false;
-					}
-				})
-				.modal('show')
-				;
+			.modal({
+				closable: true,
+				onDeny: function () {
+					return false;
+				}
+			})
+			.modal('show')
+			;
 			$("#accedi").addClass('active');
 			$('#confirm').html('accedi');
 
@@ -291,13 +307,13 @@ socket.on('noReg', function (data) {
 		changeView(data[1]);
 		$('.tiny.modal').modal('hide');
 		$('#test')
-			.popup({
-				on: 'click',
-				popup: '#popup',
-				position: 'bottom center',
-				target: '#test',
-				hideOnScroll: 'false'
-			});
+		.popup({
+			on: 'click',
+			popup: '#popup',
+			position: 'bottom center',
+			target: '#test',
+			hideOnScroll: 'false'
+		});
 		return;
 	}
 
@@ -317,97 +333,97 @@ socket.on('formatoInvalido', function (data) {
 
 	switch (data) {
 		case "1":
-			{
-				if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-					$('#emailField').removeClass('field');
-					$('#emailField').addClass('field error');
-					$('#email')
-						.popup({
-							position: 'bottom center',
-							target: '#email',
-							title: 'Errore',
-							content: 'email invalida',
-							hideOnScroll: 'false'
-						});
-					break;
-				}
-				else {
-					$('#emailField').removeClass('field');
-					$('#emailField').addClass('field error');
-					$('#email')
-						.popup({
-							position: 'right center',
-							target: '#email',
-							title: 'Errore',
-							content: 'email invalida'
-						})
-						;
-					break;
-				}
+		{
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				$('#emailField').removeClass('field');
+				$('#emailField').addClass('field error');
+				$('#email')
+				.popup({
+					position: 'bottom center',
+					target: '#email',
+					title: 'Errore',
+					content: 'email invalida',
+					hideOnScroll: 'false'
+				});
+				break;
 			}
+			else {
+				$('#emailField').removeClass('field');
+				$('#emailField').addClass('field error');
+				$('#email')
+				.popup({
+					position: 'right center',
+					target: '#email',
+					title: 'Errore',
+					content: 'email invalida'
+				})
+				;
+				break;
+			}
+		}
 		case "2":
-			{
-				if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-					$('#passwordField').removeClass('field');
-					$('#passwordField').addClass('field error');
-					$('#password')
-						.popup({
-							position: 'top center',
-							target: '#password',
-							title: 'Errore',
-							content: 'almeno 1 lettera maiuscola e un numero',
-							hideOnScroll: 'false'
+		{
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				$('#passwordField').removeClass('field');
+				$('#passwordField').addClass('field error');
+				$('#password')
+				.popup({
+					position: 'top center',
+					target: '#password',
+					title: 'Errore',
+					content: 'almeno 1 lettera maiuscola e un numero',
+					hideOnScroll: 'false'
 
-						});
-					break;
-				}
-				else {
-					$('#passwordField').removeClass('field');
-					$('#passwordField').addClass('field error');
-					$('#password')
-						.popup({
-							position: 'left center',
-							target: '#password',
-							title: 'Errore',
-							content: 'almeno 1 lettera maiuscola e un numero'
-						})
-						;
-					break;
-				}
+				});
+				break;
 			}
+			else {
+				$('#passwordField').removeClass('field');
+				$('#passwordField').addClass('field error');
+				$('#password')
+				.popup({
+					position: 'left center',
+					target: '#password',
+					title: 'Errore',
+					content: 'almeno 1 lettera maiuscola e un numero'
+				})
+				;
+				break;
+			}
+		}
 		case "3":
-			{
-				$('#confirmPasswordfield').removeClass('field');
-				$('#confirmPasswordfield').addClass('field error');
-				$('#password2')
-					.popup({
-						position: 'right center',
-						target: '#password2',
-						title: 'Errore',
-						content: 'le password non coincidono'
-					})
-					;
-				break;
-			}
+		{
+			$('#confirmPasswordfield').removeClass('field');
+			$('#confirmPasswordfield').addClass('field error');
+			$('#password2')
+			.popup({
+				position: 'right center',
+				target: '#password2',
+				title: 'Errore',
+				content: 'le password non coincidono'
+			})
+			;
+			break;
+		}
 		case "4":
-			{
-				$('#nicknameField').removeClass('field');
-				$('#nicknameField').addClass('field error');
-				$('#nick')
-					.popup({
-						position: 'left center',
-						target: '#nick',
-						title: 'Errore',
-						content: 'il nickname non può contenere la @'
-					})
-					;
-				break;
-			}
+		{
+			$('#nicknameField').removeClass('field');
+			$('#nicknameField').addClass('field error');
+			$('#nick')
+			.popup({
+				position: 'left center',
+				target: '#nick',
+				title: 'Errore',
+				content: 'il nickname non può contenere la @'
+			})
+			;
+			break;
+		}
 		case "5":
-			{
-				alert('nessun campo può esser lasciato vuoto');
-				break;
-			}
+		{
+			alert('nessun campo può esser lasciato vuoto');
+			break;
+		}
 
 	}
 
