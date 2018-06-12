@@ -1,23 +1,28 @@
-.wrapper {
-	overflow-x:scroll;
-	overflow-y:hidden;
-	-webkit-overflow-scrolling:touch;
-	width:1000px;
-	white-space:nowrap;
+
+::-webkit-scrollbar {
+	display: none;
 }
-
-.elem {
-	display:inline-block;
-	width:200px;
-	height:290px;
-	margin:20px;
-	background:#F00;
-}
-
-
 
 @media only screen and (min-width: 992px)
 { 
+
+	.wrapper {
+		overflow-x:scroll;
+		overflow-y:hidden;
+		-webkit-overflow-scrolling:touch;
+		width:1000px;
+		white-space:nowrap;
+		background-color: #cccccc;
+	}
+
+	.elem {
+		display:inline-block;
+		width:200px;
+		height:300px;
+		margin:20px;
+		background:#F00;
+	}
+
 	#container2
 	{
 		background-color: white;
@@ -73,18 +78,33 @@
 /*smartphone verticali*/
 @media only screen and (max-width: 600px) 
 {
+	#container2
+	{
+		width: 300px;
+	}
+
+
+	.wrapper {
+		overflow-x:scroll;
+		overflow-y:hidden;
+		-webkit-overflow-scrolling:touch;
+		width:400px;
+		white-space:nowrap;
+		background-color: #cccccc;
+	}
+
+	.elem {
+		display:inline-block;
+		width:120px;
+		height:220px;
+		margin:20px;
+		background:#F00;
+	}
+
 	#img
 	{
 		width: 93px;
 		height: 93px;
-	}
-	#container
-	{
-		background-color: white;
-		width: 80.5%;
-		margin:0 auto;
-		align-items: center;
-		margin-top: 12%;
 	}
 
 	#tabLog
@@ -109,6 +129,75 @@
 
 } 
 
+@media only screen and (min-width: 600px) 
+{
+	.wrapper {
+		overflow-x:scroll;
+		overflow-y:hidden;
+		-webkit-overflow-scrolling:touch;
+		width:1000px;
+		white-space:nowrap;
+		background-color: #cccccc;
+	}
+
+	.elem {
+		display:inline-block;
+		width:200px;
+		height:300px;
+		margin:20px;
+		background:#F00;
+	}
+
+	#container2
+	{
+		background-color: white;
+		width: 87.5%;
+		margin:0 auto;
+		align-items: center;
+		margin-top: 3%;
+	}
+
+
+
+	#img
+	{
+		width: 93px;
+		height: 93px;
+	}
+
+	#container
+	{
+		background-color: white;
+		width: 87.5%;
+		margin:0 auto;
+		align-items: center;
+		margin-top: 3%;
+	}
+	#label_menu
+	{
+		margin-left: 5px;
+	}
+
+
+	#tabLog
+	{
+		width: 30%;
+	}
+
+	#tabular
+	{
+		margin-left: -17px;
+		margin-top: -15px;
+	}
+	#content
+	{
+		margin-top: -10%;
+	}
+
+	body{
+		background-color: grey;
+	}
+} 
 
 
 
@@ -122,8 +211,8 @@
 
 
 
-/*Small devices (portrait tablets and phones in horizontal, 600px and up) 
-@media only screen and (min-width: 600px) {...} 
+
+/*
 
 Medium devices (landscape tablets, 768px and up) 
 @media only screen and (min-width: 768px) {...} 

@@ -58,6 +58,11 @@ $(document).ready(function () {
 			}
 		});
 
+		$('#homePage').on('click',function()
+		{
+			document.location.href = "/";
+		});
+
 		$('#drop1').on('change', function () {
 			$('#menu2').html("");
 			var type = $('#drop1').val();
