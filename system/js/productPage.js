@@ -1,4 +1,4 @@
-var ip = '192.168.10.101';
+var ip='192.168.1.209';
 var socket = io.connect(ip + ":4200")
 var prodotto = [];
 var nomi = [];
@@ -10,6 +10,10 @@ var rate = 0;
 var x;
 
 $(document).ready(function () {
+    $('#compra').on('click',function()
+    {
+        alert('hai acquistato');
+    });
 
 
     if ($(window).width() < 800) {
