@@ -1,4 +1,4 @@
-var ip='192.168.1.209';
+var ip='192.168.1.4';
 var socket = io.connect(ip+":4200");
 var x=0;
 

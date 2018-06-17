@@ -1,8 +1,8 @@
-var ip='192.168.1.209';
+var ip='192.168.1.4';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
-var regPass = /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{1,}$/i;
+var regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,}$/i;
 var fs = require('fs'); 
 var realm2=0;
 var realm3 = 0;
@@ -69,36 +69,52 @@ var prodotti =[];
 
 io.on( 'connection', function ( socket )
 {
+	socket.on('chiediProdotti',function(data)
+	{
+		tuttiProdotti = [];
+		realm.close();
+		realm2=new Realm({schema:[ProductSchema],schemaVersion:9});
+		let result=realm2.objects('Productdb');
+
+		for(let i = 0; i<result.length; i++)
+		{
+			var nuovoOggetto = {"title": result[i].nome, "tipo": result[i].tipo};
+			tuttiProdotti.push(nuovoOggetto);
+		}
+		socket.emit('mandoTuttiProdotti', tuttiProdotti);
+		realm2.close();
+	});
+
 	socket.on('chiediValutazioni', function(data)
 	{
 		//nome data[0], tipo data[1]
 	//	console.log(data[0] + ", ssss "+data[1])
-		var valutazioni=[];
-		var persone =[];
-		realm2.close();
+	var valutazioni=[];
+	var persone =[];
+	realm2.close();
 
-		realm3=new Realm({schema:[ValutationSchema],schemaVersion:9});
-		let result=realm3.objects('Valutationdb');
-		var r=result.filtered('tipo="'+data[1]+'" AND nome="'+data[0]+'"' );
-		var recensioni = JSON.parse(JSON.stringify(r));
-		var sizeRecensioni = Object.keys(recensioni).length;
-		console.log(sizeRecensioni)
-		for(let i = 0; i<sizeRecensioni; i++)
-		{			
-			valutazioni.push(recensioni[i].nickname)
-			valutazioni.push(recensioni[i].valutazione)
-			valutazioni.push(recensioni[i].recensione)
-			fs.readFile("../profile_images/ciao.txt", {encoding: 'utf-8'}, function(err,data){
-				console.log(data)
+	realm3=new Realm({schema:[ValutationSchema],schemaVersion:9});
+	let result=realm3.objects('Valutationdb');
+	var r=result.filtered('tipo="'+data[1]+'" AND nome="'+data[0]+'"' );
+	var recensioni = JSON.parse(JSON.stringify(r));
+	var sizeRecensioni = Object.keys(recensioni).length;
+	console.log(sizeRecensioni)
+	for(let i = 0; i<sizeRecensioni; i++)
+	{			
+		valutazioni.push(recensioni[i].nickname)
+		valutazioni.push(recensioni[i].valutazione)
+		valutazioni.push(recensioni[i].recensione)
+		fs.readFile("../profile_images/ciao.txt", {encoding: 'utf-8'}, function(err,data){
+			console.log(data)
 			//	valutazioni.push(data)
-			});
-			valutazioni.push(recensioni[i].nome)
-		}
+		});
+		valutazioni.push(recensioni[i].nome)
+	}
 
 	//	console.log(valutazioni)
-		realm3.close();
-		socket.emit('ricevoRecensioni',valutazioni);
-	});
+	realm3.close();
+	socket.emit('ricevoRecensioni',valutazioni);
+});
 
 	socket.on('elimina',function(data)
 	{

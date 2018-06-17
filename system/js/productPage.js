@@ -1,4 +1,4 @@
-var ip='192.168.1.209';
+var ip='192.168.1.4';
 var socket = io.connect(ip + ":4200")
 var prodotto = [];
 var nomi = [];
@@ -255,6 +255,18 @@ $(document).ready(function () {
         else window.location.href = '/system/html/404.html'
     });
 
+$("#rateYo").click(function(){
+        $('.tiny.modal')
+            .modal({
+                closable: true,
+                onDeny: function () {
+                    return false;
+                }
+            })
+            .modal('show')
+            ;
+        })
+
     $("#rateYo").rateYo({
         rating: 0,
         fullStar: true,
@@ -275,15 +287,6 @@ $(document).ready(function () {
                 $('#nicknameField').addClass('field');
                 $('#second').hide();
                 $('#first').show();
-                $('.tiny.modal')
-                    .modal({
-                        closable: true,
-                        onDeny: function () {
-                            return false;
-                        }
-                    })
-                    .modal('show')
-                    ;
                 $("#accedi").addClass('active');
                 $('#confirm').html('accedi');
                 rate = rating;

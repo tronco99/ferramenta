@@ -27,9 +27,6 @@
 				<a class="launch icon item" id="test">
 					<i class="user circle icon" id="icona"></i>
 				</a>
-				<a class="launch icon item" id="carrello">
-					<i class="shopping cart icon"></i>
-				</a>
 			</a>
 		</div>
 	</div>
@@ -58,13 +55,8 @@
 
 	<div class="ui left demo vertical inverted sidebar labeled icon menu">
 		<a class="item">
-			<div class="ui search">
-				<div class="ui icon input">
-					<input class="prompt" type="text" placeholder="Inserisci prodotto:">
-					<i class="search icon"></i>
-				</div>
-				<div class="results"></div>
-			</div>
+			<a class="item">
+			</a>
 		</a>
 		<a class="item" id="home">
 			Home
@@ -169,56 +161,108 @@
 	</div>
 
 
+	<div class="pusher" id="superContainer">
 
-	<div class="ui one centered pusher column grid" id="container">
-		<br>
-		<div class="row  ">
-			<h1 id="productName">NOME PRODOTTO</h1>
-		</div>
-		<div class="row">
-			<div class="ui three column grid ">
-				<div class="row">
-					<div class="two wide column" id="togli"></div>
-					<div class="six wide column" id="ingrandisci">
-						<img class="ui medium bordered image" id="productImage" src="https://1.bp.blogspot.com/-CzqR11o8l2U/Vj0IIWnHIFI/AAAAAAAAeMM/fDJxvi2lJEs/s400/boh.png">
-					</div>
-					<div class="six wide column" id="ingrandisci1">
-						<div class="row ui message" >
-							<p id="productDescription"></p>
+		<div class="ui one centered pusher column grid" id="container">
+			<br>
+			<div class="row  ">
+				<h1 id="productName">NOME PRODOTTO</h1>
+			</div>
+			<div class="row">
+				<div class="ui three column grid ">
+					<div class="row">
+						<div class="two wide column" id="togli"></div>
+						<div class="six wide column" id="ingrandisci">
+							<img class="ui medium bordered image" id="productImage" src="https://1.bp.blogspot.com/-CzqR11o8l2U/Vj0IIWnHIFI/AAAAAAAAeMM/fDJxvi2lJEs/s400/boh.png">
 						</div>
-						<div class="row ">
-							<h3 id="productPrice"></h3>
+						<div class="six wide column" id="ingrandisci1">
+							<div class="row ui message" >
+								<p id="productDescription"></p>
+							</div>
+							<div class="row ">
+								<h3 id="productPrice"></h3>
+							</div>
+							<div class="row">
+								<div id="rateYo"></div>
+							</div>
+							<div class="row">
+								<button class="ui icon button" id="compra">Acquista</button>								
+							</div>
+						</div>
+						<div class="two wide column" id="togli1"></div>
+					</div>
+					<div class="four column row">
+						<div class="column"></div>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ui comments" id="commenti">
+					<h3 class="ui dividing header">Comments</h3>
+				</div>
+			</div>
+			<div class="row">
+				<form class="ui reply form" id="recensione">
+					<div class="field">
+						<textarea id="commento"></textarea>
+					</div>
+					<div class="ui blue labeled submit icon button" id="commenta">
+						<i class="icon edit"></i> Add Reply
+					</div>
+				</form>
+
+			</div>
+
+			<div class="row"></div>
+			<div class="row"></div>
+			<div class="row"></div>
+			<div class="row"></div>
+			<div class="row"></div>
+
+
+			<div id="centered footer">
+				<div class="ui black message">
+					<div class="ui four column grid">
+						<div class="row">
+							<div class="column">
+								<p>prova</p>
+							</div>
+							<div class="column">
+								<p>prova</p>
+							</div>
+							<div class="column">
+								<p>prova</p>
+							</div>
+							<div class="column">
+								<p>prova</p>
+							</div>
+
 						</div>
 						<div class="row">
-							<div id="rateYo"></div>
+							<div class="column">
+								<p class="sub">se scrivo qua dentro dovrebbe andare a capo ad un certo momento</p>
+							</div>
+							<div class="column">
+								<p class="sub">se scrivo qua dentro dovrebbe andare a capo ad un certo momento</p>
+							</div>
+							<div class="column">
+								<p class="sub">se scrivo qua dentro dovrebbe andare a capo ad un certo momento</p>
+							</div>
+							<div class="column">
+								<p class="sub">se scrivo qua dentro dovrebbe andare a capo ad un certo momento</p>
+							</div>
+
 						</div>
+
 					</div>
-					<div class="two wide column" id="togli1"></div>
-				</div>
-				<div class="four column row">
-					<div class="column"></div>
-					<button class="ui icon button" id="compra">
-						<i class="shopping cart icon"></i>
-					</button>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="ui comments" id="commenti">
-				<h3 class="ui dividing header">Comments</h3>
-			</div>
-		</div>
-		<div class="row">
-			<form class="ui reply form" id="recensione">
-				<div class="field">
-					<textarea id="commento"></textarea>
-				</div>
-				<div class="ui blue labeled submit icon button" id="commenta">
-					<i class="icon edit"></i> Add Reply
-				</div>
-			</form>
 
 		</div>
+
+
+
 
 	</div>
 	

@@ -1,17 +1,39 @@
-var ip='192.168.1.209';
+var ip='192.168.1.4';
 var socket = io.connect(ip + ":4200");
 var currentItem = null;
 var name;
 var p = 0;
 var prodotti = 0;
 var prodotto=[];
-var conTr=0;
+var tuttiProdotti = [];
+
+
 function myFunction1(){
 
 	window.location.href = '/system/html/productPage.html?nome='+prodotto[0]+'&tipo='+prodotto[1];
 }
 $(document).ready(function () {
 
+	$('#productSrc').on('click',function()
+	{
+		socket.emit('chiediProdotti',1);		         
+	});
+
+	socket.on('mandoTuttiProdotti',function(data)
+	{
+		tuttiProdotti = data;
+		$('.ui.search')
+		.search({
+			type: 'standard',
+			source: data,
+			searchFields: ['title'],
+
+			onSelect: function (result,response) {
+				window.location.href = '/system/html/productPage.html?nome='+result.title+'&tipo='+result.tipo;
+			}
+		});
+
+	});
 
 	$('#container').hide();
 	$('.menu .item')
@@ -64,7 +86,6 @@ $(document).ready(function () {
 
 	$("#tagP").hide();
 	$(".pressed").on('click', function () {
-		conTr=0;
 		$('.ui.labeled.icon.sidebar').sidebar('hide');
 		$('#container2').hide();
 		$('#container').show();
@@ -138,13 +159,7 @@ $(document).ready(function () {
 	});
 
 	$('#openMenu').on('click', function () {
-		if(conTr==1)
-		{
-
-			location.reload();
-		}
 		$('.ui.labeled.icon.sidebar').sidebar('toggle');
-		conTr=1;
 	});
 
 	$('#test').on('click', function () {

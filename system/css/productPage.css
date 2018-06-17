@@ -1,5 +1,5 @@
 h1{
-    font-size: 250%;
+	font-size: 250%;
 
 }
 
@@ -12,14 +12,11 @@ h1{
 	overflow-y: scroll;
 	max-height: 95px;
 }
-body
-{
-	background-color: grey;
-}
 
 
 
-	@media only screen and (min-width: 801px)
+
+@media only screen and (min-width: 801px)
 { 
 	#img
 	{
@@ -34,6 +31,10 @@ body
 		margin:0 auto;
 		align-items: center;
 		margin-top: 3%;
+	}
+	#superContainer
+	{
+		background-color: grey;
 	}
 }
 
@@ -59,13 +60,13 @@ body
 
 	#productDescription
 	{
-margin-left : -10%;		width: 140%;
+		margin-left : -10%;		width: 140%;
 	}
 	
 	#container
 	{
 		background-color: white;
-		width: 80.5%;
+		width: auto%;
 		margin:0 auto;
 		align-items: center;
 		margin-top: 12%;
