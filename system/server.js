@@ -497,7 +497,7 @@ io.on( 'connection', function ( socket )
 			{
 				if(data[8] != "")
 				{
-					fs.writeFile("../profile_images/"+data[0]+".txt", data[8], function(err){
+					fs.writeFile("./ferramenta/profile_images/"+data[0]+".txt", data[8], function(err){
 						if (err) 
 						{
 							return console.log(err);
