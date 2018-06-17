@@ -1,4 +1,4 @@
-var ip='192.168.1.4';
+var ip='192.168.1.5';
 var socket = io.connect(ip + ":4200")
 var prodotto = [];
 var nomi = [];
@@ -10,6 +10,22 @@ var rate = 0;
 var x;
 
 $(document).ready(function () {
+
+    $('.special.cards .image').dimmer({
+      on: 'hover'
+  });
+
+
+    socket.on('fotoAgg', function (data) {
+      if (data != null && data != 'vuota') {
+         $('#img').attr('src', data);
+     }
+     $('#caricamentoIndex').hide();
+     $('#userSett').show();
+     $('.togli').removeClass('active');
+ });
+
+    
     $('#compra').on('click',function()
     {
         alert('hai acquistato');
@@ -47,13 +63,13 @@ $(document).ready(function () {
         $('#utente').text(x);
         $('.tiny.modal').modal('hide');
         $('#test')
-            .popup({
-                on: 'click',
-                popup: '#popup',
-                position: 'bottom center',
-                target: '#test',
-                hideOnScroll: 'false'
-            });
+        .popup({
+            on: 'click',
+            popup: '#popup',
+            position: 'bottom center',
+            target: '#test',
+            hideOnScroll: 'false'
+        });
     }
 
 
@@ -104,14 +120,14 @@ $(document).ready(function () {
             $('#second').hide();
             $('#first').show();
             $('.tiny.modal')
-                .modal({
-                    closable: true,
-                    onDeny: function () {
-                        return false;
-                    }
-                })
-                .modal('show')
-                ;
+            .modal({
+                closable: true,
+                onDeny: function () {
+                    return false;
+                }
+            })
+            .modal('show')
+            ;
             $("#accedi").addClass('active');
             $('#confirm').html('accedi');
         }
@@ -207,13 +223,13 @@ $(document).ready(function () {
             changeView(data[1]);
             $('.tiny.modal').modal('hide');
             $('#test')
-                .popup({
-                    on: 'click',
-                    popup: '#popup',
-                    position: 'bottom center',
-                    target: '#test',
-                    hideOnScroll: 'false'
-                });
+            .popup({
+                on: 'click',
+                popup: '#popup',
+                position: 'bottom center',
+                target: '#test',
+                hideOnScroll: 'false'
+            });
 
             $('#recensione').show();
 
@@ -255,17 +271,17 @@ $(document).ready(function () {
         else window.location.href = '/system/html/404.html'
     });
 
-$("#rateYo").click(function(){
+    $("#rateYo").click(function(){
         $('.tiny.modal')
-            .modal({
-                closable: true,
-                onDeny: function () {
-                    return false;
-                }
-            })
-            .modal('show')
-            ;
+        .modal({
+            closable: true,
+            onDeny: function () {
+                return false;
+            }
         })
+        .modal('show')
+        ;
+    })
 
     $("#rateYo").rateYo({
         rating: 0,
@@ -334,10 +350,10 @@ $("#rateYo").click(function(){
                     messaggiScritti.push(data[0]);
                     if (data[1] != 'vuota' || data[1] != undefined) {
                         if (data[1] != null) {
-                            $('#commenti').append('<div class="comment"><a class="avatar"><img id="imma" src="' + data[1] + '"></a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
+                            $('#commenti').append('<div class="comment com"><a class="avatar"><img id="imma" src="' + data[1] + '"></a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
                         }
                         else {
-                            $('#commenti').append('<div class="comment"><a class="avatar">' + nomi[i].charAt(0).toUpperCase() + '</a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
+                            $('#commenti').append('<div class="comment com"><a class="avatar">' + nomi[i].charAt(0).toUpperCase() + '</a><div class="content"<a class="author">' + nomi[i] + '</a><div class="metadata"><div class="date">' + valutazioni[i] + '</div></div><div class="text"><p>' + recensioni[i] + '</p></div></div></div > ');
                         }
 
                     }

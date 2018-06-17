@@ -1,4 +1,4 @@
-var ip='192.168.1.4';
+var ip='192.168.1.5';
 var porta=4200;
 var control=0;
 var regEm = /([\w-\.]+)@[a-z]+.[a-z]+/i; 
@@ -476,7 +476,8 @@ io.on( 'connection', function ( socket )
 	socket.on('richiestaDati',function(data)
 	{	
 		var dati;
-		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
+		var realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
+    	for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
 		{
 			if(realm.objects(RegistrationSchema.name)[i].nickname==data)
 			{
@@ -488,6 +489,8 @@ io.on( 'connection', function ( socket )
 
 	socket.on('aggiornaDati',function(data)
 	{
+		var realm=new Realm({schema:[RegistrationSchema],schemaVersion:9});
+
 		for(let i=0; i<realm.objects(RegistrationSchema.name).length;i++)
 		{
 			if(realm.objects(RegistrationSchema.name)[i].nickname==data[0])
@@ -512,6 +515,7 @@ io.on( 'connection', function ( socket )
 						socket.emit('updateNick',data[4]);
 
 					});
+					realm.close();
 					break;
 				}
 				else
@@ -536,7 +540,7 @@ io.on( 'connection', function ( socket )
 
 	socket.on('aggiornaFoto',function(data)
 	{
-		fs.readFile("./ferramenta/profile_images/"+data+".txt", {encoding: 'utf-8'}, function(err,no){
+		fs.readFile('./ferramenta/profile_images/'+data+'.txt', {encoding: 'utf-8'}, function(err,no){
 			socket.emit('fotoAgg',no); 
 		});
 	});

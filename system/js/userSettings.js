@@ -1,4 +1,4 @@
-var ip='192.168.1.4';
+var ip='192.168.1.5';
 var socket = io.connect(ip+":4200");
 var x=0;
 
@@ -8,6 +8,8 @@ $(document).ready(function()
 	$('#modificaFoto').hide();
 
 	$('#inp').hide();
+
+	
 
 	$("#name").text(document.cookie.replace('username=','').toUpperCase());
 	socket.emit('richiestaDati',document.cookie.replace('username=',''));
@@ -20,8 +22,7 @@ $(document).ready(function()
 	$('.ui .dimmer')
 	.dimmer({
 		on: 'hover'
-	})
-	;
+	});
 
 	$('#modificaFoto').click(function()
 	{

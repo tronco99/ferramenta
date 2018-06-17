@@ -1,23 +1,34 @@
-h1{
-	font-size: 250%;
 
-}
 
 .row
 {
 	margin-top: 1em;
 }
-#productDescription
+
+
+
+@media only screen and (min-width: 800px)
 {
-	overflow-y: scroll;
-	max-height: 95px;
-}
 
+	#COm
+	{
+		background-color: #cbd4db;
+		border-radius: 10px;
+	}
 
+	#commenti
+	{
+		width: 95%;
+		overflow-y: scroll;
+		max-height: 300px;
+		margin:0 auto;
+	} 
 
+	h1{
+		font-size: 250%;
 
-@media only screen and (min-width: 801px)
-{ 
+	}
+
 	#img
 	{
 		width: 93px;
@@ -36,10 +47,35 @@ h1{
 	{
 		background-color: grey;
 	}
+	#productDescription
+	{
+		overflow-y: scroll;
+		max-height: 95px;
+	}
 }
 
-@media only screen and (max-width: 800px) 
+@media only screen and (max-width: 600px) 
 {
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+
+	#COm
+	{
+		background-color: #cbd4db;
+		border-radius: 10px;
+	}
+
+	#commenti
+	{
+		width: 95%;
+		overflow-y: scroll;
+		max-height: 200px;
+		margin:0 auto;
+	} 
+
 	#descriprionContainer
 	{
 		width: 150%;
@@ -72,3 +108,38 @@ h1{
 		margin-top: 12%;
 	}
 }
+
+@media only screen and (min-width: 600px) 
+{
+
+
+	h1{
+		font-size: 250%;
+
+	}
+
+	#img
+	{
+		width: 93px;
+		height: 93px;
+	}
+
+	#container
+	{
+		background-color: white;
+		width: 87.5%;
+		margin:0 auto;
+		align-items: center;
+		margin-top: 3%;
+	}
+	#superContainer
+	{
+		background-color: grey;
+	}
+	#productDescription
+	{
+		overflow-y: scroll;
+		max-height: 95px;
+	}
+
+} 

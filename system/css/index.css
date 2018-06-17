@@ -1,8 +1,7 @@
-
-::-webkit-scrollbar {
-	display: none;
+#risultati
+{
+ width: 98%;
 }
-
 @media only screen and (min-width: 992px)
 { 
 
@@ -78,6 +77,11 @@
 /*smartphone verticali*/
 @media only screen and (max-width: 600px) 
 {
+
+
+	::-webkit-scrollbar {
+		display: none;
+	}
 	#container2
 	{
 		width: 300px;
@@ -131,6 +135,10 @@
 
 @media only screen and (min-width: 600px) 
 {
+
+
+
+
 	.wrapper {
 		overflow-x:scroll;
 		overflow-y:hidden;
@@ -157,13 +165,6 @@
 		margin-top: 3%;
 	}
 
-
-
-	#img
-	{
-		width: 93px;
-		height: 93px;
-	}
 
 	#container
 	{
@@ -194,9 +195,6 @@
 		margin-top: -10%;
 	}
 
-	#superContainer{
-		background-color: grey;
-	}
 } 
 
 

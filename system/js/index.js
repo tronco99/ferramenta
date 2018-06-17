@@ -1,4 +1,4 @@
-var ip='192.168.1.4';
+var ip='192.168.1.5';
 var socket = io.connect(ip + ":4200");
 var currentItem = null;
 var name;
@@ -13,6 +13,18 @@ function myFunction1(){
 	window.location.href = '/system/html/productPage.html?nome='+prodotto[0]+'&tipo='+prodotto[1];
 }
 $(document).ready(function () {
+
+$('#mobileContainer').hide();
+
+
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) 
+			{
+					$('#container').hide();
+					$('#container2').hide();
+					$('#mobileContainer').show();
+
+			}
+
 
 	$('#productSrc').on('click',function()
 	{
@@ -86,6 +98,7 @@ $(document).ready(function () {
 
 	$("#tagP").hide();
 	$(".pressed").on('click', function () {
+		$('#mobileContainer').hide();
 		$('.ui.labeled.icon.sidebar').sidebar('hide');
 		$('#container2').hide();
 		$('#container').show();
