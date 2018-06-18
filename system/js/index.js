@@ -1,4 +1,4 @@
-var ip='192.168.1.5';
+var ip='192.168.1.13';
 var socket = io.connect(ip + ":4200");
 var currentItem = null;
 var name;
@@ -14,18 +14,20 @@ function myFunction1(){
 }
 $(document).ready(function () {
 
-$('#mobileContainer').hide();
+	$('#mobileContainer').hide();
 
+	$('#tornaHome').click(function()
+	{
+		document.location.href = "/";
+	});
 
-			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) 
-			{
-					$('#container').hide();
-					$('#container2').hide();
-					$('#mobileContainer').show();
-
-			}
-
-
+	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) 
+	{
+		$('#container').hide();
+		$('#container2').hide();
+		$('#mobileContainer').show();
+	}
+	
 	$('#productSrc').on('click',function()
 	{
 		socket.emit('chiediProdotti',1);		         
