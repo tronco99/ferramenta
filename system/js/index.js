@@ -62,7 +62,7 @@ $(document).ready(function () {
 	$('.ui.dropdown')
 	.dropdown();
 
-	$('#drop1').on('change', function () //seleziono prodotti
+	$('#drop1').on('change', function () //seleziono prodottii
 	{
 		var control = $('#drop1').val().replace("'", "");
 		$('#pro1').html("");

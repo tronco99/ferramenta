@@ -23,7 +23,6 @@ const RegistrationSchema = {
 	}
 };
 var nuovaVariabile = "ciao" 
-
 const ProductSchema = {
 	name: 'Productdb',
 	properties: {
