@@ -73,7 +73,7 @@ $(document).ready(function () {
 			}
 		}                                                                                                         
 	});
-
+     
 	$('#drop2').on('change', function () //seleziono prodotti
 	{
 		var control = $('#drop2').val().replace("'", "");
