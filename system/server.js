@@ -7,8 +7,6 @@ var fs = require('fs');
 var realm2=0;
 var realm3 = 0;
 
-
-
 var Realm = require('realm');
 const RegistrationSchema = {
 	name: 'Database',
