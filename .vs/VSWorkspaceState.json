@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\system"
   ],
+  "SelectedNode": "\\system\\server.js",
   "PreviewInSolutionExplorer": false
 }
