@@ -21,8 +21,9 @@ const RegistrationSchema = {
 		password: 'string',
 		password2:     'string',
 	}
-}; 
-var nuovaVariabile = "ciao";
+};
+var nuovaVariabile = "ciaociao";   
+
 const ProductSchema = {
 	name: 'Productdb',
 	properties: {
