@@ -6,7 +6,7 @@ var p = 0;
 var prodotti = 0;
 var prodotto=[];
 var tuttiProdotti = [];
-
+var index ="nuovaModifica1"
 function myFunction1(){
 
 	window.location.href = '/system/html/productPage.html?nome='+prodotto[0]+'&tipo='+prodotto[1];
