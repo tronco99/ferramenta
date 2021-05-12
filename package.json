@@ -20,7 +20,7 @@
   "dependencies": {
     "chilkat_node9_win32": "^9.50.72",
     "express": "^4.16.3",
-    "nodemailer": "^4.6.3",
+    "nodemailer": "^6.4.16",
     "rateyo": "^2.3.3",
     "realm": "^2.3.3",
     "semantic-ui": "^2.3.1",
