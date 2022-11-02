@@ -23,7 +23,7 @@
     "nodemailer": "^4.6.3",
     "rateyo": "^2.3.3",
     "realm": "^2.3.3",
-    "semantic-ui": "^2.3.1",
+    "semantic-ui": "^2.5.0",
     "socket.io": "^2.0.4",
     "sqlite": "^2.9.1",
     "velocity": "^0.7.2",
